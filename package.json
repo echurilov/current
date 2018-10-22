@@ -4,7 +4,8 @@
   "description": "Trending Content Aggregator",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "server": "nodemon app.js"
   },
   "repository": {
     "type": "git",
@@ -30,11 +31,6 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.8.0"
-  },
-  "scripts": {
-
-    "start": "node app.js",
-    "server": "nodemon app.js"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
