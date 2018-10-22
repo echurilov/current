@@ -1,6 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+require('./config/passport')(passport);
 
 const db = require('./config/keys').mongoURI;
 mongoose
@@ -17,6 +19,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/users", users);
 app.use("/api/events", events);
+app.use(passport.initialize());
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
-app.get("/", (req, res) => res.send("Get carried away!"));
