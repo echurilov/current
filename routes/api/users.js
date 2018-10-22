@@ -87,15 +87,12 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get('/current', passport.authenticate('jwt', {session: false}), (req, res) => {
-  res.json({msg: 'Success'});
-})
-
 router.get('/current', passport.authenticate('jsonwebtoken', {session: false}), (req, res) => {
   res.json({
     id: req.user.id,
     name: req.user.name,
-    email: req.user.email
+    email: req.user.email,
+    msg: 'Success'
   });
 })
 
