@@ -110,4 +110,5 @@ build/Release
 node_modules/
 
 #Keys
-config/
+config/keys_dev.js
+config/keys_prod.js
