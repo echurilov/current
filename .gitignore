@@ -109,5 +109,5 @@ build/Release
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules/
 
-#Keys
-config/keys.js
+#Secrets
+config/keys_dev.js
