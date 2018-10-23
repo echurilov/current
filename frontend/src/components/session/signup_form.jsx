@@ -41,8 +41,12 @@ class SignupForm extends React.Component {
 
 	render() {
 
+		if (this.props.currentUser) {
+			return null;
+		}
+
 		let renderedErrors;
-		if (this.props.errors.length > 1) { 
+		if (this.props.errors.length > 0) { 
 			renderedErrors = this.renderErrors()
 			// debugger
 		} else {
@@ -84,9 +88,10 @@ class SignupForm extends React.Component {
 }
 
 
-const mapStateToProps = ({ errors }) => {
+const mapStateToProps = ({ errors, session }) => {
 	return {
-		errors: Object.values(errors.session)
+		errors: Object.values(errors.session),
+		currentUser: session.email
 	};
 };
 

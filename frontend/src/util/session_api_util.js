@@ -63,11 +63,10 @@ export const loginUser = userData => dispatch => {
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
         })
-        .catch(err =>
-            dispatch({
-                type: GET_ERRORS,
-                payload: err.response.data
-            })
+        .catch(err => {
+            // debugger
+            dispatch({ type: GET_ERRORS, payload: err.response.data });
+            }
         );
 };
 
@@ -75,6 +74,8 @@ export const loginUser = userData => dispatch => {
 
 export const logoutUser = () => dispatch => {
     localStorage.removeItem('jwtToken');
+    
+    // debugger
     setAuthToken(false);
 
     dispatch(setCurrentUser({}));
