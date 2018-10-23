@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = '/login';
         }
     }
-
+    
     ReactDOM.render(<Root store={store} />, root);
+
+    window.getState = store.getState;
 })
