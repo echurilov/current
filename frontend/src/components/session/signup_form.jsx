@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { registerUser } from '../../util/session_api_util';
+import { openModal } from '../../actions/modal_actions';
+
 
 class SignupForm extends React.Component {
 
@@ -56,7 +58,7 @@ class SignupForm extends React.Component {
 			<div className="login-form-container">
 				<form onSubmit={this.handleSubmit}>
 
-					Please sign up or {<Link to="/login">log in instead</Link>}
+					Please sign up or {this.props.otherForm}
 
 					{renderedErrors}
 
@@ -98,6 +100,11 @@ const mapStateToProps = ({ errors, session }) => {
 const mapDispatchToProps = dispatch => {
 	return {
 		registerUser: (user) => dispatch(registerUser(user)),
+		otherForm: (
+			<button onClick={() => dispatch(openModal('login'))}>
+				Log In
+      </button>
+		)
 	};
 };
 

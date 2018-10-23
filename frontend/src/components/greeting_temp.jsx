@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/greeting.css'
 import { connect } from 'react-redux';
 import { logoutUser } from '../util/session_api_util';
+import { openModal } from '../actions/modal_actions';
 
 class GreetingTemp extends React.Component {
 
@@ -14,8 +15,8 @@ class GreetingTemp extends React.Component {
       logout = null;
       welcome = (
         <div>
-          <button className="session-button" onClick={this.props.loginUser}>Log In</button>
-          <button className="session-butotn" onClick={this.props.registerUser}>Sign Up</button>
+          <button className="session-button" onClick={() => this.props.openModal('login')}>Log In</button>
+          <button className="session-button" onClick={() => this.props.openModal('signup')}>Sign Up</button>
         </div>
       )
     } else {
@@ -43,7 +44,8 @@ const mapStateToProps = ({session}) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    logoutUser: () => dispatch(logoutUser())
+    logoutUser: () => dispatch(logoutUser()),
+    openModal: modal => dispatch(openModal(modal))
   };
 };
 
