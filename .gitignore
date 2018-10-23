@@ -110,7 +110,7 @@ build/Release
 node_modules/
 
 #Keys
-/config/keys_dev.js
+/config/dev_key.js
 
 
 test
