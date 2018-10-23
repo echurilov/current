@@ -1,6 +1,7 @@
 const express = require("express");
 const bcrypt = require('bcryptjs');
-const jsonwebtoken = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
+// const jsonwebtoken = require('jsonwebtoken');
 const passport = require('passport');
 
 const User = require('../../models/User');
@@ -13,19 +14,19 @@ const router = express.Router();
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.post("/register", (req, res) => {
+  debugger
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
     return res.status(400).json(errors);
   }
 
-  User.findOne({ name: req.body.name }).then(user => {
+  User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      errors.name = "User already exists";
+      errors.email = "User already exists";
       return res.status(400).json(errors);
     } else {
       const newUser = new User({
-        name: req.body.name,
         email: req.body.email,
         password: req.body.password
       });
@@ -37,7 +38,7 @@ router.post("/register", (req, res) => {
           newUser
             .save()
             .then(user => {
-              const payload = { id: user.id, name: user.name };
+              const payload = { id: user.id, email: user.email };
 
               jwt.sign(payload, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
                 res.json({
@@ -60,18 +61,18 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const name = req.body.name;
+  const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ name }).then(user => {
+  User.findOne({ email }).then(user => {
     if (!user) {
-      errors.name = "This user does not exist";
+      errors.email = "This user does not exist";
       return res.status(400).json(errors);
     }
 
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
-        const payload = { id: user.id, name: user.name };
+        const payload = { id: user.id, email: user.email };
 
         jwt.sign(payload, keys.secretOrKeys, { expiresIn: 3600 }, (err, token) => {
           res.json({
@@ -90,7 +91,6 @@ router.post("/login", (req, res) => {
 router.get('/current', passport.authenticate('jsonwebtoken', {session: false}), (req, res) => {
   res.json({
     id: req.user.id,
-    name: req.user.name,
     email: req.user.email,
     msg: 'Success'
   });

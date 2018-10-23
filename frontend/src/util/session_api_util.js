@@ -1,7 +1,7 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
 
-const $ = window.$;
+// const $ = window.$;
 export const GET_ERRORS = 'GET_ERRORS';
 export const CLEAR_ERRORS = 'CLEAR_ERRORS';
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
@@ -19,6 +19,7 @@ export const setAuthToken = token => {
 // set current user 
 
 export const setCurrentUser = decoded => {
+    debugger
     return {
         type: RECEIVE_CURRENT_USER,
         payload: decoded
@@ -28,9 +29,11 @@ export const setCurrentUser = decoded => {
 // sign up user
 
 export const registerUser = (userData) => dispatch => {
+    debugger 
     axios
         .post('/api/users/register', userData)
         .then(res => {
+            debugger
             const { token } = res.data;
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);
