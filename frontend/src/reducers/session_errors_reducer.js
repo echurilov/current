@@ -12,6 +12,10 @@ export default (state = [], action) => {
     case RECEIVE_CURRENT_USER:
     // debugger
       return [];
+    case 'OPEN_MODAL':
+      return [];
+    case 'CLOSE_MODAL':
+      return [];
     default:
       return state;
   }

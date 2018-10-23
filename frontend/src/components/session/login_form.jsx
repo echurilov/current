@@ -2,7 +2,7 @@ import React from 'react';
 import '../../css/session_form.css';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
-import { loginUser } from '../../util/session_api_util';
+import { loginUser, GET_ERRORS } from '../../util/session_api_util';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
 
@@ -26,8 +26,7 @@ class LoginForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         const user = Object.assign({}, this.state);
-        this.props.loginUser(user);
-        this.props.closeModal();
+        this.props.loginUser(user)
         this.setState({ email: '', password: '' });
     }
 
@@ -65,7 +64,6 @@ class LoginForm extends React.Component {
 
                     Please log in or {this.props.otherForm}
 
-                    {renderedErrors}
 
                     <div className="session-form">
 
@@ -87,6 +85,8 @@ class LoginForm extends React.Component {
 
                         <input className="session-submit" type="submit" value='Log in' />
                     </div>
+                    {renderedErrors}
+
                 </form>
             </div>
         );
@@ -107,12 +107,13 @@ const mapDispatchToProps = dispatch => {
         loginUser: (user) => dispatch(loginUser(user)),
         otherForm: (
             <span>
-            <button onClick={() => dispatch(openModal('signup'))}>
+                <button onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
                 Sign Up
             </button>
             </span>
         ),
-        closeModal: () => dispatch(closeModal())
+        closeModal: () => dispatch(closeModal()),
+        clearErrors: () => dispatch({ type: GET_ERRORS, payload: {}})
     };
 };
 
