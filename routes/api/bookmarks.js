@@ -1,7 +1,6 @@
 const express = require("express");
 
 const Bookmark = require('../../models/Bookmark');
-const keys = require('../../config/keys');
 const validateNewBookmark = require('../../validations/bookmark');
 
 const router = express.Router();
@@ -28,8 +27,15 @@ router.post("/create", (req, res) => {
   });
 });
 
-router.get('/', (req, res) => {
-  Bookmark.findOne({ id: req.body.id }).then(bookmark => {
+router.get("/:bookmarkId", (req, res) => {
+  const { errors, isValid } = validateNewBookmark(req.body);
+
+  const { bookmarkId } = req.params;
+  if (!bookmarkId) {
+    return res.json({ success: false, error: "No bookmark id provided" });
+  }
+
+  Bookmark.findOne({ id: bookmarkId }).then(bookmark => {
     if (bookmark) {
       res.json({
         id: req.bookmark.id,
@@ -37,12 +43,12 @@ router.get('/', (req, res) => {
         title: req.bookmark.title,
         query: req.bookmark.query,
         msg: "Success"
-      })
+      });
     } else {
       errors.id = "Bookmark does not exist";
       return res.status(400).json(errors);
     }
-  })
-})
+  });
+});
 
 module.exports = router;
