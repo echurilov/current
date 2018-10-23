@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
+const BookmarkSchema = new Schema({
   title: {
     type: String,
     required: false
   },
   user_id: {
-    type: integer,
+    type: Number,
     required: true
   },
   query: {
@@ -15,7 +15,7 @@ const UserSchema = new Schema({
     required: true
   }
   // API_id: {
-  //   type: Integer,
+  //   type: Number,
   //   required: true
   // },
   // date: {
@@ -24,4 +24,4 @@ const UserSchema = new Schema({
   // }
 });
 
-module.exports = User = mongoose.model("users", UserSchema);
+module.exports = Bookmark = mongoose.model("bookmarks", BookmarkSchema);
