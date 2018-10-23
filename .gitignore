@@ -111,6 +111,7 @@ node_modules/
 
 #Keys
 /config/dev_key.js
+/routes/api/api_keys.js
 
 
 test
