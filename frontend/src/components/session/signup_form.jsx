@@ -57,7 +57,7 @@ class SignupForm extends React.Component {
 			renderedErrors = null
 		}
 		return (
-			<div className="session-form-container">
+			<div className="animated slideInDown fast session-form-container">
 				<form onSubmit={this.handleSubmit}>
 
 					Please sign up or {this.props.otherForm}

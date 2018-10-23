@@ -60,7 +60,7 @@ class LoginForm extends React.Component {
             renderedErrors = null
         }
         return (
-            <div className="session-form-container">
+            <div className="animated slideInDown fast session-form-container">
                 <form onSubmit={this.handleSubmit}>
 
                     Please log in or {this.props.otherForm}
