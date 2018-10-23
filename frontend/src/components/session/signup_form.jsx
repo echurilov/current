@@ -1,8 +1,9 @@
 import React from 'react';
+import '../../css/session_form.css';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { registerUser } from '../../util/session_api_util';
-import { openModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 
 class SignupForm extends React.Component {
@@ -26,6 +27,7 @@ class SignupForm extends React.Component {
 		e.preventDefault();
 		const user = Object.assign({}, this.state);
 		this.props.registerUser(user);
+		this.props.closeModal();
 		this.setState({ email: '', password: '' });
 	}
 
@@ -55,30 +57,30 @@ class SignupForm extends React.Component {
 			renderedErrors = null
 		}
 		return (
-			<div className="login-form-container">
+			<div className="session-form-container">
 				<form onSubmit={this.handleSubmit}>
 
 					Please sign up or {this.props.otherForm}
 
 					{renderedErrors}
 
-					<div className="login-form">
+					<div className="session-form">
 
 						<label>Email:
+						</label>
               <input type="text"
 								value={this.state.email}
 								onChange={this.update('email')}
-								className="login-input"
+								className="session-input"
 							/>
-						</label>
 
 						<label>Password:
+						</label>
               <input type="password"
 								value={this.state.password}
 								onChange={this.update('password')}
-								className="login-input"
+								className="session-input"
 							/>
-						</label>
 
 						<input className="session-submit" type="submit" value='Sign Up' />
 					</div>
@@ -101,10 +103,13 @@ const mapDispatchToProps = dispatch => {
 	return {
 		registerUser: (user) => dispatch(registerUser(user)),
 		otherForm: (
+			<span>
 			<button onClick={() => dispatch(openModal('login'))}>
 				Log In
       </button>
-		)
+			</span>
+		),
+		closeModal: () => dispatch(closeModal())
 	};
 };
 

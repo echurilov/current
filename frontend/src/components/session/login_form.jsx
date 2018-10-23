@@ -1,8 +1,9 @@
 import React from 'react';
+import '../../css/session_form.css';
 import { connect } from 'react-redux';
 // import { Link } from 'react-router-dom';
 import { loginUser } from '../../util/session_api_util';
-import { openModal } from '../../actions/modal_actions';
+import { openModal, closeModal } from '../../actions/modal_actions';
 
 
 class LoginForm extends React.Component {
@@ -26,6 +27,7 @@ class LoginForm extends React.Component {
         e.preventDefault();
         const user = Object.assign({}, this.state);
         this.props.loginUser(user);
+        this.props.closeModal();
         this.setState({ email: '', password: '' });
     }
 
@@ -58,30 +60,30 @@ class LoginForm extends React.Component {
             renderedErrors = null
         }
         return (
-            <div className="login-form-container">
+            <div className="session-form-container">
                 <form onSubmit={this.handleSubmit}>
 
                     Please log in or {this.props.otherForm}
 
                     {renderedErrors}
 
-                    <div className="login-form">
+                    <div className="session-form">
 
                         <label>Email:
+                        </label>
               <input type="text"
                                 value={this.state.email}
                                 onChange={this.update('email')}
-                                className="login-input"
+                                className="session-input"
                             />
-                        </label>
 
                         <label>Password:
+                        </label>
               <input type="password"
                                 value={this.state.password}
                                 onChange={this.update('password')}
-                                className="login-input"
+                                className="session-input"
                             />
-                        </label>
 
                         <input className="session-submit" type="submit" value='Log in' />
                     </div>
@@ -104,10 +106,13 @@ const mapDispatchToProps = dispatch => {
     return {
         loginUser: (user) => dispatch(loginUser(user)),
         otherForm: (
+            <span>
             <button onClick={() => dispatch(openModal('signup'))}>
                 Sign Up
             </button>
-        )
+            </span>
+        ),
+        closeModal: () => dispatch(closeModal())
     };
 };
 

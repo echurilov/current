@@ -22,14 +22,16 @@ class GreetingTemp extends React.Component {
     } else {
       user = this.props.currentUser;
       logout = (<button className="logout-button" onClick={this.props.logoutUser}>Log Out</button>)
-      welcome = (<h4>welcome {user}</h4>);
+      welcome = (<h4>welcome, {user}</h4>);
     }
 
     return (
       <div className="greeting-container">
         <img src={window.location.origin + '/images/current-logo.png'}></img>
+        <div className="right-header">
         {welcome}
         {logout}
+        </div>
       </div>
     )
   }
