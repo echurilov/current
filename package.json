@@ -33,9 +33,11 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.3.4",
+    "newsapi": "^2.4.0",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
-    "validator": "^10.8.0"
+    "validator": "^10.8.0",
+    "youtube-api-v3-search": "^1.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.4"
