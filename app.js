@@ -13,10 +13,12 @@ mongoose
 const app = express();
 const port = process.env.PORT || 5000;
 const users = require("./routes/api/users");
+const search = require('./routes/api/search');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api/users", users);
 app.use(passport.initialize());
+app.use("/api/search", search);
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));
