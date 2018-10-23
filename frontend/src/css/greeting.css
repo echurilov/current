@@ -1,0 +1,22 @@
+.greeting-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 5px 10px 5px 10px;
+  align-items: center;
+}
+
+.greeting-container h4 {
+  padding-right: 50px;
+}
+
+.greeting-container img {
+  width: 230px;
+  height: 80px;
+}
+
+.greeting-container .right-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
