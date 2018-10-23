@@ -1,45 +1,58 @@
 import React from 'react';
+import '../css/search.css'
 // import { connect } from 'react-redux';
-import SearchResults from './search_results';
+// import SearchResults from './search_results';
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = { searchTerm: '', render: false };
-        this.timeout = 0;
-        this.updateInput = this.updateInput.bind(this);
+        // this.timeout = 0;
+        // this.updateInput = this.updateInput.bind(this);
+        this.submitSearch = this.submitSearch.bind(this);
     }
 
-    updateInput(e) {
-        this.setState({ render: false })
+    // updateInput(e) {
+    //     this.setState({ render: false })
 
-        let val = e.target.value
+    //     let val = e.target.value
 
-        if (this.timeout) clearTimeout(this.timeout);
+    //     if (this.timeout) clearTimeout(this.timeout);
 
-        this.timeout = setTimeout(() => {
-            this.setState({ render: true });
-        }, 300);
-        this.setState({ searchTerm: val });
+    //     this.timeout = setTimeout(() => {
+    //         this.setState({ render: true });
+    //     }, 300);
+    //     this.setState({ searchTerm: val });
+    // }
+
+    submitSearch() {
+        let searchTerm = document.getElementById('search-input').value;
+        // login for sending term to calls
     }
 
     render() {
-        let { searchTerm, render } = this.state;
+        let { render } = this.state;
 
-        let results = <SearchResults searchTerm={searchTerm} />
-        
+        // let results = <SearchResults searchTerm={searchTerm} />
+        let results = 'result'
 
         return (
             <div className="search">
-                <div className="search-input">
-                    <input autoFocus="autoFocus"
+                
+                <form onSubmit={this.submitSearch} className="search-input">
+                    <input 
+                        className="search-bar"
+                        id="search-input"
+                        autoFocus="autoFocus"
                         type="text"
-                        value={this.state.searchTerm}
-                        onChange={this.updateInput}
                         placeholder="See what's trending..."></input>
-                </div>
-
+                
+                <button type="submit" className="search-btn">
+                    <i className="fa fa-search"></i>
+                </button>
+                </form>
+                
                 {(render) ? results : null}
             </div>
         )
