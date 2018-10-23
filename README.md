@@ -86,13 +86,13 @@ The state will need to be updated based on API calls that return different kinds
  ### Day 1 
  * Finish building User Auth backend- **Elena**
  * Create methods to get info from APIs return relevant data, start building frontend components - **Wade and Sam**
- * Get GoogleTrends requests and connect to frontend - **Riya**
+ * Build Frontend User Auth and connect to backend - **Riya**
  * Discuss how we want to display returned API info on the frontend -**All**
 
 ### Day 2
-* Build User Auth frontend and start building database for search terms -**Elena**
+* Start building database for search terms and connect search terms through util to pass to fronend components -**Elena**
 * Get APIs styled on frontend -**Sam and Wade**
-* Get user search and trends to connect to APIs -**Riya**
+*  Get GoogleTrends requests and connect to frontend & connect search terms to components -**Riya**
 
 ### Day 3
 * Add functionality for saving search terms and using them to make requests to the APIs -**Elena**
