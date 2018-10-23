@@ -19,7 +19,7 @@ export const setAuthToken = token => {
 // set current user 
 
 export const setCurrentUser = decoded => {
-    debugger
+    // debugger
     return {
         type: RECEIVE_CURRENT_USER,
         payload: decoded
@@ -29,11 +29,11 @@ export const setCurrentUser = decoded => {
 // sign up user
 
 export const registerUser = (userData) => dispatch => {
-    debugger 
+    // debugger 
     axios
         .post('/api/users/register', userData)
         .then(res => {
-            debugger
+            // debugger
             const { token } = res.data;
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);

@@ -23,8 +23,8 @@ class SignupForm extends React.Component {
 	handleSubmit(e) {
 		e.preventDefault();
 		const user = Object.assign({}, this.state);
-		this.props.registerUser(user)
-			// .then(res => console.log(res), err => console.log(err))
+		this.props.registerUser(user);
+		this.setState({ email: '', password: '' });
 	}
 
 	renderErrors() {
@@ -40,8 +40,13 @@ class SignupForm extends React.Component {
 	}
 
 	render() {
-		debugger
+
+		let renderedErrors;
 		if (this.props.errors.length > 1) { 
+			renderedErrors = this.renderErrors()
+			// debugger
+		} else {
+			renderedErrors = null
 		}
 		return (
 			<div className="login-form-container">
@@ -49,7 +54,7 @@ class SignupForm extends React.Component {
 
 					Please sign up or {<Link to="/login">log in instead</Link>}
 
-					{this.props.errors.length > 1 ? this.renderErrors() : null}
+					{renderedErrors}
 
 					<div className="login-form">
 

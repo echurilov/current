@@ -5,12 +5,12 @@ import { logoutUser } from '../util/session_api_util';
 class GreetingTemp extends React.Component {
 
   render() {
-    if (!this.props.currentUsername) {
+    if (!this.props.currentUser) {
       return null
     }
     return (
       <div>
-        <h1>greetings {this.props.currentUsername}</h1>
+        <h1>greetings {this.props.currentUser}</h1>
         <button className="header-button" onClick={this.props.logoutUser}>Log Out</button>
       </div>
     )
@@ -20,7 +20,7 @@ class GreetingTemp extends React.Component {
 
 const mapStateToProps = ({session}) => {
   return {
-    currentUsername: session.username
+    currentUser: session.email
   };
 };
 
