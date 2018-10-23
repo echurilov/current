@@ -1,5 +1,5 @@
 .session-form-container form {
-  width: 400px;
+  width: 450px;
   height: 400px;
   border: 1px solid white;
   border-radius: 10px;
@@ -10,6 +10,11 @@
   align-content: center;
   padding-top: 30px;
   color: white;
+}
+
+.session-form-container ul {
+  list-style: none;
+  padding-right: 50px;
 }
 
 .session-form {

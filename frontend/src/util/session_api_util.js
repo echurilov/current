@@ -30,7 +30,7 @@ export const setCurrentUser = decoded => {
 
 export const registerUser = (userData) => dispatch => {
     // debugger 
-    axios
+    return axios
         .post('/api/users/register', userData)
         .then(res => {
             // debugger
@@ -53,7 +53,7 @@ export const registerUser = (userData) => dispatch => {
 // log in user
 
 export const loginUser = userData => dispatch => {
-    axios
+    return axios
         .post('/api/users/login', userData)
         .then(res => {
             const { token } = res.data;
