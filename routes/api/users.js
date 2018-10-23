@@ -14,7 +14,6 @@ const router = express.Router();
 router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
 
 router.post("/register", (req, res) => {
-  debugger
   const { errors, isValid } = validateRegisterInput(req.body);
 
   if (!isValid) {
