@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
-router.post("/create", (req, res) => {
+router.post("/", (req, res) => {
   const { errors, isValid } = validateNewBookmark(req.body);
 
   if (!isValid) {
