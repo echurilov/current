@@ -79,29 +79,16 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   Promise.all([
-    imgurCallback(),
     giphyCallback(),
     newsCallback(),
     youtubeCallback()
   ])
     .then(function(value) {
-      const allTheData = {};
-      allTheData["imgur"] = value[0].data.slice(0, 10);
-      allTheData["giphy"] = value[1].data.slice(0, 10);
-      allTheData["news"] = value[2].data.slice(0, 10);
-      allTheData["youtube"] = value[3].data;
-      console.log(allTheData)
-      return allTheData;
-  Promise.all([giphyCallback()])
-    .then(function(value) {
-      const allTheData = {};
-      // allTheData["imgur"] = value[0].data.slice(0, 10);
-      allTheData["giphy"] = value[0].data.slice(0, 10);
-      console.log(allTheData);
       res.json({
-        giphy: value[0].data.slice(0,10)
-      })
-    })
+        giphy: value[0].data.slice(0,10),
+        news: value[1].data.slice(0,10),
+        youtube: value[2].data
+      })})
     .catch(err => {
       console.log("search didnt work");
       return;
