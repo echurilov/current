@@ -10,7 +10,9 @@ router.get("/", (req, res) => {
   googleTrends
     .hotTrends("US")
     .then(function (results) {
-      console.log(results);
+      res.json({
+        trends: results
+      });
     })
     .catch(function (err) {
       console.error("Oh no there was an error", err);
