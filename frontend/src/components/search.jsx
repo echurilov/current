@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/search.css'
 // import { connect } from 'react-redux';
-// import SearchResults from './search_results';
+import SearchResults from './search_results';
 
 class Search extends React.Component {
 
