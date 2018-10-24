@@ -9,7 +9,9 @@ class NewsIndexItem extends React.Component {
         console.log(date)
 
         return <div className="news-index-item">
-            <img src={article.urlToImage} alt={""} />
+            <a href={article.url}>
+              <img src={article.urlToImage} alt={""} />
+            </a>
 
             <div className="text-content">
               <a href={article.url}>
@@ -17,11 +19,16 @@ class NewsIndexItem extends React.Component {
               </a>
 
               <div className="published-info">
-                <p>{article.source.name}</p>
+                <a href={article.url}>
+                  <p>{article.source.name}</p>
+                </a>
+                <p>-</p>
                 <p>{moment(article.publishedAt).fromNow()}</p>
               </div>
 
-              <p>{article.description}</p>
+              <a href={article.url}>
+                <p>{article.description}</p>
+              </a>
             </div>
           </div>;
     }

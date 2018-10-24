@@ -1,43 +1,66 @@
 .news-index {
 
-  border: 1px solid grey;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 3px;
+  margin: 25px;
+  padding: 10px;
 
   .news-header{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    border-bottom: 2px solid rgb(224, 224, 224);
 
       h1 {
       color: rgb(41, 188, 173);
-      font-size: 36px;
+      font-size: 40px;
       font-weight: bold;
+       margin-block-start: 0;
+       margin-block-end: 0;
+       margin-inline-start: 0;
+       margin-inline-end: 0;
     }
 
     strong {
       font-weight: bold;
-      font-size: 14px;
+      font-size: 13px;
     }
-
-
 
   }
   
-
-
   .news-index-item {
     display: flex;
-    
-    
+    padding: 15px;
+    border-bottom: 1px solid rgb(224, 224, 224);
+
+    strong {
+      font-size: 18px;
+    }
 
     img {
       width: 250px;
       height: 150px;
+      margin-right: 20px;
     }
 
     .published-info {
       display: flex;
+
+      p {
+        margin-right: 20px;
+        font-size: 13px;
+        color: #C1C1C1;
+      }
     }
+
+   p {
+     margin-top: 12px;
+   }
+  }
+
+  .news-index-item:last-child{
+    border-bottom: none;
   }
     
 }

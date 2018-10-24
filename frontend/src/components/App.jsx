@@ -5,6 +5,7 @@ import '../css/app.css'
 import Greeting from './greeting_temp';
 import Modal from './modal';
 import Search from './search';
+import NewsIndexContainer from './apis/news/news_index_container';
 
 class App extends React.Component {
 
@@ -14,6 +15,7 @@ class App extends React.Component {
                 <Modal></Modal>
                 <Greeting></Greeting>
                 <Search></Search>
+                <NewsIndexContainer />
             </div>
         )
     }
