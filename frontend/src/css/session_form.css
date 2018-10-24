@@ -22,13 +22,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: turquoise;
+  color: #8FE9DF;
 }
 
-.session-form input[type="text"], input[type="password"] {
+.session-form button, input[type="text"], input[type="password"] {
   font-family: "Poppins";
   border-radius: 3px;
   width: 200px;
   margin: 10px 0 10px 0;
+  transition: 0.1s;
 }
 
+.other-form {
+  margin-top: 20px;
+}
+
+.session-submit {
+  margin-top: 50px;
+}

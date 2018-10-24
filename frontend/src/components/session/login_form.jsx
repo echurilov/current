@@ -107,7 +107,7 @@ const mapDispatchToProps = dispatch => {
         loginUser: (user) => dispatch(loginUser(user)),
         otherForm: (
             <span>
-                <button onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
+                <button className="other-form" onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
                 Sign Up
             </button>
             </span>
