@@ -5,21 +5,8 @@ const keys = require("./keys");
 
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
-  debugger;
-  const imgurCallback = () => {
-    return axios({
-      method: "get",
-      url: `https://api.imgur.com/3/gallery/search?q=${processedQuery}`,
-      headers: { Authorization: `Client-ID ${keys.imgurId}` }
-    })
-      .then(res => {
-        return res.data;
-      })
-      .catch(err => {
-        return err;
-      });
-  };
 
+  console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
   const giphyCallback = () => {
     return axios({
       method: "get",
@@ -27,21 +14,23 @@ router.get("/:searchQuery", (req, res) => {
         keys.giphyId
       }&q=${processedQuery}`
     })
-      .then(res => {
-        return res.data;
+      .then(result => {
+        return result.data;
       })
       .catch(err => {
         return err;
       });
   };
 
-  Promise.all([imgurCallback(), giphyCallback()])
+  Promise.all([giphyCallback()])
     .then(function(value) {
       const allTheData = {};
-      allTheData["imgur"] = value[0].data.slice(0, 10);
-      allTheData["giphy"] = value[1].data.slice(0, 10);
+      // allTheData["imgur"] = value[0].data.slice(0, 10);
+      allTheData["giphy"] = value[0].data.slice(0, 10);
       console.log(allTheData);
-      return allTheData;
+      res.json({
+        giphy: value[0].data.slice(0,10)
+      })
     })
     .catch(err => {
       console.log("search didnt work");
