@@ -2,13 +2,20 @@
   font-family: 'Poppins';
 }
 
-button, input[type="submit"] {
+.greeting-container button, input[type="submit"] {
   font-family: "Montserrat";
   font-size: 13px;
   border-radius: 3px;
-  background-color: turquoise;
+  background-color: #FF6C45;
+  /* color: black; */
   color: white;
-  margin: 5px;
-  width: 70px;
+  width: 80px;
   height: 30px;
+  transition: 0.1s;
+}
+
+.greeting-container button:hover, input[type="submit"]:hover {
+  background-color: white;
+  color: #FF6C45;
+  border: 1px solid #FF6C45;
 }

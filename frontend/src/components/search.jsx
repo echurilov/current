@@ -1,43 +1,68 @@
 import React from 'react';
+import '../css/search.css'
 // import { connect } from 'react-redux';
-import SearchResults from './search_results';
+// import SearchResults from './search_results';
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: false };
-        this.timeout = 0;
-        this.updateInput = this.updateInput.bind(this);
+        this.state = { searchTerm: '', render: false, dailyTrends: [], dailyTrends2: [] };
+        this.submitSearch = this.submitSearch.bind(this);
     }
 
-    updateInput(e) {
-        this.setState({ render: false })
+    componentDidMount() {
+        this.setState({ dailyTrends: ['Ariana Grande', 'Westminster Dog Show', 'World Cup', 'Amazon Go', 'Halloween', 'Game of Thrones'] })
+        this.setState({ dailyTrends2: ['Matt Damon', 'The Warriors', 'Voter Registration', 'Supreme Court', 'Haunted Houses', 'Drake'] })
+        this.setState({ render: true })
+    }
 
-        let val = e.target.value
-
-        if (this.timeout) clearTimeout(this.timeout);
-
-        this.timeout = setTimeout(() => {
-            this.setState({ render: true });
-        }, 300);
-        this.setState({ searchTerm: val });
+    submitSearch(searchTermInput) {
+        let searchTerm = searchTermInput || document.getElementById('search-input').value;
+        // logic/call method for sending term to calls
     }
 
     render() {
-        let { searchTerm, render } = this.state;
+        let { render, dailyTrends, dailyTrends2 } = this.state;
 
-        let results = <SearchResults searchTerm={searchTerm} />
-        
+        if (!render) {
+            return null;
+        }
+
+        let trendButtons = [];
+        for(let i = 0; i < dailyTrends.length; i++) {
+            let btn = <button className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+            trendButtons.push(btn);
+        }
+
+        let trendButtons2 = [];
+        for(let i = 0; i < dailyTrends2.length; i++) {
+            let btn = <button className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
+            trendButtons2.push(btn);
+        }
+
+        let results = ''
+        // let results = <SearchResults searchTerm={searchTerm} />
 
         return (
-            <div className="search">
-                <div className="search-input">
-                    <input autoFocus="autoFocus"
-                        type="text"
-                        value={this.state.searchTerm}
-                        onChange={this.updateInput}
-                        placeholder="See what's trending..."></input>
+            <div>
+                <div className="search">
+                    <form onSubmit={this.submitSearch} className="search-input">
+                        <input 
+                            className="search-bar"
+                            id="search-input"
+                            autoFocus="autoFocus"
+                            type="text"
+                            placeholder="See what's trending..."></input>
+                    
+                    <button type="submit" className="search-btn">
+                        <i className="fa fa-search"></i>
+                    </button>
+                    </form>
+                </div>
+                
+                <div className="trends">
+                    {trendButtons}
                 </div>
 
                 {(render) ? results : null}

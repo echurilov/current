@@ -27,7 +27,7 @@ class GreetingTemp extends React.Component {
 
     return (
       <div className="greeting-container">
-        <img src={window.location.origin + '/images/current-logo.png'}></img>
+        <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>
         <div className="right-header">
         {welcome}
         {logout}
