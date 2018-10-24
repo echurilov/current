@@ -8,14 +8,14 @@ class NewsIndex extends React.Component {
             return <NewsIndexItem key={`news-${idx}`} article={article} />
         })
 
-        return (
-            <div className="news-index">
-                <h1>News</h1>
-                <div>
-                    {newsItems}
-                </div>
+        return <div className="news-index">
+            <div className="news-header">
+              <h1>News</h1>
+                <a href="https://newsapi.org/"><strong>Powered by NewsAPI</strong></a>
             </div>
-        )
+
+            <div>{newsItems}</div>
+          </div>;
     }
 }
 

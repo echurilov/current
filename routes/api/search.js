@@ -92,18 +92,18 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   Promise.all([
-    imgurCallback(),
-    giphyCallback(),
+    
+    
     newsCallback(),
     youtubeCallback()
   ])
     .then(function(value) {
       const allTheData = {};
-      allTheData["imgur"] = value[0].data.slice(0, 10);
-      allTheData["giphy"] = value[1].data.slice(0, 10);
-      allTheData["news"] = value[2].data.slice(0, 10);
-      allTheData["youtube"] = value[3].data;
-      console.log(allTheData)
+      // allTheData["imgur"] = value[0].data.slice(0, 10);
+      // allTheData["giphy"] = value[1].data.slice(0, 10);
+      allTheData["news"] = value[0].data.slice(0, 10);
+      allTheData["youtube"] = value[1].data;
+      console.log(allTheData.news)
       return allTheData;
     })
     .catch(err => {
