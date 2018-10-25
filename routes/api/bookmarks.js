@@ -42,6 +42,30 @@ router.get("/:bookmarkId", (req, res) => {
   });
 });
 
+// router.patch("/:bookmarkId", (req, res) => {
+//   (async () => {
+//     return Bookmark.findOneAndUpdate({ _id: bookmarkId }, { $set: req.body} )
+//   })().catch(errors => res.status(400).json(errors));
+// });
+
+router.patch("/:bookmarkId", (req, res) => {
+  const { bookmarkId } = req.params;
+  if (!bookmarkId) {
+    return res.json({ success: false, error: "No bookmark id provided" });
+  }
+
+  Bookmark.findOne({ _id: bookmarkId }).then(bookmark => {
+    if (bookmark) {
+      Bookmark.update({ _id: bookmarkId }, { $set: req.body }).then(() =>
+        res.json({ bookmark })
+      );
+    } else {
+      errors = { id: "Bookmark does not exist" };
+      return res.status(400).json(errors);
+    }
+  });
+});
+
 router.delete("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
