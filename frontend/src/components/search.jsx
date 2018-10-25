@@ -1,16 +1,22 @@
 import React from 'react';
 import '../css/search.css'
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { fetchTrends } from '../actions/trends_actions';
 // import SearchResults from './search_results';
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: false };
+        this.state = { searchTerm: '', render: false, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
     }
 
+    componentDidMount() {   
+        this.props.fetchTrends()
+            .then( () => this.setState({ trends: this.props.trends }) )
+        // debugger
+    }
 
     submitSearch(searchTermInput) {
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
@@ -19,10 +25,15 @@ class Search extends React.Component {
 
     render() {
         let { render } = this.state;
+        let { trends } = this.props;
 
-        let dailyTrends = ['Ariana Grande', 'Westminster Dog Show', 'World Cup', 'Piperade']
-        let dailyTrends2 = ['Matt Damon', 'The Warriors', 'Voter Registration', 'Supreme Court']
-        let dailyTrends3 = ['Amazon Go', 'Halloween', 'Game of Thrones', 'Haunted Houses', 'Drake']
+        if (trends.length < 1) {
+            return null;
+        }
+        
+        let dailyTrends = trends.slice(0, 5)
+        let dailyTrends2 = trends.slice(5, 10)
+        let dailyTrends3 = trends.slice(10, 15)
 
         let trendButtons = [];
         for(let i = 0; i < dailyTrends.length; i++) {
@@ -47,7 +58,7 @@ class Search extends React.Component {
 
         return (
             <div>
-                
+
                 <div className="search">
                     <form onSubmit={this.submitSearch} className="search-input">
                         <input 
@@ -81,4 +92,13 @@ class Search extends React.Component {
     }
 }
 
-export default Search;
+
+const mapStateToProps = state => ({
+    trends: state.entities.trends
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchTrends: () => dispatch(fetchTrends())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Search);

@@ -9,7 +9,7 @@ const receiveTrends = trends => {
 }
 
 export const fetchTrends = () => dispatch => {
-  axios.get(`/api/trends`)
+  return axios.get(`/api/trends`)
     .then(trends => {
       console.log('TRENDS', trends)
       dispatch(receiveTrends(trends))

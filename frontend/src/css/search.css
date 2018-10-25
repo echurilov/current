@@ -53,8 +53,6 @@
 .trends {
   height: 50px;
   margin-top: 20px;
-  /* display: flex; */
-  /* border: 1px solid red; */
   width: 100%;
   position: relative;
 }
@@ -72,7 +70,6 @@
 }
 
 .trend-btn:hover {
-  /* font-size: 23px; */
   color: #8FE9DF;
   cursor: pointer;
 }
@@ -94,11 +91,9 @@
   justify-content: space-evenly;
   
   width: 100%;
-  /* border: 1px solid red; */
   
-  animation-duration: 20s;
-  animation-timing-function: cubic-bezier(0.785, 0.135, 0.56, 0.86);
-	/* animation-timing-function: ease-in-out; */
+  animation-duration: 25s;
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.16, 0.56);
 	animation-iteration-count: infinite;
 }
 
