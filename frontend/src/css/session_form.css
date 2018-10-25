@@ -22,11 +22,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #3BB1B3;
+  color: #B9E9F2;
 }
 
 .session-form button, input[type="text"], input[type="password"] {
-  font-family: "Poppins";
+  font-family: "Roboto";
   border-radius: 3px;
   width: 200px;
   margin: 10px 0 10px 0;

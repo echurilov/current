@@ -3,6 +3,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 10px;
+  background: #F9ECD7;
 }
 
 .search-input {
@@ -14,11 +16,16 @@
   width: 700px !important;
   height: 40px;
   border-radius: 20px 0 0 20px !important;
-  border: 5px solid #3BB1B3;
+  border: 2px solid #7dbbc2;
   font-size: 20px;
-  padding: 0 10px 0 10px;
+  padding: 0 10px 0 20px;
   border-right: none;
-  color: #F16A43;
+  color: #2F2F2F;
+  background-color: #FFFBF3;
+}
+
+.search-bar::placeholder {
+  color: #2F2F2F;
 }
 
 .search-bar:focus {
@@ -26,19 +33,20 @@
 }
 
 .fa-search {
-  color: #F16A43;
+  color: #7dbbc2;
   text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
 }
 
 .search-btn {
   margin: 10px 10px 10px 0;
-  height: 50px;
+  height: 40px;
   border-radius: 0 20px 20px 0;
-  border: 5px solid #3BB1B3;
-  border-left: 5px solid #3BB1B3;
-  background-color: #EBEBEB;
+  border: 2px solid #7dbbc2;
+  border-left: 2px solid #7dbbc2;
+  background-color: #F9ECD7;
   width: 90px;
   transition: 0.1s;
+  text-align: center;
 }
 
 .search-btn:hover {
@@ -59,14 +67,15 @@
   margin-top: 20px;
   width: 100%;
   position: relative;
+  overflow-y: hidden;
 }
 
 .trend-btn {
-  font-family: "Poppins";
+  font-family: "Roboto";
   font-size: 20px;
   font-style: italic;
   background: none;
-  color:  #F16A43;
+  color:  #7dbbc2;
   border: none;
   width: 230px;
   transition: .3s;
@@ -74,7 +83,7 @@
 }
 
 .trend-btn:hover {
-  color: #D2512C;
+  color: #607F85;
   cursor: pointer;
 }
 

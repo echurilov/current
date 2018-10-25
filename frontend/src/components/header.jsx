@@ -27,6 +27,10 @@ class Header extends React.Component {
 
     return (
       <div className="header-container">
+        <div>
+          <a>About Us</a>
+          <a>What's Current?</a>
+        </div>
         <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>
         <div className="right-header">
         {welcome}

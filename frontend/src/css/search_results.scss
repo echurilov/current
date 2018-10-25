@@ -1,14 +1,16 @@
 .search-results {
      display: grid;
      grid-template-columns: 1fr 1fr 1fr;
-     margin-top: 50px;
-     grid-gap: 10px;
+     margin-top: 10px;
+     grid-gap: 15px;
      padding: 10px;
     
 
      .giphy-image {
          height: 380px;
          border-radius: 3px;
+         border: 5px solid white;
+         width: 410px;
      }
 
      

@@ -68,7 +68,7 @@ class Search extends React.Component {
                         sizeUnit={"px"}
                         height={30}
                         width={30}
-                        color={'#D2512C'}
+                        color={'#7dbbc2'}
                         loading={this.state.loading}
                     />
                 </div>
@@ -84,7 +84,7 @@ class Search extends React.Component {
                             id="search-input"
                             autoFocus="autoFocus"
                             type="text"
-                            placeholder="See what's trending..."></input>
+                            placeholder="see what's trending..."></input>
                     
                     <button type="submit" className="search-btn">
                         <i className="fa fa-search"></i>
