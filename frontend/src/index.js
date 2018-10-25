@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Root from './components/Root';
-import 'normalize.css';
+// import 'normalize.css';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import * as APIUtil from './util/session_api_util';

@@ -7,27 +7,27 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: false, dailyTrends: [], dailyTrends2: [] };
+        this.state = { 
+            searchTerm: '', 
+            dailyTrends: [], 
+            dailyTrends2: [],
+            renderResults: false 
+        };
         this.submitSearch = this.submitSearch.bind(this);
     }
 
     componentDidMount() {
-        this.setState({ dailyTrends: ['Ariana Grande', 'Westminster Dog Show', 'World Cup', 'Amazon Go', 'Halloween', 'Game of Thrones'] })
-        this.setState({ dailyTrends2: ['Matt Damon', 'The Warriors', 'Voter Registration', 'Supreme Court', 'Haunted Houses', 'Drake'] })
-        this.setState({ render: true })
+       
     }
 
-    submitSearch(searchTermInput) {
-        let searchTerm = searchTermInput || document.getElementById('search-input').value;
+    submitSearch(searchTerm) {
+        // let searchTerm = searchTermInput || document.getElementById('search-input').value;
         // logic/call method for sending term to calls
+        this.setState({renderResults: true, searchTerm: document.getElementById('search-input').value})
     }
 
     render() {
-        let { render, dailyTrends, dailyTrends2 } = this.state;
-
-        if (!render) {
-            return null;
-        }
+        let { dailyTrends, dailyTrends2, searchTerm } = this.state;
 
         let trendButtons = [];
         for(let i = 0; i < dailyTrends.length; i++) {
@@ -41,8 +41,12 @@ class Search extends React.Component {
             trendButtons2.push(btn);
         }
 
-        let results = ''
-        // let results = <SearchResults searchTerm={searchTerm} />
+        // let results = ''
+        let results = this.state.renderResults ? (
+            <SearchResults searchTerm={searchTerm} />
+        ) : (
+            <div>Nothing to see here</div>
+        )
 
         return (
             <div>
@@ -65,7 +69,7 @@ class Search extends React.Component {
                     {trendButtons}
                 </div>
 
-                {(render) ? results : null}
+                { results }
             </div>
         )
     }

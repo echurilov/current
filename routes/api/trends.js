@@ -7,7 +7,7 @@ router.get("/test", (req, res) =>
 );
 
 router.get("/", (req, res) => {
-  googleTrends
+  return googleTrends
     .hotTrends("US")
     .then(function (results) {
       res.json({

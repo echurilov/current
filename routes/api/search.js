@@ -28,7 +28,7 @@ router.get("/:searchQuery", (req, res) => {
   const giphyCallback = () => {
     return axios({
       method: "get",
-      url: `https://api.giphy.com/v1/gifs/search?api_key=${
+      url: `https://api.giphy.com/v1/gifs/trending?api_key=${
         keys.giphyId
       }&q=${processedQuery}`
     })
