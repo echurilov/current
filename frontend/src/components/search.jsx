@@ -47,6 +47,7 @@ class Search extends React.Component {
 
         return (
             <div>
+                
                 <div className="search">
                     <form onSubmit={this.submitSearch} className="search-input">
                         <input 
