@@ -31,13 +31,13 @@ class Search extends React.Component {
 
         let trendButtons = [];
         for(let i = 0; i < dailyTrends.length; i++) {
-            let btn = <button className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+            let btn = <button key={`trend-${i}`} className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
             trendButtons.push(btn);
         }
 
         let trendButtons2 = [];
         for(let i = 0; i < dailyTrends2.length; i++) {
-            let btn = <button className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
+            let btn = <button key={`trend-${i * 2}`} className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
             trendButtons2.push(btn);
         }
 

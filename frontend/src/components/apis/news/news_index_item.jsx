@@ -5,8 +5,6 @@ class NewsIndexItem extends React.Component {
 
     render(){
         const article = this.props.article
-        const date = new Date(article.publishedAt)
-        console.log(date)
 
         return <div className="news-index-item">
             <a href={article.url}>
