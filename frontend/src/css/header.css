@@ -1,4 +1,4 @@
-.greeting-container {
+.header-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -6,21 +6,21 @@
   align-items: center;
 }
 
-.greeting-container h4 {
+.header-container h4 {
   padding-right: 50px;
 }
 
-.greeting-container img {
+.header-container img {
   width: 210px;
   height: 80px;
 }
 
-.greeting-container .right-header {
+.header-container .right-header {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.greeting-container button {
+.header-container button {
   margin: 5px;
 }
