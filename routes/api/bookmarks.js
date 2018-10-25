@@ -42,4 +42,21 @@ router.get("/:bookmarkId", (req, res) => {
   });
 });
 
+router.delete("/:bookmarkId", (req, res) => {
+  const { bookmarkId } = req.params;
+  if (!bookmarkId) {
+    return res.json({ success: false, error: "No bookmark id provided" });
+  }
+
+  Bookmark.findOne({ _id: bookmarkId }).then(bookmark => {
+    if (bookmark) {
+      Bookmark.deleteOne({ _id: bookmarkId })
+        .then(() => res.json({bookmark}));
+    } else {
+      errors = { id: "Bookmark does not exist" };
+      return res.status(400).json(errors);
+    }
+  });
+});
+
 module.exports = router;
