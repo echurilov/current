@@ -4,8 +4,8 @@ import giphyReducer from './api_results/giphy_reducer';
 import trendsReducer from './api_results/trends_reducer';
 import newsReducer from './api_results/news_reducer';
 import youtubeReducer from './api_results/youtube_reducer';
+import relatedTopicsReducer from './api_results/related_topics_reducer';
 import bookmarksReducer from './api_results/bookmarks_reducer';
-
 // import users from './users_reducer';
 
 export default combineReducers({
@@ -14,5 +14,6 @@ export default combineReducers({
   trends: trendsReducer,
   news: newsReducer,
   youtube: youtubeReducer,
+  relatedTopics: relatedTopicsReducer,
   bookmarks: bookmarksReducer
 });
