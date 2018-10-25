@@ -68,7 +68,7 @@ router.get("/:searchQuery", (req, res) => {
       safeSearch: "strict",
       videoEmbeddable: "true"
     };
-    
+
     return youtubeSearch(keys.youtubeId, options)
       .then(res => {
         return { data: res.items };
