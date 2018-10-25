@@ -1,9 +1,10 @@
 .session-form-container form {
+  font-family: "Heebo";
   width: 450px;
   height: 400px;
   border: 1px solid white;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, .1);
+  background-color: rgba(0, 0, 0, .5);
   display: flex;
   flex-direction: column;
   text-align: center;
@@ -25,18 +26,39 @@
   color: #B9E9F2;
 }
 
-.session-form button, input[type="text"], input[type="password"] {
-  font-family: "Roboto";
+.session-form input[type="text"], input[type="password"] {
+  font-family: "Heebo";
   border-radius: 3px;
   width: 200px;
-  margin: 10px 0 10px 0;
+  margin: 0px 0 30px 0;
   transition: 0.1s;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+} 
+
+.session-form label {
+  font-style: italic;
+}
+
+.session-submit {
+  margin-top: 30px;
+  font-size: 20px;
+  padding: 7px 20px;
+  border-radius: 3px;
+  border: 1px solid white;
 }
 
 .other-form {
   margin-top: 20px;
+  color: #B9E9F2;
+  border: 1px solid #B9E9F2;
+  border-radius: 3px;
+  padding: 6px;
 }
 
-.session-submit {
-  margin-top: 50px;
+.other-form:hover {
+  background: #B9E9F2;
+  color: white;
+  border: 1px solid white;
 }
+
