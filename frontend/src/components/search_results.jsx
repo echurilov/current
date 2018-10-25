@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from '../actions/results_actions';
-
 import GiphyIndexItem from './results/giphy/giphy_index_item';
 import NewsIndexItem from './apis/news/news_index_item';
+const shuffle = require('shuffle-array');
 
 const mapStateToProps = state => ({
   giphy: state.entities.giphy,
@@ -17,37 +17,6 @@ const mapDispatchToProps = dispatch => ({
 
 class SearchResults extends React.Component {
 
-  constructor(props) {
-    super(props);
-    // this.state = { searchTerm: props.searchTerm, render: false };
-  }
-
-  // componentDidMount() {
-  //   this.props.fetchResults(this.props.searchTerm)
-  //     .then( this.setState({render: true}))
-  // }
-
-  // componentWillReceiveProps(newProps) {
-  //   if (this.props.searchTerm != newProps.searchTerm) {
-  //     debugger
-  //     this.setState({ searchTerm: newProps.searchTerm })
-  //     this.props.fetchResults(this.state.searchTerm)
-  //   }
-  // }
-
-  // shouldComponentUpdate(newProps) {
-  //   if (this.props.searchTerm != newProps.searchTerm) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
-
-  // componentDidUpdate(newProps) {
-  //   this.setState({ searchTerm: newProps.searchTerm })
-  //   this.props.fetchResults(this.state.searchTerm)
-  // }
-
   render() {
 
     let giphyItems = [];
@@ -56,10 +25,10 @@ class SearchResults extends React.Component {
     )
     let newsItems = [];
     this.props.news.forEach(
-      (article, idx) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
+      (article) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
     )
 
-    let results = giphyItems.concat(newsItems);
+    let results = shuffle(giphyItems.concat(newsItems));
 
     return (
       <div className="search-results">
