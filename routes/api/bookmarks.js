@@ -27,24 +27,16 @@ router.post("/", (req, res) => {
 });
 
 router.get("/:bookmarkId", (req, res) => {
-  const { errors, isValid } = validateBookmark(req.body);
-
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
     return res.json({ success: false, error: "No bookmark id provided" });
   }
 
-  Bookmark.findOne({ id: bookmarkId }).then(bookmark => {
+  Bookmark.findOne({ _id: bookmarkId }).then(bookmark => {
     if (bookmark) {
-      res.json({
-        id: req.bookmark.id,
-        user_id: req.bookmark.user_id,
-        title: req.bookmark.title,
-        query: req.bookmark.query,
-        msg: "Success"
-      });
+      res.json(bookmark);
     } else {
-      errors.id = "Bookmark does not exist";
+      errors = {id: "Bookmark does not exist"};
       return res.status(400).json(errors);
     }
   });
