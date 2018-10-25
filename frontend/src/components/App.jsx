@@ -4,6 +4,8 @@ import '../css/app.css'
 // import LoginForm from './session/login_form';
 import Greeting from './greeting_temp';
 import Modal from './modal';
+import Search from './search';
+// import NewsIndexContainer from './apis/news/news_index_container';
 
 class App extends React.Component {
 
@@ -12,6 +14,8 @@ class App extends React.Component {
             <div className="app-container">
                 <Modal></Modal>
                 <Greeting></Greeting>
+                <Search></Search>
+                {/* <NewsIndexContainer /> */}
             </div>
         )
     }
