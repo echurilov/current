@@ -22,20 +22,42 @@ class SearchResults extends React.Component {
 
   render() {
 
-    let giphyItems = [];
-    this.props.giphy.forEach(
-      (giphyItem, idx) => (giphyItems.push((<GiphyIndexItem key={idx} giphyItem={giphyItem} />)))
-    )
-    let newsItems = [];
-    this.props.news.forEach(
-      (article) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
-    )
-    let imgurItems = [];
-    this.props.imgur.forEach(imgurItem =>
-      imgurItems.push(
-        <ImgurIndexItem key={Math.random()} imgurItem={imgurItem} />
-      )
-    );
+    let { giphy, news, imgur } = this.props; 
+
+    let giphyItems;
+    if (giphy.length > 0) {
+      giphyItems = [];
+      giphy.forEach((giphyItem, idx) =>
+        giphyItems.push(<GiphyIndexItem key={idx} giphyItem={giphyItem} />)
+      );
+    } else {
+      giphyItems = [];
+    }
+
+    let newsItems;
+    if (news.length > 0) {
+      newsItems = [];
+      news.forEach(article =>
+        newsItems.push(
+          <NewsIndexItem key={Math.random()} article={article} />
+        )
+      );
+    } else {
+      newsItems = [];
+    }
+
+    let imgurItems;
+
+    if (imgur.length > 0) {
+      imgurItems = [];
+      imgur.forEach(imgurItem =>
+        imgurItems.push(
+          <ImgurIndexItem key={Math.random()} imgurItem={imgurItem} />
+        )
+      );
+    } else {
+      imgurItems = [];
+    }
 
     let results = shuffle(giphyItems.concat(newsItems).concat(imgurItems));
 
