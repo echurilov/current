@@ -19,6 +19,7 @@ class Search extends React.Component {
     }
 
     submitSearch(searchTermInput) {
+        // eslint-disable-next-line
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
         // logic/call method for sending term to calls
     }
@@ -37,27 +38,22 @@ class Search extends React.Component {
 
         let trendButtons = [];
         for(let i = 0; i < dailyTrends.length; i++) {
-<<<<<<< HEAD
-            let btn = <button key={`trend-${i}`} className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
-=======
-            let btn = <button className="trend-btn" onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
->>>>>>> 2e3baf0c43eaff2168d389046258deb7206e27f8
+            let btn = <button className="trend-btn" key={`trends-${i}`} onClick={this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
             trendButtons.push(btn);
         }
 
         let trendButtons2 = [];
         for(let i = 0; i < dailyTrends2.length; i++) {
-<<<<<<< HEAD
-            let btn = <button key={`trend-${i * 2}`} className="trend-btn animated slideInLeft" onClick={this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
-=======
-            let btn = <button className="trend-btn" onClick={this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
->>>>>>> 2e3baf0c43eaff2168d389046258deb7206e27f8
+            let btn = <button className="trend-btn" key={`trends-${i * 2}`} onClick={this.submitSearch(dailyTrends2[i])}>
+                {" "}
+                {dailyTrends2[i]}{" "}
+              </button>;
             trendButtons2.push(btn);
         }
 
         let trendButtons3 = [];
         for(let i = 0; i < dailyTrends3.length; i++) {
-            let btn = <button className="trend-btn" onClick={this.submitSearch(dailyTrends3[i])}> {dailyTrends3[i]} </button>
+            let btn = <button className="trend-btn" key={`trends-${i * 3}`} onClick={this.submitSearch(dailyTrends3[i])}> {dailyTrends3[i]} </button>
             trendButtons3.push(btn);
         }
 
