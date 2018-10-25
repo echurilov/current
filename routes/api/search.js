@@ -9,7 +9,7 @@ const youtubeSearch = require("youtube-api-v3-search");
 //https://stackoverflow.com/questions/16686640/function-to-get-yesterdays-date-in-javascript-in-format-dd-mm-yyyy
 let today = new Date();
 let yesterday = new Date(today);
-yesterday.setDate(today.getDate() - 1);
+yesterday.setDate(today.getDate() - 2);
 const dd = yesterday.getDate();
 const mm = yesterday.getMonth() + 1; //January is 0!
 const yyyy = yesterday.getFullYear();
@@ -59,8 +59,8 @@ router.get("/:searchQuery", (req, res) => {
 
   const youtubeCallback = () => {
     const options = {
+      part: 'snippet, id',
       q: processedQuery,
-      part: 'video',
       type: 'video',
       maxResults: 10,
       order: 'viewCount',
@@ -71,7 +71,6 @@ router.get("/:searchQuery", (req, res) => {
 
     return youtubeSearch(keys.youtubeId, options)
       .then(res => {
-        console.log("youtube", res)
         return { data: res.items };
       })
       .catch(err => {

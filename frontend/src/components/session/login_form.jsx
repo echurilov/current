@@ -50,7 +50,6 @@ class LoginForm extends React.Component {
         let renderedErrors;
         if (this.props.errors.length > 0) {
             renderedErrors = this.renderErrors()
-            debugger
         } else {
             renderedErrors = null
         }
