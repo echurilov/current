@@ -38,6 +38,21 @@
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
+.fa-plus {
+  color: white;
+  font-size: 27px;
+  -webkit-text-stroke: 3px #7dbbc2;
+}
+
+.add-btn {
+  padding: 0px 30px;
+  background-color: #E7E7E7;
+  height: 40px;
+  border: 2px solid #7dbbc2;
+  border-right: none;
+  margin: 10px 0 10px 0;
+}
+
 .search-btn {
   margin: 10px 10px 10px 0;
   height: 40px;
@@ -50,7 +65,7 @@
   text-align: center;
 }
 
-.search-btn:hover {
+.search-btn:hover, .add-btn:hover {
   cursor: pointer;
   background: #A2A2A2;
 }
@@ -76,7 +91,7 @@
   font-size: 20px;
   font-style: italic;
   background: none;
-  color:  #7dbbc2;
+  color:  #2F2F2F;
   border: none;
   width: 230px;
   transition: .3s;
