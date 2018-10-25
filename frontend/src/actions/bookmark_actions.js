@@ -31,7 +31,27 @@ const receiveBookmarkErrors = errors => {
   };
 };
 
-export const fetchBookmark = bookmarkId => dispatch => {
+export const fetchBookmarks = () => dispatch => {
+  return axios.get(`/api/bookmarks/`)
+    .then(bookmarks => {
+      dispatch(receiveBookmarks(bookmarks));
+    })
+    .catch(errors => {
+      dispatch(receiveBookmarkErrors(errors));
+    });
+}
+
+export const createBookmark = (bookmark) => dispatch => {
+  return axios.post(`/api/bookmarks/`, bookmark)
+    .then(bookmark => {
+      dispatch(receiveBookmarks(bookmark));
+    })
+    .catch(errors => {
+      dispatch(receiveBookmarkErrors(errors));
+    });
+}
+
+export const fetchBookmark = (bookmarkId) => dispatch => {
   return axios.get(`/api/bookmarks/${bookmarkId}`)
     .then( bookmark => {
       dispatch(receiveBookmark(bookmark));
@@ -41,17 +61,17 @@ export const fetchBookmark = bookmarkId => dispatch => {
     });
 }
 
-export const fetchBookmarks = () => dispatch => {
-  return axios.get(`/api/bookmarks/`)
-    .then( bookmarks => {
-      dispatch(receiveBookmarks(bookmarks));
+export const updateBookmark = (bookmark) => dispatch => {
+  return axios.patch(`/api/bookmarks/${bookmark._id}`, bookmark)
+    .then(bookmark => {
+      dispatch(receiveBookmarks(bookmark));
     })
-    .catch( errors => {
+    .catch(errors => {
       dispatch(receiveBookmarkErrors(errors));
     });
 }
 
-export const deleteBookmark = bookmarkId => dispatch => {
+export const deleteBookmark = (bookmarkId) => dispatch => {
   return axios.get(`/api/bookmarks/${bookmarkId}`)
     .then( bookmark => {
       dispatch(removeBookmark(bookmark));
