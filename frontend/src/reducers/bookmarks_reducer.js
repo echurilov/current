@@ -4,11 +4,11 @@ import {
   REMOVE_BOOKMARK,
 } from "../actions/bookmark_actions";
 
-const _nullUser = Object.freeze({
+const _nullBookmark = Object.freeze({
   id: null
 });
 
-const sessionReducer = (state = _nullUser, action) => {
+const bookmarkReducer = (state = _nullBookmark, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_BOOKMARK:
@@ -25,4 +25,4 @@ const sessionReducer = (state = _nullUser, action) => {
   }
 };
 
-export default sessionReducer;
+export default bookmarkReducer;
