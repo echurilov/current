@@ -88,7 +88,8 @@ router.get("/:searchQuery", (req, res) => {
         giphy: value[0].data.slice(0,10),
         news: value[1].data.slice(0,10),
         youtube: value[2].data
-      })})
+      });
+    })
     .catch(err => {
       console.log("search didnt work");
       return;
