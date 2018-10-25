@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
+const path = require("path");
 require('./config/passport')(passport);
 
 const db = require('./config/keys').mongoURI;
@@ -27,5 +28,12 @@ app.use("/api/bookmarks", bookmarks);
 app.use(passport.initialize());
 app.use("/api/search", search);
 app.use('/api/trends', trends)
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("frontend/build"));
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "build", "index.html"));
+  });
+}
 
 app.listen(port, () => console.log(`Server is running on port ${port}`));

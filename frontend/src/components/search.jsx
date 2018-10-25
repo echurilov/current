@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { fetchTrends } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
 import { GridLoader } from 'react-spinners';
-import { css } from 'react-emotion';
 import SearchResults from './search_results';
 
 class Search extends React.Component {
@@ -26,13 +25,10 @@ class Search extends React.Component {
         this.props.fetchResults(searchTerm)
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
         document.getElementById('search-input').value = searchTerm;
-        // this.setState({renderResults: true, searchTerm: searchTerm})
     }
     
     render() {
-        // debugger
         let { trends } = this.props;
-        let { searchTerm } = this.state;
 
         if (trends.length < 1) {
             return null;

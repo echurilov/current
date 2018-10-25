@@ -7,7 +7,7 @@ export default function trendsReducer(state =[], action) {
   switch(action.type) {
     case RECEIVE_TRENDS:
       return action.trends.data.trends;
-    default: 
+    default:
       return state;
   }
 }
