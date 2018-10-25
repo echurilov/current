@@ -6,7 +6,7 @@
   font-family: "Montserrat";
   font-size: 13px;
   border-radius: 3px;
-  background-color: #FF6C45;
+  background-color: #F16A43;
   /* color: black; */
   color: white;
   width: 80px;
@@ -16,6 +16,6 @@
 
 .greeting-container button:hover, input[type="submit"]:hover {
   background-color: white;
-  color: #FF6C45;
-  border: 1px solid #FF6C45;
+  color: #F16A43;
+  border: 1px solid #F16A43;
 }

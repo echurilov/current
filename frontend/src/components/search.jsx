@@ -19,14 +19,15 @@ class Search extends React.Component {
     }
 
     submitSearch(searchTermInput) {
-        
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
         // logic/call method for sending term to calls
+        
         this.setState({renderResults: true, searchTerm: searchTerm})
     }
 
     render() {
-        let { trends, searchTerm } = this.props;
+        let { trends } = this.props;
+        let { searchTerm } = this.state;
 
         if (trends.length < 1) {
             return null;
@@ -60,7 +61,7 @@ class Search extends React.Component {
         let results = this.state.renderResults ? (
             <SearchResults searchTerm={searchTerm} />
         ) : (
-            <div>Nothing to see here</div>
+            <div> ... </div>
         )
 
         return (
