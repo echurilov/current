@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwt_decode from 'jwt-decode';
+import { closeModal } from '../actions/modal_actions';
 
 // const $ = window.$;
 export const GET_ERRORS = 'GET_ERRORS';
@@ -30,7 +31,7 @@ export const setCurrentUser = decoded => {
 
 export const registerUser = (userData) => dispatch => {
     // debugger 
-    axios
+    return axios
         .post('/api/users/register', userData)
         .then(res => {
             // debugger
@@ -40,6 +41,7 @@ export const registerUser = (userData) => dispatch => {
 
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
+            dispatch(closeModal());
         })
         .catch(err =>
             dispatch({
@@ -53,7 +55,7 @@ export const registerUser = (userData) => dispatch => {
 // log in user
 
 export const loginUser = userData => dispatch => {
-    axios
+    return axios
         .post('/api/users/login', userData)
         .then(res => {
             const { token } = res.data;
@@ -62,6 +64,7 @@ export const loginUser = userData => dispatch => {
 
             const decoded = jwt_decode(token);
             dispatch(setCurrentUser(decoded));
+            dispatch(closeModal());
         })
         .catch(err => {
             // debugger
