@@ -53,9 +53,8 @@
 .trends {
   height: 50px;
   margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 20px 0 20px;
+  width: 100%;
+  position: relative;
 }
 
 .trend-btn {
@@ -68,17 +67,62 @@
   width: 150px;
   transition: .3s;
   text-align: center;
-  animation-duration: 3s;
-  animation-delay: 2s;
-  animation-iteration-count: infinite;
 }
 
 .trend-btn:hover {
-  font-size: 23px;
   color: #8FE9DF;
   cursor: pointer;
 }
 
 .trend-btn:active, .trend-btn:focus {
   outline: none;
+}
+
+/* animations */
+
+.item-1, 
+.item-2, 
+.item-3 {
+	position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-evenly;
+  
+  width: 100%;
+  
+  animation-duration: 25s;
+  animation-timing-function: cubic-bezier(0.785, 0.135, 0.16, 0.56);
+	animation-iteration-count: infinite;
+}
+
+.item-1{
+	animation-name: anim-1;
+}
+
+.item-2{
+	animation-name: anim-2;
+}
+
+.item-3{
+	animation-name: anim-3;
+}
+
+@keyframes anim-1 {
+	0%, 8.3% { left: -100%; opacity: 0; }
+  8.3%,25% { left: 0%; opacity: 1; }
+  33.33%, 100% { left: 110%; opacity: 0; }
+}
+
+@keyframes anim-2 {
+	0%, 33.33% { left: -100%; opacity: 0; }
+  41.63%, 58.29% { left: 0%; opacity: 1; }
+  66.66%, 100% { left: 110%; opacity: 0; }
+}
+
+@keyframes anim-3 {
+	0%, 66.66% { left: -100%; opacity: 0; }
+  74.96%, 91.62% { left: 0%; opacity: 1; }
+  100% { left: 110%; opacity: 0; }
 }
