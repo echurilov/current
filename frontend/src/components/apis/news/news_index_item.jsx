@@ -1,8 +1,10 @@
 import React from "react";
+import "../../../css/reset.css";
+import "../../../css/news.scss";
 const moment = require("moment");
 
 class NewsIndexItem extends React.Component {
-
+ 
     render(){
         const article = this.props.article
 

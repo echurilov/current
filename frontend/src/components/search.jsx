@@ -2,31 +2,37 @@ import React from 'react';
 import '../css/search.css'
 import { connect } from 'react-redux';
 import { fetchTrends } from '../actions/trends_actions';
+import { fetchResults } from '../actions/results_actions';
+import { GridLoader } from 'react-spinners';
+import { css } from 'react-emotion';
 import SearchResults from './search_results';
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: false, trends: [] };
+        this.state = { searchTerm: '', render: true, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
     }
 
     componentDidMount() {   
         this.props.fetchTrends()
             .then( () => this.setState({ trends: this.props.trends }) )
-        // debugger
     }
 
     submitSearch(searchTermInput) {
-        
+        this.setState({ render: false })
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
-        // logic/call method for sending term to calls
-        this.setState({renderResults: true, searchTerm: searchTerm})
+        this.props.fetchResults(searchTerm)
+            .then(() => this.setState({ render: true, searchTerm: searchTerm }))
+        document.getElementById('search-input').value = searchTerm;
+        // this.setState({renderResults: true, searchTerm: searchTerm})
     }
-
+    
     render() {
-        let { trends, searchTerm } = this.props;
+        // debugger
+        let { trends } = this.props;
+        let { searchTerm } = this.state;
 
         if (trends.length < 1) {
             return null;
@@ -57,10 +63,19 @@ class Search extends React.Component {
             trendButtons3.push(btn);
         }
 
-        let results = this.state.renderResults ? (
-            <SearchResults searchTerm={searchTerm} />
+
+        let results = this.state.render ? (
+            <SearchResults />
         ) : (
-            <div>Nothing to see here</div>
+                <div className='sweet-loading'>
+                    <GridLoader
+                        sizeUnit={"px"}
+                        height={30}
+                        width={30}
+                        color={'#D2512C'}
+                        loading={this.state.loading}
+                    />
+                </div>
         )
 
         return (
@@ -105,7 +120,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    fetchTrends: () => dispatch(fetchTrends())
+    fetchTrends: () => dispatch(fetchTrends()),
+    fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
