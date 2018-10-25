@@ -1,4 +1,4 @@
-html, body, header, nav, h1, a,
+input, button, html, body, header, nav, h1, a,
 li, strong, main, i,
 section, img, div, h1, h2, p, form,
 fieldset, label, textarea,
@@ -18,6 +18,10 @@ span, article, footer, time, small {
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
+}
+
+body {
+  background: #F9ECD7;
 }
 
 ul {

@@ -58,12 +58,12 @@ class LoginForm extends React.Component {
             <div className="animated slideInDown fast session-form-container">
                 <form onSubmit={this.handleSubmit}>
 
-                    Please log in or {this.props.otherForm}
+                    please log in or {this.props.otherForm}
 
 
                     <div className="session-form">
 
-                        <label>Email:
+                        <label>email
                         </label>
               <input type="text"
                                 value={this.state.email}
@@ -71,7 +71,7 @@ class LoginForm extends React.Component {
                                 className="session-input"
                             />
 
-                        <label>Password:
+                        <label>password
                         </label>
               <input type="password"
                                 value={this.state.password}
@@ -79,7 +79,7 @@ class LoginForm extends React.Component {
                                 className="session-input"
                             />
 
-                        <input className="session-submit" type="submit" value='Log in' />
+                        <input className="session-submit" type="submit" value='log in!' />
                     </div>
                     {renderedErrors}
 
@@ -104,7 +104,7 @@ const mapDispatchToProps = dispatch => {
         otherForm: (
             <span>
                 <button className="other-form" onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
-                Sign Up
+                sign up
             </button>
             </span>
         ),
