@@ -7,7 +7,7 @@ const BookmarkSchema = new Schema({
     required: false
   },
   user_id: {
-    type: Number,
+    type: Schema.ObjectId,
     required: true
   },
   query: {

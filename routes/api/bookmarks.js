@@ -1,34 +1,33 @@
 const express = require("express");
 
 const Bookmark = require('../../models/Bookmark');
-const validateNewBookmark = require('../../validations/bookmark');
+const validateBookmark = require('../../validations/bookmark');
 
 const router = express.Router();
 
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
 router.post("/", (req, res) => {
-  const { errors, isValid } = validateNewBookmark(req.body);
-
-  if (!isValid) {
-    return res.status(400).json(errors);
-  }
-
-  Bookmark.findOne({ user_id: req.bookmark.user_id, query: req.body.query }).then(bookmark => {
-    if (bookmark) {
-      errors.query = "Bookmark already exists";
-      return res.status(400).json(errors);
-    } else {
-      const newBookmark = new Bookmark({
-        user_id: req.bookmark.user_id,
-        query: req.bookmark.query
-      });
-    }
-  });
+  (async () => {
+    let bookmark = validateBookmark(req.body);
+    return Bookmark.findOne(bookmark).then(dupBookmark => {
+      if (dupBookmark) {
+        throw { query: "Bookmark already exists" };
+      } else {
+        const newBookmark = new Bookmark(bookmark);
+        newBookmark.save()
+        .then( ()=> res.json({
+          success:true,
+          bookmark:newBookmark
+        }));
+      }
+    });
+  })()
+    .catch(errors => res.status(400).json(errors))
 });
 
 router.get("/:bookmarkId", (req, res) => {
-  const { errors, isValid } = validateNewBookmark(req.body);
+  const { errors, isValid } = validateBookmark(req.body);
 
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
