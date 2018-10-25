@@ -3,13 +3,15 @@ import '../css/search.css'
 import { connect } from 'react-redux';
 import { fetchTrends } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
+import { GridLoader } from 'react-spinners';
+import { css } from 'react-emotion';
 import SearchResults from './search_results';
 
 class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: false, trends: [] };
+        this.state = { searchTerm: '', render: true, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
     }
 
@@ -28,7 +30,7 @@ class Search extends React.Component {
     }
     
     render() {
-        debugger
+        // debugger
         let { trends } = this.props;
         let { searchTerm } = this.state;
 
@@ -61,10 +63,19 @@ class Search extends React.Component {
             trendButtons3.push(btn);
         }
 
+
         let results = this.state.render ? (
             <SearchResults />
         ) : (
-            <div> {searchTerm} </div>
+                <div className='sweet-loading'>
+                    <GridLoader
+                        sizeUnit={"px"}
+                        height={30}
+                        width={30}
+                        color={'#D2512C'}
+                        loading={this.state.loading}
+                    />
+                </div>
         )
 
         return (
