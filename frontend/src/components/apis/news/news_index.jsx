@@ -11,12 +11,7 @@ class NewsIndex extends React.Component {
         })
 
         return <div className="news-index">
-            <div className="news-header">
-              <h1>News</h1>
-                <a href="https://newsapi.org/"><strong>Powered by NewsAPI</strong></a>
-            </div>
-
-            <div>{newsItems}</div>
+            <div className="grid">{newsItems}</div>
           </div>;
     }
 }

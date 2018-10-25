@@ -27,6 +27,8 @@ class NewsIndexItem extends React.Component {
               <a href={article.url}>
                 <p>{article.description}</p>
               </a>
+
+                <a href="https://newsapi.org/"><strong className="attribution">Powered by NewsAPI</strong></a>
             </div>
           </div>;
     }
