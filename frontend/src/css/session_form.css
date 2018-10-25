@@ -22,7 +22,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #8FE9DF;
+  color: #3BB1B3;
 }
 
 .session-form button, input[type="text"], input[type="password"] {

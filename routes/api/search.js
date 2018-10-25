@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require("axios");
-const keys = require("./api_keys");
+const keys = require("../../config/keys");
 const NewsAPI = require("newsapi");
 const news = new NewsAPI(keys.newsId);
 const youtubeSearch = require("youtube-api-v3-search");
@@ -88,7 +88,8 @@ router.get("/:searchQuery", (req, res) => {
         giphy: value[0].data.slice(0,10),
         news: value[1].data.slice(0,10),
         youtube: value[2].data
-      })})
+      });
+    })
     .catch(err => {
       console.log("search didnt work");
       return;
