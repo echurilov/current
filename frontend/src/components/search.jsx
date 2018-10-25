@@ -12,6 +12,7 @@ class Search extends React.Component {
         super(props);
         this.state = { searchTerm: '', render: true, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
+        this.onSave = this.onSave.bind(this);
     }
 
     componentDidMount() {   
@@ -27,6 +28,10 @@ class Search extends React.Component {
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
         document.getElementById('search-input').value = searchTerm;
     }
+
+    onSave() {
+
+    }
     
     render() {
         let { trends, relatedTopics } = this.props;
@@ -35,12 +40,13 @@ class Search extends React.Component {
         let trendButtons;
         let trendButtons2;
         let trendButtons3;
-
+        
         if (trends.length < 1) {
             trendButtons = null;
             trendButtons2 = null;
             trendButtons3 = null;
-        } else if (searchTerm.length < 1) {
+        } else if (searchTerm.length < 1 || relatedTopics.length == 0) {
+            debugger
             let dailyTrends = trends.slice(0, 5)
             let dailyTrends2 = trends.slice(5, 10)
             let dailyTrends3 = trends.slice(10, 15)
@@ -119,10 +125,13 @@ class Search extends React.Component {
                             autoFocus="autoFocus"
                             type="text"
                             placeholder="see what's trending..."></input>
+                   
+                        <button onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                     
-                    <button type="submit" className="search-btn">
-                        <i className="fa fa-search"></i>
-                    </button>
+                        <button type="submit" className="search-btn">
+                            <i className="fa fa-search"></i>
+                        </button>
+                   
                     </form>
                 </div>
                 
