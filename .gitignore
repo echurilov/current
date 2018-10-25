@@ -110,5 +110,5 @@ build/Release
 node_modules/
 
 # Keys
-/config/dev_key.js
-/routes/api/api_keys.js
+/config/dev_keys.js
+
