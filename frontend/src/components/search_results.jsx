@@ -2,14 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from '../actions/results_actions';
-import GiphyIndexItem from './results/giphy/giphy_index_item';
+import GiphyIndexItem from './results/giphy_index_item';
 import NewsIndexItem from './apis/news/news_index_item';
+import ImgurIndexItem from './results/imgur_index_item';
 import "../css/search_results.scss";
 const shuffle = require('shuffle-array');
 
 const mapStateToProps = state => ({
   giphy: state.entities.giphy,
-  news: state.entities.news
+  news: state.entities.news,
+  imgur: state.entities.imgur
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -28,8 +30,14 @@ class SearchResults extends React.Component {
     this.props.news.forEach(
       (article) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
     )
+    let imgurItems = [];
+    this.props.imgur.forEach(imgurItem =>
+      imgurItems.push(
+        <ImgurIndexItem key={Math.random()} imgurItem={imgurItem} />
+      )
+    );
 
-    let results = shuffle(giphyItems.concat(newsItems));
+    let results = shuffle(giphyItems.concat(newsItems).concat(imgurItems));
 
     return (
       <div className="search-results">
