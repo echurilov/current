@@ -1,10 +1,10 @@
 import React from 'react';
-import '../css/greeting.css'
+import '../css/header.css'
 import { connect } from 'react-redux';
 import { logoutUser } from '../util/session_api_util';
 import { openModal } from '../actions/modal_actions';
 
-class GreetingTemp extends React.Component {
+class Header extends React.Component {
 
   render() {
     let user;
@@ -26,7 +26,7 @@ class GreetingTemp extends React.Component {
     }
 
     return (
-      <div className="greeting-container">
+      <div className="header-container">
         <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>
         <div className="right-header">
         {welcome}
@@ -51,4 +51,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GreetingTemp);
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

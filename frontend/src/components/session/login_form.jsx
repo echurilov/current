@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../css/session_form.css';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 import { loginUser, GET_ERRORS } from '../../util/session_api_util';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
@@ -48,9 +47,6 @@ class LoginForm extends React.Component {
             return null;
         }
 
-        // console.log(this.props.errors);
-        
-        
         let renderedErrors;
         if (this.props.errors.length > 0) {
             renderedErrors = this.renderErrors()
