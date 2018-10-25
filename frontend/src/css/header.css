@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 5px 10px 5px 10px;
+  padding: 5px 40px 5px 40px;
   align-items: center;
+  background: #252525;
 }
 
 .header-container h4 {
@@ -11,8 +12,10 @@
 }
 
 .header-container img {
-  width: 210px;
-  height: 80px;
+  width: 240px;
+  height: 70px;
+  padding-right: 60px;
+  padding-top: 5px;
 }
 
 .header-container .right-header {
@@ -21,6 +24,29 @@
   align-items: center;
 }
 
-.header-container button {
+.session-button, .header-container a {
+  font-family: "Heebo";
   margin: 5px;
+  color: #7dbbc2;
+}
+
+.session-button {
+  border: 1px solid #7dbbc2;
+  padding: 7px;
+  border-radius: 3px;
+  /* background: rgba(125, 187, 194, .1); */
+  transition: .2s;
+}
+
+.session-button:hover {
+  background:  #7dbbc2;
+  color: white
+}
+
+.header-links {
+  transition: 0.2s;
+}
+
+.header-links:hover {
+  color: white;
 }

@@ -58,7 +58,7 @@ class SignupForm extends React.Component {
 			<div className="animated slideInDown fast session-form-container">
 				<form onSubmit={this.handleSubmit}>
 
-					Please sign up or {this.props.otherForm}
+					please sign up or {this.props.otherForm}
 
 
 					<div className="session-form">
@@ -79,7 +79,7 @@ class SignupForm extends React.Component {
 								className="session-input"
 							/>
 
-						<input className="session-submit" type="submit" value='Sign Up' />
+						<input className="session-submit" type="submit" value='sign up!' />
 					</div>
 				{renderedErrors}
 				</form>
@@ -105,7 +105,7 @@ const mapDispatchToProps = dispatch => {
 		otherForm: (
 			<span>
 				<button className="other-form" onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('login'));}}>
-				Log In
+				log in
       </button>
 			</span>
 		),

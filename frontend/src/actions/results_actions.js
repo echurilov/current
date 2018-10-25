@@ -1,11 +1,19 @@
 import axios from "axios";
 export const RECEIVE_RESULTS = 'RECEIVE_RESULTS';
+export const CLEAR_RESULTS = 'CLEAR_RESULTS';
 
 const receiveResults = results => {
   console.log('in receiveResults', results)
   return {
     type: RECEIVE_RESULTS,
     results
+  }
+}
+
+export const clearResults = () => {
+  console.log('in clearResults')
+  return {
+    type: CLEAR_RESULTS
   }
 }
 
