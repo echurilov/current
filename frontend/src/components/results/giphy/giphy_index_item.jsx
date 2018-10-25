@@ -1,5 +1,4 @@
 import React from 'react';
-import "../../../css/index_items/giphy.css";
 
 class GiphyIndexItem extends React.Component {
 
