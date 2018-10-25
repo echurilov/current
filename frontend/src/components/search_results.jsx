@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { fetchResults } from '../actions/results_actions';
 import GiphyIndexItem from './results/giphy/giphy_index_item';
-import NewsIndexItem from './apis/news/news_index_item';
+import NewsIndexItem from './results/news/news_index_item';
 import "../css/search_results.scss";
 const shuffle = require('shuffle-array');
 

@@ -60,7 +60,6 @@ router.get("/:searchQuery", (req, res) => {
   const youtubeCallback = () => {
     const options = {
       q: processedQuery,
-      part: 'snippet',
       type: 'video',
       maxResults: 10,
       order: 'viewCount',
@@ -71,6 +70,7 @@ router.get("/:searchQuery", (req, res) => {
 
     return youtubeSearch(keys.youtubeId, options)
       .then(res => {
+        console.log(res)
         return { data: res.items };
       })
       .catch(err => {
