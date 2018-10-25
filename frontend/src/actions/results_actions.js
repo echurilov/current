@@ -10,7 +10,7 @@ const receiveResults = results => {
 }
 
 export const fetchResults = (searchTerm) => dispatch => {
-  axios.get(`/api/search/${searchTerm}`)
+  return axios.get(`/api/search/${searchTerm}`)
     .then( results => {
       console.log('In success of fetchResults', results);
       dispatch(receiveResults(results.data));
