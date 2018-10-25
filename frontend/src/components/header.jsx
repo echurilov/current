@@ -1,12 +1,22 @@
 import React from 'react';
 import '../css/header.css'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { logoutUser } from '../util/session_api_util';
 import { openModal } from '../actions/modal_actions';
 import { clearResults } from '../actions/results_actions';
 
 class Header extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.clearSearch = this.clearSearch.bind(this);
+  }
+
+  clearSearch() {
+    document.getElementById('search-input').value = '';
+    this.props.clearResults();
+  }
 
   render() {
     let user;
@@ -33,7 +43,7 @@ class Header extends React.Component {
           <a className="header-links">About Us</a>
           <a className="header-links">What's Current?</a>
         </div>
-        <button onClick={this.props.clearResults}>
+        <button onClick={this.clearSearch}>
          <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>
         </button>
         <div className="right-header">
