@@ -56,8 +56,8 @@ router.patch("/:bookmarkId", (req, res) => {
 
   Bookmark.findOne({ _id: bookmarkId }).then(bookmark => {
     if (bookmark) {
-      Bookmark.update({ _id: bookmarkId }, { $set: req.body }).then(() =>
-        res.json({ bookmark })
+      Bookmark.updateOne({ _id: bookmarkId }, { $set: req.body }).then(
+        () => res.json({ bookmark })
       );
     } else {
       errors = { id: "Bookmark does not exist" };
