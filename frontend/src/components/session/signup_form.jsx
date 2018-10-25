@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../css/session_form.css';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router-dom';
 import { registerUser, GET_ERRORS } from '../../util/session_api_util';
 import { openModal, closeModal } from '../../actions/modal_actions';
 
@@ -51,9 +50,7 @@ class SignupForm extends React.Component {
 		let renderedErrors;
 		if (this.props.errors.length > 0) { 
 			console.log(this.props.errors);
-			
 			renderedErrors = this.renderErrors()
-			// debugger
 		} else {
 			renderedErrors = null
 		}
