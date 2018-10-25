@@ -19,15 +19,27 @@ const mapDispatchToProps = dispatch => ({
 class SearchResults extends React.Component {
 
   render() {
+    let { giphy, news } = this.props; 
 
-    let giphyItems = [];
-    this.props.giphy.forEach(
-      (giphyItem, idx) => (giphyItems.push((<GiphyIndexItem key={idx} giphyItem={giphyItem} />)))
-    )
-    let newsItems = [];
-    this.props.news.forEach(
-      (article) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
-    )
+    let giphyItems;
+    if (giphy.length > 0) {
+      giphyItems = [];
+      this.props.giphy.forEach(
+        (giphyItem, idx) => (giphyItems.push((<GiphyIndexItem key={idx} giphyItem={giphyItem} />)))
+      )
+    } else {
+      giphyItems = [];
+    }
+
+    let newsItems;
+    if (news.length > 0) {
+      newsItems = [];
+      this.props.news.forEach(
+        (article) => (newsItems.push((<NewsIndexItem key={Math.random()} article={article} />)))
+      )
+    } else {
+      newsItems = [];
+    }
 
     let results = shuffle(giphyItems.concat(newsItems));
 

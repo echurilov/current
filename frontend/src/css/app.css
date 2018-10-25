@@ -1,21 +1,20 @@
 .app-container {
-  font-family: 'Poppins';
+  font-family: 'Rosario';
+  /* overflow-y: hidden; */
+  /* background: url('./images/gradient.png') no-repeat center center fixed; */
+  background-size: cover;
+  /* background-position: cover; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #F9ECD7;
 }
 
-.greeting-container button, input[type="submit"] {
-  font-family: "Montserrat";
-  font-size: 13px;
-  border-radius: 3px;
-  background-color: #F16A43;
-  /* color: black; */
-  color: white;
-  width: 80px;
-  height: 30px;
-  transition: 0.1s;
-}
 
 .greeting-container button:hover, input[type="submit"]:hover {
   background-color: white;
-  color: #F16A43;
-  border: 1px solid #F16A43;
+  color: #7dbbc2;
+  border: 1px solid #7dbbc2;
 }
