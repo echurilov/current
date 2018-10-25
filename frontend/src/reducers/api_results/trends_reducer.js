@@ -6,7 +6,7 @@ export default function trendsReducer(state =[], action) {
   Object.freeze(state);
   switch(action.type) {
     case RECEIVE_TRENDS:
-      return JSON.parse(action.trends.data.trends);
+      return action.trends.data.trends;
     default:
       return state;
   }

@@ -1,14 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const googleTrendsEs = require("google-trends-api-es");
-const googleTrends = require("google-trends-api");
+const googleTrends = require("google-trends-api-es");
+const googleTrends2 = require("google-trends-api");
 
 router.get("/test", (req, res) =>
   res.json({ msg: "This is the google trends route" })
 );
 
 router.get("/", (req, res) => {
-  return googleTrendsEs
+  return googleTrends
     .hotTrends("US")
     .then(function (results) {
       res.json({
@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/related/:searchQuery", (req, res) => {
-  return googleTrends
+  return googleTrends2
     .relatedTopics({keyword: req.params.searchQuery})
     .then(function (results) {
       console.log(JSON.parse(results));

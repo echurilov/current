@@ -19,8 +19,8 @@ const receiveRelatedTopics = related => {
 export const fetchTrends = () => dispatch => {
   return axios.get(`/api/trends`)
     .then(trends => {
-      console.log('TRENDS', trends)
-      dispatch(receiveTrends(trends))
+      console.log('TRENDS', trends);
+      dispatch(receiveTrends(trends));
     }, () => console.log('fetch trends did not work'))
     .catch(err => console.log('in catch of fetch trends'))
 }
