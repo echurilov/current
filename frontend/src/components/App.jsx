@@ -1,11 +1,8 @@
 import React from 'react';
-import '../css/app.css'
-// import SignupForm from './session/signup_form';
-// import LoginForm from './session/login_form';
-import Greeting from './greeting_temp';
+import '../css/app.css';
+import Header from './header';
 import Modal from './modal';
 import Search from './search';
-// import NewsIndexContainer from './apis/news/news_index_container';
 
 class App extends React.Component {
 
@@ -13,9 +10,8 @@ class App extends React.Component {
         return (
             <div className="app-container">
                 <Modal></Modal>
-                <Greeting></Greeting>
+                <Header></Header>
                 <Search></Search>
-                {/* <NewsIndexContainer /> */}
             </div>
         )
     }
