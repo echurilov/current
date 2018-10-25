@@ -130,3 +130,11 @@
   74.96%, 91.62% { left: 0%; opacity: 1; }
   100% { left: 110%; opacity: 0; }
 }
+
+/* loader */
+
+.sweet-loading {
+ width: 60px;
+ margin: auto;
+ margin-top: 160px;
+}
