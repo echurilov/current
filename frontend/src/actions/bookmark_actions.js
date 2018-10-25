@@ -36,7 +36,7 @@ export const fetchBookmark = bookmarkId => dispatch => {
     .then( bookmark => {
       dispatch(receiveBookmark(bookmark));
     })
-    .catch(errors => {
+    .catch( errors => {
       dispatch(receiveBookmarkErrors(errors));
     });
 }
@@ -53,10 +53,10 @@ export const fetchBookmarks = () => dispatch => {
 
 export const deleteBookmark = bookmarkId => dispatch => {
   return axios.get(`/api/bookmarks/${bookmarkId}`)
-    .then(bookmark => {
+    .then( bookmark => {
       dispatch(removeBookmark(bookmark));
     })
-    .catch(errors => {
+    .catch( errors => {
       dispatch(receiveBookmarkErrors(errors));
     });
 }
