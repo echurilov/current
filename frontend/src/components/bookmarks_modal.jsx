@@ -21,30 +21,17 @@ class BookmarksModal extends React.Component {
   dispatchSearch(query) {
     this.props.closeModal();
     let searchTerm = query;
-    this.props.fetchResults(searchTerm)
-      .then(() => this.props.fetchRelatedTopics(searchTerm))
-    document.getElementById('search-input').value = searchTerm;
+    this.props.bookmarkFunc(searchTerm);
+    document.getElementById('search-bar').value = searchTerm;
   }
 
   render() {
 
     let { bookmarks } = this.state;
-
-    // 
+     
     if (bookmarks === null) {
-      console.log('bookmarks are null');
       return null;
     }
-
-    // let bookmarks = [
-    //   { title: 'cats', query: 'cats'},
-    //   { title: 'tv', query: 'modern family'},
-    //   { title: 'dogs', query: 'puppy'},
-    //   { title: 'food', query: 'pizza'},
-    //   { title: 'fashion', query: 'fashion'},
-    // ]
-    console.log('BOOKMARKS', bookmarks);
-    
 
     let bookmarkButtons = [];
     bookmarks.forEach( 

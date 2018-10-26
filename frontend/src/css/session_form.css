@@ -46,6 +46,9 @@
   padding: 7px 20px;
   border-radius: 3px;
   border: 1px solid white;
+  font-family: "Heebo";
+  margin: 5px;
+  color: #7dbbc2;
 }
 
 .other-form {

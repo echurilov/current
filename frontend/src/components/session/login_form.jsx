@@ -78,7 +78,7 @@ class LoginForm extends React.Component {
                                 className="session-input"
                             />
 
-                        <input className="session-submit" type="submit" value='log in!' />
+                        <button className="session-submit" type="submit">log in!</button>
                     </div>
                     {renderedErrors}
 
@@ -102,7 +102,7 @@ const mapDispatchToProps = dispatch => {
         loginUser: (user) => dispatch(loginUser(user)),
         otherForm: (
             <span>
-                <button className="other-form" onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
+                <button type="button" className="other-form" onClick={() => { dispatch({ type: GET_ERRORS, payload: {} }); dispatch(openModal('signup')); }}>
                 sign up
             </button>
             </span>

@@ -1,7 +1,7 @@
 import React from 'react';
 import '../css/app.css';
 import Header from './header';
-import Modal from './modal';
+// import Modal from './modal';
 import Search from './search';
 
 class App extends React.Component {
@@ -9,7 +9,6 @@ class App extends React.Component {
     render() {
         return (
             <div className="app-container">
-                <Modal></Modal>
                 <Header></Header>
                 <Search></Search>
             </div>

@@ -1,12 +1,15 @@
 import React from 'react';
+import Modal from './modal';
 import '../css/search.css'
 import { connect } from 'react-redux';
 import { fetchTrends, fetchRelatedTopics } from '../actions/trends_actions';
-import { fetchResults } from '../actions/results_actions';
+import { fetchResults, clearResults } from '../actions/results_actions';
 import { GridLoader } from 'react-spinners';
 import { openModal } from '../actions/modal_actions';
 import { createBookmark } from '../actions/bookmark_actions';
 import SearchResults from './search_results';
+import Typed from 'typed.js';
+
 
 class Search extends React.Component {
 
@@ -16,6 +19,7 @@ class Search extends React.Component {
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
+        this.clearSearch = this.clearSearch.bind(this);
     }
 
     componentDidMount() {   
@@ -23,17 +27,39 @@ class Search extends React.Component {
             .then( () => this.setState({ trends: this.props.trends }) )
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.userEmail === 'demouser@gmail.com') {
+            let options = {
+                strings: [
+                    'welcome to current!',
+                    'click on the trending topics below to check them out,',
+                    'or type in this search bar to explore more!',
+                    ''
+                ],
+                typeSpeed: 60
+            }
+            // npm module typed.js
+            let typed = new Typed(".search-bar", options);
+        }
+    }
+
+    clearSearch() {
+        document.getElementById('search-bar').value = '';
+        this.props.clearResults();
+    }
+
     submitSearch(searchTermInput) {
         this.setState({ render: false })
-        let searchTerm = searchTermInput || document.getElementById('search-input').value;
+        let searchTerm = searchTermInput || document.getElementById('search-bar').value;
        
         this.props.fetchResults(searchTerm)
             .then( () => this.props.fetchRelatedTopics(searchTerm) )
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
-        document.getElementById('search-input').value = searchTerm;
+        document.getElementById('search-bar').value = searchTerm;
     }
 
-    onSave() {
+    onSave(e) {
+        e.preventDefault();
         if (!this.props.userId) {
             this.props.openModal('login');
         } else {
@@ -65,15 +91,17 @@ class Search extends React.Component {
             trendButtons = null;
             trendButtons2 = null;
             trendButtons3 = null;
-        } else if (searchTerm.length < 1 || relatedTopics.length === 0) {
+        } else if (( searchTerm && searchTerm.length < 1 )|| relatedTopics.length === 0) {
             let dailyTrends = trends.slice(0, 4)
             dailyTrends.push("Halloween");
             let dailyTrends2 = trends.slice(5, 10)
             let dailyTrends3 = trends.slice(10, 15)
-    
+            let pulseIdx = Math.floor(Math.random() * 5)
+            console.log(pulseIdx);
+
             trendButtons = [];
             for(let i = 0; i < dailyTrends.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                let btn = <button className="trend-btn animated pulse fast delay-2s" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
                 trendButtons.push(btn);
             }
     
@@ -95,10 +123,17 @@ class Search extends React.Component {
             let dailyTrends = relatedTopics.slice(0, 5)
             let dailyTrends2 = relatedTopics.slice(5, 10)
             let dailyTrends3 = relatedTopics.slice(10, 15)
+            let pulseIdx = Math.floor(Math.random() * 5)
+            console.log(pulseIdx);
 
             trendButtons = [];
             for (let i = 0; i < dailyTrends.length; i++) {
-                let btn = <button className="trend-btn-1" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                let btn;
+                if (i === pulseIdx) {
+                    btn = <button className="trend-btn-1 animated pulse" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                } else {
+                    btn = <button className="trend-btn-1" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                }
                 trendButtons.push(btn);
             }
 
@@ -136,21 +171,26 @@ class Search extends React.Component {
 
         return (
             <div>
+                <Modal bookmarkFunc={this.submitSearch}></Modal>
 
                 <div className="search">
-                    <form onSubmit={() => this.submitSearch(null)} className="search-input">
+
+                    <button type="button" onClick={this.clearSearch} className="home-btn"><i className="fa fa-home"></i> </button>
+                    <button type="button" onClick={this.openBookmarks} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
+
+
+                    <form className="search-input">
+                    <button type="button" onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                         <input 
                             className="search-bar"
-                            id="search-input"
+                            id="search-bar"
                             autoFocus="autoFocus"
                             type="text"
-                            placeholder="see what's trending..."></input>
+                            spellcheck="false"></input>
                    
-                        <button onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                        
-                        <button onClick={this.openBookmarks} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
 
-                        <button type="submit" className="search-btn">
+                        <button type="submit" onClick={() => this.submitSearch(null)} className="search-btn">
                             <i className="fa fa-search"></i>
                         </button>
                    
@@ -179,7 +219,8 @@ class Search extends React.Component {
 const mapStateToProps = state => ({
     trends: state.entities.trends,
     relatedTopics: state.entities.relatedTopics,
-    userId: state.session.id
+    userId: state.session.id,
+    userEmail: state.session.email
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -187,7 +228,8 @@ const mapDispatchToProps = dispatch => ({
     openModal: modal => dispatch(openModal(modal)),
     fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
     fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
-    createBookmark: bookmark => dispatch(createBookmark(bookmark))
+    createBookmark: bookmark => dispatch(createBookmark(bookmark)),
+    clearResults: () => dispatch(clearResults())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
