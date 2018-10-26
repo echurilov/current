@@ -15,7 +15,7 @@ module.exports = passport => {
 
 module.exports = passport => {
   passport.use(new JwtStrategy(options, (payload, done) => {
-    User.findById(jwt_payload.id)
+    User.findById(payload.id)
       .then(user => {
         if (user) {
           // return the user to the frontend
