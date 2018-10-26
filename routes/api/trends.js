@@ -24,9 +24,6 @@ router.get("/related/:searchQuery", (req, res) => {
   return googleTrends2
     .relatedTopics({keyword: req.params.searchQuery})
     .then(function (results) {
-      console.log(JSON.parse(results));
-      // console.log(Object.keys(results));
-
       res.json({
         relatedQueries: JSON.parse(results)
       });
