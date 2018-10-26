@@ -7,6 +7,21 @@ const router = express.Router();
 
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
+router.get("/", (req, res) => {
+  (async () => {
+    number = req.body.count || 30;
+    Bookmark.find({ qty: { $lt: number } }).then(bookmarks => {
+      if (bookmarks) {
+        res.json(bookmarks);
+      } else {
+        errors = { id: "No bookmarks" };
+        return res.status(400).json(errors);
+      };
+    })
+  })()
+    .catch(errors => res.status(400).json(errors))
+});
+
 router.post("/", (req, res) => {
   (async () => {
     let bookmark = validateBookmark(req.body);
