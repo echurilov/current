@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 import { closeModal } from '../actions/modal_actions';
 import { fetchTrends, fetchRelatedTopics } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
+import { fetchBookmarks } from '../actions/bookmark_actions';
 
 class BookmarksModal extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { bookmarks: null }
     this.dispatchSearch = this.dispatchSearch.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchBookmarks()
+      .then( () => this.setState({ bookmarks: this.props.bookmarks }));
   }
 
   dispatchSearch(query) {
@@ -21,13 +28,23 @@ class BookmarksModal extends React.Component {
 
   render() {
 
-    let bookmarks = [
-      { name: 'cats', query: 'cats'},
-      { name: 'tv', query: 'modern family'},
-      { name: 'dogs', query: 'puppy'},
-      { name: 'food', query: 'pizza'},
-      { name: 'fashion', query: 'fashion'},
-    ]
+    let { bookmarks } = this.state;
+
+    // 
+    if (bookmarks === null) {
+      console.log('bookmarks are null');
+      return null;
+    }
+
+    // let bookmarks = [
+    //   { title: 'cats', query: 'cats'},
+    //   { title: 'tv', query: 'modern family'},
+    //   { title: 'dogs', query: 'puppy'},
+    //   { title: 'food', query: 'pizza'},
+    //   { title: 'fashion', query: 'fashion'},
+    // ]
+    console.log('BOOKMARKS', bookmarks);
+    
 
     let bookmarkButtons = [];
     bookmarks.forEach( 
@@ -35,7 +52,7 @@ class BookmarksModal extends React.Component {
         let btn = (
           <li className="bookmark-li" key={Math.random()}>
             <button onClick={() => this.dispatchSearch(bookmark.query)}>
-              {bookmark.name}
+              {bookmark.query}
             </button>
           </li>
         )
@@ -55,15 +72,15 @@ class BookmarksModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  // bookmarks: Object.values(state.entities.bookmarks)
+  bookmarks: Object.values(state.entities.bookmarks)
 })
 
 const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
   fetchTrends: () => dispatch(fetchTrends()),
   fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-  fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
-  // fetchBookmarks: () => dispatch(fetchBookmarks())
+  fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+  fetchBookmarks: () => dispatch(fetchBookmarks())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookmarksModal);
