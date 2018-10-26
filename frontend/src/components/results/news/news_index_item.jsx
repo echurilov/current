@@ -9,28 +9,28 @@ class NewsIndexItem extends React.Component {
         const article = this.props.article
 
         return <div className="news-index-item">
-            <a href={article.url}>
+            <a target="_blank" href={article.url}>
               <img src={article.urlToImage} alt={""} />
             </a>
 
             <div className="text-content">
-              <a href={article.url}>
+              <a target="_blank" href={article.url}>
                 <strong>{article.title}</strong>
               </a>
 
               <div className="published-info">
-                <a href={article.url}>
+                <a target="_blank" href={article.url}>
                   <p>{article.source.name}</p>
                 </a>
                 <p>-</p>
                 <p>{moment(article.publishedAt).fromNow()}</p>
               </div>
 
-              <a href={article.url}>
+              <a target="_blank" href={article.url}>
                 <p>{article.description}</p>
               </a>
 
-                <a href="https://newsapi.org/"><strong className="attribution">Powered by NewsAPI</strong></a>
+                <a target="_blank" href="https://newsapi.org/"><strong className="attribution">Powered by NewsAPI</strong></a>
             </div>
           </div>;
     }
