@@ -4,16 +4,29 @@ import "../../css/imgur.scss";
 class ImgurIndexItem extends React.Component {
 
   render() {
-    return <div className="imgur-index-item">
-        <div className="imgur-header">
-          <img src="https://i.imgur.com/cX0VsCp.png"
-               className="imgur-logo" />
-        </div>
-        <img className="imgur-image" src={this.props.imgurItem.link} alt="imgur" />
+
+    const { imgurItem } = this.props;
+    const linkParts = imgurItem.link.split('.');
+    linkParts.pop();
+    const link = linkParts.join('.');
+
+    const imgurTitle = imgurItem.title.length > 43 ? (
+      imgurItem.title.slice(0, 43) + '...'
+    ) : (
+      imgurItem.title
+    )
+
+    return <a target="_blank" 
+      rel="noopener noreferrer" 
+      href={link} 
+      className="imgur-index-item">
+        <img className="imgur-image" src={imgurItem.link} alt="imgur" />
         <div className="imgur-title-container">
-          <h1 className="imgur-title">{this.props.imgurItem.title}</h1>
+          <h1 className="imgur-title">{imgurTitle}</h1>
+          <img src="https://i.imgur.com/cX0VsCp.png"
+            className="imgur-logo" />
         </div>
-      </div>;
+      </a>;
   }
 
 }
