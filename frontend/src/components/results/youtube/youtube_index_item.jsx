@@ -6,8 +6,8 @@ class YoutubeIndexItem extends React.Component {
         const video = this.props.video
 
         return <div className="youtube-item">
-            <strong>{video.snippet.title}</strong>
             <iframe src={`//www.youtube.com/embed/${video.id.videoId}`} title={video.snippet.title} />
+            <strong>{video.snippet.title}</strong>
           </div>;
 
     }
