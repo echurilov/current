@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 import { closeModal } from '../actions/modal_actions';
 import { fetchTrends, fetchRelatedTopics } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
+import { fetchBookmarks } from '../actions/bookmark_actions';
 
 class BookmarksModal extends React.Component {
 
   constructor(props) {
     super(props);
+    this.state = { bookmarks: null }
     this.dispatchSearch = this.dispatchSearch.bind(this);
+  }
+
+  componentDidMount() {
+    this.props.fetchBookmarks()
+      .then( () => this.setState({ bookmarks: this.props.bookmarks }));
   }
 
   dispatchSearch(query) {
@@ -21,7 +28,12 @@ class BookmarksModal extends React.Component {
 
   render() {
 
-    let { bookmarks } = this.props;
+    let { bookmarks } = this.state;
+
+    // debugger
+    if (!bookmarks) {
+      return null;
+    }
 
     // let bookmarks = [
     //   { title: 'cats', query: 'cats'},
@@ -64,8 +76,8 @@ const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
   fetchTrends: () => dispatch(fetchTrends()),
   fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-  fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
-  // fetchBookmarks: () => dispatch(fetchBookmarks())
+  fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+  fetchBookmarks: () => dispatch(fetchBookmarks())
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookmarksModal);

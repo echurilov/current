@@ -10,10 +10,9 @@ const router = express.Router();
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
 // INDEX
-router.get('/', passport.authenticate('jwt', { session: false }),
-  function (req, res) {
+router.get('/', passport.authenticate('jwt', { session: false }), function (req, res) {
     (async () => {
-      user = req.user.id || req.query.user_id;
+      user = req.user._id
       Bookmark.find({ user_id: user }).then(bookmarks => {
         if (bookmarks) {
           res.json(bookmarks);
@@ -28,8 +27,7 @@ router.get('/', passport.authenticate('jwt', { session: false }),
 );
 
 // CREATE
-router.post("/", (req, res) => {
-  
+router.post("/", passport.authenticate("jwt", { session: false }), function (req, res) {
   // (async () => {
     
     const { errors, isValid } = validateBookmark(req.body);
@@ -46,22 +44,18 @@ router.post("/", (req, res) => {
       } else {
         bookmark = req.body;
         const newBookmark = new Bookmark(bookmark);
-        newBookmark.save()
-        .then( ()=> res.json({
-          success: true,
-          bookmark: newBookmark
-        }))
-          .catch(err => console.log(err));
+        newBookmark.save().then(() =>
+          res.json({
+            success: true,
+            bookmark: newBookmark
+          })
+        );
       }
-    })
-  // })
-    .catch(errors => {
-      res.status(400).json(errors);
-    })
-});
+    });
+  })().catch(errors => res.status(400).json(errors));
 
 // SHOW
-router.get("/:bookmarkId", (req, res) => {
+router.get("/:bookmarkId", passport.authenticate("jwt", { session: false }), function (req, res) {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
     return res.json({ success: false, error: "No bookmark id provided" });
@@ -78,7 +72,7 @@ router.get("/:bookmarkId", (req, res) => {
 });
 
 // UPDATE
-router.patch("/:bookmarkId", (req, res) => {
+router.patch("/:bookmarkId", passport.authenticate("jwt", { session: false }), function (req, res) {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
     return res.json({ success: false, error: "No bookmark id provided" });
@@ -97,7 +91,7 @@ router.patch("/:bookmarkId", (req, res) => {
 });
 
 // DESTROY
-router.delete("/:bookmarkId", (req, res) => {
+router.delete("/:bookmarkId", passport.authenticate("jwt", { session: false }), function (req, res) {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
     return res.json({ success: false, error: "No bookmark id provided" });
