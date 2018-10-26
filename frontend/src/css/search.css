@@ -29,12 +29,13 @@
   color: #2F2F2F;
 }
 
-.search-bar:focus {
+.search-bar:focus, .search-bar:active {
   outline: gray;
+  background: white;
 }
 
 .fa-search {
-  color: #7dbbc2;
+  color: #2F2F2F;
   text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
 }
 
@@ -44,8 +45,23 @@
   -webkit-text-stroke: 3px #7dbbc2;
 }
 
+.fa-bookmark {
+  color: white;
+  font-size: 20px;
+  -webkit-text-stroke: 3px #7dbbc2;
+}
+
 .add-btn {
-  padding: 0px 30px;
+  padding: 0px 15px;
+  background-color: #E7E7E7;
+  height: 40px;
+  border: 2px solid #7dbbc2;
+  border-right: none;
+  margin: 10px 0 10px 0;
+}
+
+.modal-btn {
+  padding: 0px 15px;
   background-color: #E7E7E7;
   height: 40px;
   border: 2px solid #7dbbc2;
@@ -59,15 +75,25 @@
   border-radius: 0 20px 20px 0;
   border: 2px solid #7dbbc2;
   border-left: 2px solid #7dbbc2;
-  background-color: #E7E7E7;
+  background-color: #7dbbc2;
   width: 90px;
   transition: 0.1s;
   text-align: center;
 }
 
-.search-btn:hover, .add-btn:hover {
+.search-btn:hover {
+  background: black;
+}
+.search-btn:hover i {
+  color: #7dbbc2;
+}
+
+.modal-btn:hover, .add-btn:hover {
   cursor: pointer;
   background: #A2A2A2;
+}
+.modal-btn:hover i, .add-btn:hover i {
+  color: black;
 }
 
 .search-btn:active, .search-btn:focus {
@@ -98,8 +124,20 @@
   text-align: center;
 }
 
+.trend-btn-1 {
+  font-family: "Heebo";
+  font-size: 20px;
+  font-style: italic;
+  background: none;
+  color:  #7dbbc2;
+  border: none;
+  width: 230px;
+  transition: .3s;
+  text-align: center;
+}
+
 .trend-btn:hover {
-  color: #607F85;
+  color: white;
   cursor: pointer;
 }
 

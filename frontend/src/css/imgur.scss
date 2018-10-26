@@ -1,0 +1,50 @@
+.imgur-index-item {
+  display: flex;
+  flex-direction: column;
+  height: 380px;
+  width: 400px;
+  border: 5px solid white;
+  border-radius: 3px;
+  background-color: rgb(43, 43, 43);
+  color: white;
+  font-family: 'Open Sans';
+
+    .imgur-header {
+      display: flex;
+      height: 48px;
+      width: 100%;
+      position: relative;
+    }
+
+    .imgur-title-container {
+      position: relative;
+    }
+
+    .imgur-title {
+      margin: 0;
+      font-size: 18px;
+      position: absolute;
+      left: 5px;
+      top: 12px;
+      
+      font-weight: 400;
+    }
+
+    .imgur-logo {
+      height: 40px;
+      width: auto;
+      position: absolute;
+      right: 15px;
+      top: 5px;
+    }
+
+    .imgur-image {
+      width: 400px;
+      overflow: hidden;
+    }
+
+    .imgur-description {
+      font-size: 16px;
+      height: 45px;
+    }
+}

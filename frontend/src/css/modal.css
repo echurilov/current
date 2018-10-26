@@ -14,3 +14,50 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.modal-background-bookmark {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.17);
+  z-index: 10;
+}
+
+.modal-child-bookmark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bookmark-box {
+  height: 400px;
+  width: 400px;
+  overflow-y: scroll;
+  border: 5px solid white;
+  border-radius: 10px;
+  background: #545454;
+  text-align: center;
+}
+
+.bookmark-box h3 {
+  font-family: "Heebo";
+  text-transform: uppercase;
+  letter-spacing: .2em;
+  font-size: 26px;
+  text-shadow: 1px 1px white;
+}
+
+.bookmark-li {
+  font-family: "Ubuntu Condensed";
+  font-size: 26px;
+  color: #7dbbc2;
+  margin: 20px 40px 20px 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid white;
+}
+
+.bookmark-li:hover {
+  color: black;
+}
