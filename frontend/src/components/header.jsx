@@ -19,7 +19,7 @@ class Header extends React.Component {
   }
 
   handleDemo() {
-    const user = { email: 'demo@user.com', password: 'password'};
+    const user = { email: 'woohoo@gmail.com', password: '123456'};
     this.props.loginUser(user);
   }
 
