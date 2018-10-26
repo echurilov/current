@@ -51,6 +51,12 @@
   color: #7dbbc2;
 }
 
+.session-submit:hover {
+  background: white;
+  color: #2f2f2f;
+  border: 1px solid #B9E9F2;
+}
+
 .other-form {
   margin-top: 20px;
   color: #B9E9F2;

@@ -46,8 +46,8 @@ class Header extends React.Component {
     return (
       <div className="header-container">
         <div>
-          <a className="header-links">About Us</a>
-          <a className="header-links">What's Current?</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/echurilov/current" className="header-links">About Us</a>
+          <a target="_blank" rel="noopener noreferrer" href="https://github.com/echurilov/current" className="header-links">What's Current?</a>
         </div>
         <button onClick={this.clearSearch}>
          <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>
