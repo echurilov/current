@@ -26,7 +26,7 @@ class Search extends React.Component {
     submitSearch(searchTermInput) {
         this.setState({ render: false })
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
-        debugger
+       
         this.props.fetchResults(searchTerm)
             .then( () => this.props.fetchRelatedTopics(searchTerm) )
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))

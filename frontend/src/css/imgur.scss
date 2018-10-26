@@ -8,43 +8,57 @@
   background-color: rgb(43, 43, 43);
   color: white;
   font-family: 'Open Sans';
-
-    .imgur-header {
-      display: flex;
-      height: 48px;
-      width: 100%;
-      position: relative;
-    }
+  position: relative;
+  align-items: center;
 
     .imgur-title-container {
-      position: relative;
+      bottom: 0;
+      left: 0;
+      height: 40px;
+      background-color: #2b2b2b;
+      overflow: hidden;
+      width: 100%;
+      height: auto;
     }
 
     .imgur-title {
-      margin: 0;
-      font-size: 18px;
-      position: absolute;
-      left: 5px;
-      top: 12px;
-      
+      font-size: 16px;
       font-weight: 400;
+      text-align: center;
+      font-style: italic;
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      transition: 0.2s;
+    }
+
+    .imgur-title:hover {
+      transition: 0.2s;
+      color: rgb(136, 198, 57);
     }
 
     .imgur-logo {
-      height: 40px;
-      width: auto;
+      height: auto;
+      width: 54px;
       position: absolute;
-      right: 15px;
-      top: 5px;
+      bottom: 3px;
+      left: 173px;
     }
 
     .imgur-image {
-      width: 400px;
-      overflow: hidden;
+      overflow: auto;
+      max-height: 314px;
+      position: absolute;
+      object-fit: contain;
+      margin-top: 10px;
     }
 
     .imgur-description {
-      font-size: 16px;
-      height: 45px;
+      font-size: 13px;
+      font-weight: 300;
     }
+}
+
+.imgur-index-item:hover {
+  cursor: pointer;
 }
