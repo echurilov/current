@@ -1,8 +1,7 @@
 import React from 'react';
 import '../css/header.css'
-// import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { logoutUser } from '../util/session_api_util';
+import { logoutUser, loginUser } from '../util/session_api_util';
 import { openModal } from '../actions/modal_actions';
 import { clearResults } from '../actions/results_actions';
 
@@ -11,11 +10,17 @@ class Header extends React.Component {
   constructor(props) {
     super(props);
     this.clearSearch = this.clearSearch.bind(this);
+    this.handleDemo = this.handleDemo.bind(this);
   }
 
   clearSearch() {
     document.getElementById('search-input').value = '';
     this.props.clearResults();
+  }
+
+  handleDemo() {
+    const user = { email: 'demo@user.com', password: 'password'};
+    this.props.loginUser(user);
   }
 
   render() {
@@ -27,6 +32,7 @@ class Header extends React.Component {
       logout = null;
       welcome = (
         <div>
+          <button className="session-button" onClick={this.handleDemo}>Demo</button>
           <button className="session-button" onClick={() => this.props.openModal('login')}>Log In</button>
           <button className="session-button" onClick={() => this.props.openModal('signup')}>Sign Up</button>
         </div>
@@ -65,6 +71,7 @@ const mapStateToProps = ({session}) => {
 const mapDispatchToProps = dispatch => {
   return {
     logoutUser: () => dispatch(logoutUser()),
+    loginUser: (userData) => dispatch(loginUser(userData)),
     openModal: modal => dispatch(openModal(modal)),
     clearResults: () => dispatch(clearResults())
   };
