@@ -21,7 +21,6 @@ class BookmarksModal extends React.Component {
 
   render() {
 
-    debugger
     let { bookmarks } = this.props;
 
     // let bookmarks = [
