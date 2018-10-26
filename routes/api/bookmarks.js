@@ -6,6 +6,36 @@ const passport = require("passport");
 
 const router = express.Router();
 
+// function ensureAuthorized(req, res, next) {
+//   var bearerToken;
+//   var bearerHeader = req.headers["authorization"];
+//   if (typeof bearerHeader !== 'undefined') {
+//     var bearer = bearerHeader.split(" ");
+//     bearerToken = bearer[1];
+//     req.token = bearerToken;
+//     next();
+//   } else {
+//     res.send(403);
+//   }
+// }
+
+// router.get('/', ensureAuthorized, function (req, res) {
+//   User.findOne({ token: req.token }, function (err, user) {
+//     (async () => {
+//       user = req.user.id || req.query.user_id;
+//       Bookmark.find({ user_id: user }).then(bookmarks => {
+//         if (bookmarks) {
+//           res.json(bookmarks);
+//         } else {
+//           errors = { id: "No bookmarks" };
+//           return res.status(400).json(errors);
+//         };
+//       })
+//     })()
+//       .catch(errors => res.status(400).json(errors))
+//   });
+// });
+
 // TEST
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
@@ -13,7 +43,7 @@ router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" 
 router.get('/', passport.authenticate('jwt', { session: false }),
   function (req, res) {
     (async () => {
-      user = req.user.id || req.query.user_id;
+      user = req.user._id
       Bookmark.find({ user_id: user }).then(bookmarks => {
         if (bookmarks) {
           res.json(bookmarks);
