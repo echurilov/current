@@ -32,9 +32,11 @@ class Search extends React.Component {
     }
 
     onSave() {
+        console.log('omg;;;sfkafhdsnz,');
         if (!this.props.userId) {
             this.props.openModal('login');
         } else {
+            console.log('trying to save');
             let query = document.getElementById('search-input').value;
             let user_id = this.props.userId;
             let bookmark = { query, user_id };
@@ -136,7 +138,7 @@ class Search extends React.Component {
                             type="text"
                             placeholder="see what's trending..."></input>
                    
-                        <button onClick={() => this.onSave()} className="add-btn"><i className="fa fa-plus"></i> </button>
+                        <button onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                        
                         <button onClick={() => this.props.openModal('bookmark')} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
 

@@ -26,9 +26,10 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  (async () => {
-    console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
-
+  console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
+  // (async () => {
+    
+    console.log('IN ASYNC ACTION', req.body);
     const { errors, isValid } = validateBookmark(req.body);
     console.log('BOOKMARK', req.body);
 
@@ -43,21 +44,22 @@ router.post("/", (req, res) => {
         errors.query = "You already saved this bookmark";
         return res.status(400).json(errors);
       } else {
+        bookmark = req.body;
         const newBookmark = new Bookmark(bookmark);
         newBookmark.save()
         .then( ()=> res.json({
-          success:true,
-          bookmark:newBookmark
+          success: true,
+          bookmark: newBookmark
         }))
           .catch(err => console.log('ERR2', err));
       }
-    });
-  })
-    // .catch(errors => {
-    //   console.log('ERRORS',errors);
-    //   console.log('heyyyy',errors);
-    //   res.status(400).json(errors);
-    // })
+    })
+  // })
+    .catch(errors => {
+      console.log('ERRORS',errors);
+      console.log('heyyyy',errors);
+      res.status(400).json(errors);
+    })
 });
 
 router.get("/:bookmarkId", (req, res) => {

@@ -1,7 +1,7 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
-const validateBookmark = ({ user_id, query }) => {
+  module.exports = function validateBookmark(data) {
   // let errors = {
   //   user_id: !user_id && "User field is required",
   //   query: !query && "Query field is required",
@@ -27,4 +27,3 @@ const validateBookmark = ({ user_id, query }) => {
   };
 }
 
-module.exports = validateBookmark;

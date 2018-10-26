@@ -42,13 +42,17 @@ export const fetchBookmarks = () => dispatch => {
 }
 
 export const createBookmark = (bookmark) => dispatch => {
-  return axios.post(`/api/bookmarks/`, bookmark)
+  debugger
+  return axios.post(`/api/bookmarks`, bookmark)
     .then(bookmark => {
       debugger
-      dispatch(receiveBookmarks(bookmark));
+      console.log('SUCCES MADE BOOKMAR');
+      dispatch(receiveBookmark(bookmark));
     })
     .catch(errors => {
       debugger
+      console.log('FAILED TO MAKE BOOKMARK');
+      console.log(errors);
       dispatch(receiveBookmarkErrors(errors));
     });
 }

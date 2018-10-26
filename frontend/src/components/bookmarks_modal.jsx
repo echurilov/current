@@ -21,13 +21,16 @@ class BookmarksModal extends React.Component {
 
   render() {
 
-    let bookmarks = [
-      { title: 'cats', query: 'cats'},
-      { title: 'tv', query: 'modern family'},
-      { title: 'dogs', query: 'puppy'},
-      { title: 'food', query: 'pizza'},
-      { title: 'fashion', query: 'fashion'},
-    ]
+    debugger
+    let { bookmarks } = this.props;
+
+    // let bookmarks = [
+    //   { title: 'cats', query: 'cats'},
+    //   { title: 'tv', query: 'modern family'},
+    //   { title: 'dogs', query: 'puppy'},
+    //   { title: 'food', query: 'pizza'},
+    //   { title: 'fashion', query: 'fashion'},
+    // ]
 
     let bookmarkButtons = [];
     bookmarks.forEach( 
@@ -35,7 +38,7 @@ class BookmarksModal extends React.Component {
         let btn = (
           <li className="bookmark-li" key={Math.random()}>
             <button onClick={() => this.dispatchSearch(bookmark.query)}>
-              {bookmark.name}
+              {bookmark.query}
             </button>
           </li>
         )
@@ -55,7 +58,7 @@ class BookmarksModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  // bookmarks: Object.values(state.entities.bookmarks)
+  bookmarks: Object.values(state.entities.bookmarks)
 })
 
 const mapDispatchToProps = dispatch => ({
