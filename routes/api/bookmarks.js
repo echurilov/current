@@ -2,39 +2,42 @@ const express = require("express");
 
 const Bookmark = require('../../models/Bookmark');
 const validateBookmark = require('../../validations/bookmark');
+const passport = require("passport");
 
 const router = express.Router();
 
+// TEST
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
-router.get("/", (req, res) => {
-  (async () => {
-    number = req.body.count || 30;
-    Bookmark.find({ qty: { $lt: number } }).then(bookmarks => {
-      if (bookmarks) {
-        res.json(bookmarks);
-      } else {
-        errors = { id: "No bookmarks" };
-        return res.status(400).json(errors);
-      };
-    })
-  })()
-    .catch(errors => {
-          res.status(400).json(errors);
-        }
-      )
-});
+// INDEX
+router.get('/', passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    (async () => {
+      user = req.user.id || req.query.user_id;
+      Bookmark.find({ user_id: user }).then(bookmarks => {
+        if (bookmarks) {
+          res.json(bookmarks);
+        } else {
+          errors = { id: "No bookmarks" };
+          return res.status(400).json(errors);
+        };
+      })
+    })()
+      .catch(errors => res.status(400).json(errors))
+  }
+);
 
+// CREATE
 router.post("/", (req, res) => {
-  console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
+  // console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
   // (async () => {
     
-    console.log('IN ASYNC ACTION', req.body);
+    // console.log('IN ASYNC ACTION', req.body);
     const { errors, isValid } = validateBookmark(req.body);
-    console.log('BOOKMARK', req.body);
+    // console.log('BOOKMARK', req.body);
 
     if (!isValid) {
-      console.log('ERRORSinvalid',errors);
+      // console.log('ERRORSinvalid',errors);
       return res.status(400).json(errors);
     }
 
@@ -62,6 +65,7 @@ router.post("/", (req, res) => {
     })
 });
 
+// SHOW
 router.get("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
@@ -78,12 +82,7 @@ router.get("/:bookmarkId", (req, res) => {
   });
 });
 
-// router.patch("/:bookmarkId", (req, res) => {
-//   (async () => {
-//     return Bookmark.findOneAndUpdate({ _id: bookmarkId }, { $set: req.body} )
-//   })().catch(errors => res.status(400).json(errors));
-// });
-
+// UPDATE
 router.patch("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
@@ -102,6 +101,7 @@ router.patch("/:bookmarkId", (req, res) => {
   });
 });
 
+// DESTROY
 router.delete("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
