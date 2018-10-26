@@ -2,6 +2,7 @@ const express = require("express");
 
 const Bookmark = require('../../models/Bookmark');
 const validateBookmark = require('../../validations/bookmark');
+const passport = require("passport");
 
 const router = express.Router();
 
@@ -9,20 +10,21 @@ const router = express.Router();
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
 // INDEX
-router.get("/", (req, res) => {
-  (async () => {
-    user = req.query.user_id
-    Bookmark.find({ user_id: user}).then(bookmarks => {
-      if (bookmarks) {
-        res.json(bookmarks);
-      } else {
-        errors = { id: "No bookmarks" };
-        return res.status(400).json(errors);
-      };
-    })
-  })()
-    .catch(errors => res.status(400).json(errors))
-});
+router.get('/', passport.authenticate('jwt', { session: false }),
+  function (req, res) {
+    (async () => {
+      Bookmark.find({ user_id: req.user.id }).then(bookmarks => {
+        if (bookmarks) {
+          res.json(bookmarks);
+        } else {
+          errors = { id: "No bookmarks" };
+          return res.status(400).json(errors);
+        };
+      })
+    })()
+      .catch(errors => res.status(400).json(errors))
+  }
+);
 
 // CREATE
 router.post("/", (req, res) => {
