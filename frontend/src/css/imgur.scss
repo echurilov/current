@@ -16,7 +16,11 @@
       position: relative;
     }
 
-    .imgur-header-title {
+    .imgur-title-container {
+      position: relative;
+    }
+
+    .imgur-title {
       margin: 0;
       font-size: 18px;
       position: absolute;
