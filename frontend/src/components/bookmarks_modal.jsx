@@ -22,11 +22,11 @@ class BookmarksModal extends React.Component {
   render() {
 
     let bookmarks = [
-      { name: 'cats', query: 'cats'},
-      { name: 'tv', query: 'modern family'},
-      { name: 'dogs', query: 'puppy'},
-      { name: 'food', query: 'pizza'},
-      { name: 'fashion', query: 'fashion'},
+      { title: 'cats', query: 'cats'},
+      { title: 'tv', query: 'modern family'},
+      { title: 'dogs', query: 'puppy'},
+      { title: 'food', query: 'pizza'},
+      { title: 'fashion', query: 'fashion'},
     ]
 
     let bookmarkButtons = [];

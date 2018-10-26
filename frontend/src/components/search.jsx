@@ -5,6 +5,7 @@ import { fetchTrends, fetchRelatedTopics } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
 import { GridLoader } from 'react-spinners';
 import { openModal } from '../actions/modal_actions';
+import { createBookmark } from '../actions/bookmark_actions';
 import SearchResults from './search_results';
 
 class Search extends React.Component {
@@ -31,7 +32,15 @@ class Search extends React.Component {
     }
 
     onSave() {
-
+        if (!this.props.userId) {
+            this.props.openModal('login');
+        } else {
+            let query = document.getElementById('search-input').value;
+            let user_id = this.props.userId;
+            let bookmark = { query, user_id };
+            debugger
+            this.props.createBookmark(bookmark);
+        }
     }
     
     render() {
@@ -46,13 +55,8 @@ class Search extends React.Component {
             trendButtons = null;
             trendButtons2 = null;
             trendButtons3 = null;
-<<<<<<< HEAD
         } else if (searchTerm.length < 1 || relatedTopics.length === 0) {
             // debugger
-=======
-        } else if (searchTerm.length < 1 || relatedTopics.length == 0) {
-            
->>>>>>> da7503c939a6c95a4d4666113ba570c03d0c0363
             let dailyTrends = trends.slice(0, 5)
             let dailyTrends2 = trends.slice(5, 10)
             let dailyTrends3 = trends.slice(10, 15)
@@ -132,7 +136,7 @@ class Search extends React.Component {
                             type="text"
                             placeholder="see what's trending..."></input>
                    
-                        <button onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
+                        <button onClick={() => this.onSave()} className="add-btn"><i className="fa fa-plus"></i> </button>
                        
                         <button onClick={() => this.props.openModal('bookmark')} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
 
@@ -164,14 +168,16 @@ class Search extends React.Component {
 
 const mapStateToProps = state => ({
     trends: state.entities.trends,
-    relatedTopics: state.entities.relatedTopics
+    relatedTopics: state.entities.relatedTopics,
+    userId: state.session.id
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchTrends: () => dispatch(fetchTrends()),
     openModal: modal => dispatch(openModal(modal)),
     fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-    fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
+    fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+    createBookmark: bookmark => dispatch(createBookmark(bookmark))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

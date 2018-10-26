@@ -19,26 +19,45 @@ router.get("/", (req, res) => {
       };
     })
   })()
-    .catch(errors => res.status(400).json(errors))
+    .catch(errors => {
+          res.status(400).json(errors);
+        }
+      )
 });
 
 router.post("/", (req, res) => {
   (async () => {
-    let bookmark = validateBookmark(req.body);
-    return Bookmark.findOne(bookmark).then(dupBookmark => {
+    console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
+
+    const { errors, isValid } = validateBookmark(req.body);
+    console.log('BOOKMARK', req.body);
+
+    if (!isValid) {
+      console.log('ERRORSinvalid',errors);
+      return res.status(400).json(errors);
+    }
+
+    Bookmark.findOne({ user_id: req.body.user_id, query: req.body.query }).then(dupBookmark => {
       if (dupBookmark) {
-        throw { query: "Bookmark already exists" };
+        // throw { query: "Bookmark already exists" };
+        errors.query = "You already saved this bookmark";
+        return res.status(400).json(errors);
       } else {
         const newBookmark = new Bookmark(bookmark);
         newBookmark.save()
         .then( ()=> res.json({
           success:true,
           bookmark:newBookmark
-        }));
+        }))
+          .catch(err => console.log('ERR2', err));
       }
     });
-  })()
-    .catch(errors => res.status(400).json(errors))
+  })
+    // .catch(errors => {
+    //   console.log('ERRORS',errors);
+    //   console.log('heyyyy',errors);
+    //   res.status(400).json(errors);
+    // })
 });
 
 router.get("/:bookmarkId", (req, res) => {
