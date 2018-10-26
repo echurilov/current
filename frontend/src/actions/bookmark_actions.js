@@ -34,7 +34,8 @@ const receiveBookmarkErrors = errors => {
 export const fetchBookmarks = () => dispatch => {
   return axios.get(`/api/bookmarks/`)
     .then(bookmarks => {
-      dispatch(receiveBookmarks(bookmarks));
+      debugger
+      dispatch(receiveBookmarks(bookmarks.data));
     })
     .catch(errors => {
       dispatch(receiveBookmarkErrors(errors));
