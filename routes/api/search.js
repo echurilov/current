@@ -25,6 +25,21 @@ router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
 
   console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
+
+  const imgurCallback = () => {
+    return axios({
+      method: "get",
+      url: `https://api.imgur.com/3/gallery/search?q=${processedQuery}`,
+      headers: { Authorization: `Client-ID ${keys.imgurId}` }
+    })
+      .then(res => {
+        return res.data;
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  };
+
   const giphyCallback = () => {
     return axios({
       method: "get",
@@ -81,13 +96,23 @@ router.get("/:searchQuery", (req, res) => {
   Promise.all([
     giphyCallback(),
     newsCallback(),
-    youtubeCallback()
+    youtubeCallback(),
+    imgurCallback()
   ])
     .then(function(value) {
+
+      const validImgurData = []
+      value[3].data.forEach( imgurData => {
+        if (imgurData.type && imgurData.type.slice(0,5) === 'image' && imgurData.privacy != 'hidden') {
+          validImgurData.push(imgurData);
+        }
+      })
+
       res.json({
         giphy: value[0].data.slice(0,10),
         news: value[1].data.slice(0,10),
-        youtube: value[2].data
+        youtube: value[2].data,
+        imgur: validImgurData.slice(0,10)
       });
     })
     .catch(err => {
