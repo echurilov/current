@@ -52,7 +52,8 @@ router.post("/", passport.authenticate("jwt", { session: false }), function (req
         );
       }
     });
-  })().catch(errors => res.status(400).json(errors));
+  });
+  // .catch(errors => res.status(400).json(errors));
 
 // SHOW
 router.get("/:bookmarkId", passport.authenticate("jwt", { session: false }), function (req, res) {

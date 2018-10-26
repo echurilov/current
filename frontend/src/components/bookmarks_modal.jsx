@@ -30,8 +30,9 @@ class BookmarksModal extends React.Component {
 
     let { bookmarks } = this.state;
 
-    // debugger
-    if (!bookmarks) {
+    // 
+    if (bookmarks === null) {
+      console.log('bookmarks are null');
       return null;
     }
 
@@ -42,6 +43,8 @@ class BookmarksModal extends React.Component {
     //   { title: 'food', query: 'pizza'},
     //   { title: 'fashion', query: 'fashion'},
     // ]
+    console.log('BOOKMARKS', bookmarks);
+    
 
     let bookmarkButtons = [];
     bookmarks.forEach( 
