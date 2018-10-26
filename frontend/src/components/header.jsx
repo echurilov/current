@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { logoutUser, loginUser } from '../util/session_api_util';
 import { openModal } from '../actions/modal_actions';
 import { clearResults } from '../actions/results_actions';
+import Typed from 'typed.js';
 
 class Header extends React.Component {
 
@@ -11,6 +12,7 @@ class Header extends React.Component {
     super(props);
     this.clearSearch = this.clearSearch.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
+    this.ghostType = this.ghostType.bind(this);
   }
 
   clearSearch() {
@@ -21,6 +23,22 @@ class Header extends React.Component {
   handleDemo() {
     const user = { email: 'demouser@gmail.com', password: '123456'};
     this.props.loginUser(user);
+  }
+
+  ghostType() {
+    document.getElementById('search-bar').value = '';
+    let options = {
+      strings: [
+        'welcome to current!',
+        'click on the trending topics below to check them out,',
+        'save your favorite topics on the right,',
+        'or type in this search bar to explore more!',
+        ''
+      ],
+      typeSpeed: 60
+    }
+    // npm module typed.js
+    let typed = new Typed(".search-bar", options);
   }
 
   render() {
@@ -47,7 +65,7 @@ class Header extends React.Component {
       <div className="header-container">
         <div>
           <a target="_blank" rel="noopener noreferrer" href="https://github.com/echurilov/current" className="header-links">About Us</a>
-          <a target="_blank" rel="noopener noreferrer" href="https://github.com/echurilov/current" className="header-links">What's Current?</a>
+          <button onClick={this.ghostType} className="header-links">How do I use Current?</button>
         </div>
         <button onClick={this.clearSearch}>
          <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>

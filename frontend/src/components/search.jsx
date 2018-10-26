@@ -15,7 +15,7 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: true, trends: [], clear: true };
+        this.state = { searchTerm: '', render: true, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
@@ -28,19 +28,19 @@ class Search extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.userEmail === 'demouser@gmail.com' && this.state.clear) {
+        if (newProps.userEmail === 'demouser@gmail.com') {
             let options = {
                 strings: [
                     'welcome to current!',
                     'click on the trending topics below to check them out,',
-                    'save your favorite topics on the right',
+                    'save your favorite topics on the right,',
                     'or type in this search bar to explore more!',
                     ''
                 ],
                 typeSpeed: 60
             }
             // npm module typed.js
-            let typed = new Typed(".intro-typer", options);
+            let typed = new Typed(".search-bar", options);
         }
     }
 
@@ -55,7 +55,7 @@ class Search extends React.Component {
        
         this.props.fetchResults(searchTerm)
             .then( () => this.props.fetchRelatedTopics(searchTerm) )
-            .then(() => this.setState({ render: true, searchTerm: searchTerm, clear: false }))
+            .then(() => this.setState({ render: true, searchTerm: searchTerm }))
         document.getElementById('search-bar').value = searchTerm;
     }
 
@@ -165,13 +165,6 @@ class Search extends React.Component {
                 </div>
         )
 
-       let tempTypeSpace;
-       if (this.state.clear) {
-           tempTypeSpace = (
-               <input id="intro-typer" className="intro-typer"></input>
-           )
-       }
-
         return (
             <div>
                 <Modal bookmarkFunc={this.submitSearch}></Modal>
@@ -199,7 +192,6 @@ class Search extends React.Component {
                    
                     </form>
                 </div>
-
                 
                 <div className="trends">
                     <div className="item-1">
@@ -213,7 +205,6 @@ class Search extends React.Component {
                     </div>
                 </div>
 
-                {this.state.clear ? tempTypeSpace : null}
                 { results }
             </div>
         )

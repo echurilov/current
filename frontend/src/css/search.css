@@ -16,13 +16,15 @@
 
 .intro-typer {
   position: absolute;
-  top: Calc(70% - 100px);
-  left: Calc(50% - 200px);
-  width: 400px;
+  top: Calc(60% - 100px);
+  left: Calc(50% - 500px);
+  width: 1000px;
   height: 200px;
-  border: 1px solid black;
   text-align: center;
   font-family: "Heebo";
+  font-size: 40px;
+  color: #7dbbc2;
+  font-style: italic;
 }
 
 .add-btn {

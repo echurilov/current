@@ -31,27 +31,23 @@
   align-items: center;
 }
 
-.session-button, .header-container a {
+.session-button, .header-container a, .header-links {
   font-family: "Heebo";
   margin: 5px;
   color: #7dbbc2;
+  transition: 0.2s;
 }
 
 .session-button {
   border: 1px solid #7dbbc2;
   padding: 7px;
   border-radius: 3px;
-  /* background: rgba(125, 187, 194, .1); */
   transition: .2s;
 }
 
 .session-button:hover {
   background:  #7dbbc2;
   color: white
-}
-
-.header-links {
-  transition: 0.2s;
 }
 
 .header-links:hover {
