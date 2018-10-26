@@ -8,6 +8,8 @@ import { GridLoader } from 'react-spinners';
 import { openModal } from '../actions/modal_actions';
 import { createBookmark } from '../actions/bookmark_actions';
 import SearchResults from './search_results';
+import Typed from 'typed.js';
+
 
 class Search extends React.Component {
 
@@ -25,19 +27,35 @@ class Search extends React.Component {
             .then( () => this.setState({ trends: this.props.trends }) )
     }
 
+    componentWillReceiveProps(newProps) {
+        if (newProps.userEmail === 'demouser@gmail.com') {
+            let options = {
+                strings: [
+                    'welcome to current!',
+                    'click on the trending topics below to check them out,',
+                    'or type in this search bar to explore more!',
+                    ''
+                ],
+                typeSpeed: 60
+            }
+            // npm module typed.js
+            let typed = new Typed(".search-bar", options);
+        }
+    }
+
     clearSearch() {
-        document.getElementById('search-input').value = '';
+        document.getElementById('search-bar').value = '';
         this.props.clearResults();
     }
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
-        let searchTerm = searchTermInput || document.getElementById('search-input').value;
+        let searchTerm = searchTermInput || document.getElementById('search-bar').value;
        
         this.props.fetchResults(searchTerm)
             .then( () => this.props.fetchRelatedTopics(searchTerm) )
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
-        document.getElementById('search-input').value = searchTerm;
+        document.getElementById('search-bar').value = searchTerm;
     }
 
     onSave(e) {
@@ -83,12 +101,7 @@ class Search extends React.Component {
 
             trendButtons = [];
             for(let i = 0; i < dailyTrends.length; i++) {
-                let btn;
-                if (i === pulseIdx) {
-                    btn = <button className="trend-btn animated infinite pulse" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
-                } else {
-                    btn = <button className="trend-btn animated infinite pulse" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
-                }
+                let btn = <button className="trend-btn animated pulse fast delay-2s" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
                 trendButtons.push(btn);
             }
     
@@ -170,10 +183,10 @@ class Search extends React.Component {
                     <button type="button" onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                         <input 
                             className="search-bar"
-                            id="search-input"
+                            id="search-bar"
                             autoFocus="autoFocus"
                             type="text"
-                            placeholder="see what's trending..."></input>
+                            spellcheck="false"></input>
                    
                        
 
@@ -206,7 +219,8 @@ class Search extends React.Component {
 const mapStateToProps = state => ({
     trends: state.entities.trends,
     relatedTopics: state.entities.relatedTopics,
-    userId: state.session.id
+    userId: state.session.id,
+    userEmail: state.session.email
 })
 
 const mapDispatchToProps = dispatch => ({

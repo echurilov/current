@@ -14,7 +14,7 @@ class Header extends React.Component {
   }
 
   clearSearch() {
-    document.getElementById('search-input').value = '';
+    document.getElementById('search-bar').value = '';
     this.props.clearResults();
   }
 

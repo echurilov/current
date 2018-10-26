@@ -22,7 +22,8 @@
     "redux-thunk": "^2.3.0",
     "shuffle-array": "^1.0.1",
     "stream-to-promise": "^2.2.0",
-    "thunk": "0.0.1"
+    "thunk": "0.0.1",
+    "typed.js": "^2.0.9"
   },
   "scripts": {
     "start": "react-scripts start",

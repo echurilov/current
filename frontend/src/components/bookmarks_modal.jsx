@@ -22,7 +22,7 @@ class BookmarksModal extends React.Component {
     this.props.closeModal();
     let searchTerm = query;
     this.props.bookmarkFunc(searchTerm);
-    document.getElementById('search-input').value = searchTerm;
+    document.getElementById('search-bar').value = searchTerm;
   }
 
   render() {
