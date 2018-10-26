@@ -3,7 +3,8 @@ import {
 } from '../util/session_api_util';
 
 const _nullUser = Object.freeze({
-  id: null
+  id: null,
+  email: null
 });
 
 const sessionReducer = (state = _nullUser, action) => {

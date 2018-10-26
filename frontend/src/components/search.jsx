@@ -5,6 +5,7 @@ import { fetchTrends, fetchRelatedTopics } from '../actions/trends_actions';
 import { fetchResults } from '../actions/results_actions';
 import { GridLoader } from 'react-spinners';
 import { openModal } from '../actions/modal_actions';
+import { createBookmark } from '../actions/bookmark_actions';
 import SearchResults from './search_results';
 
 class Search extends React.Component {
@@ -31,7 +32,16 @@ class Search extends React.Component {
     }
 
     onSave() {
-
+        console.log('omg;;;sfkafhdsnz,');
+        if (!this.props.userId) {
+            this.props.openModal('login');
+        } else {
+            console.log('trying to save');
+            let query = document.getElementById('search-input').value;
+            let user_id = this.props.userId;
+            let bookmark = { query, user_id };
+            this.props.createBookmark(bookmark);
+        }
     }
     
     render() {
@@ -158,14 +168,16 @@ class Search extends React.Component {
 
 const mapStateToProps = state => ({
     trends: state.entities.trends,
-    relatedTopics: state.entities.relatedTopics
+    relatedTopics: state.entities.relatedTopics,
+    userId: state.session.id
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchTrends: () => dispatch(fetchTrends()),
     openModal: modal => dispatch(openModal(modal)),
     fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-    fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
+    fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+    createBookmark: bookmark => dispatch(createBookmark(bookmark))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);

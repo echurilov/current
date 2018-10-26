@@ -13,7 +13,7 @@ const twoWeeksAgo = moment().subtract(14, "day").format("YYYY-MM-DD");
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
 
-  console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
+  // console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
 
   const imgurCallback = () => {
     return axios({
