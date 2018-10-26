@@ -13,7 +13,8 @@ router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" 
 router.get('/', passport.authenticate('jwt', { session: false }),
   function (req, res) {
     (async () => {
-      Bookmark.find({ user_id: req.user.id }).then(bookmarks => {
+      user = req.user.id || req.query.user_id;
+      Bookmark.find({ user_id: user }).then(bookmarks => {
         if (bookmarks) {
           res.json(bookmarks);
         } else {
