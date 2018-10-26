@@ -5,12 +5,14 @@ const validateBookmark = require('../../validations/bookmark');
 
 const router = express.Router();
 
+// TEST
 router.get("/test", (req, res) => res.json({ msg: "This is the bookmarks route" }));
 
+// INDEX
 router.get("/", (req, res) => {
   (async () => {
-    number = req.body.count || 30;
-    Bookmark.find({ qty: { $lt: number } }).then(bookmarks => {
+    user = req.query.user_id
+    Bookmark.find({ user_id: user}).then(bookmarks => {
       if (bookmarks) {
         res.json(bookmarks);
       } else {
@@ -22,6 +24,7 @@ router.get("/", (req, res) => {
     .catch(errors => res.status(400).json(errors))
 });
 
+// CREATE
 router.post("/", (req, res) => {
   (async () => {
     let bookmark = validateBookmark(req.body);
@@ -41,6 +44,7 @@ router.post("/", (req, res) => {
     .catch(errors => res.status(400).json(errors))
 });
 
+// SHOW
 router.get("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
@@ -57,12 +61,7 @@ router.get("/:bookmarkId", (req, res) => {
   });
 });
 
-// router.patch("/:bookmarkId", (req, res) => {
-//   (async () => {
-//     return Bookmark.findOneAndUpdate({ _id: bookmarkId }, { $set: req.body} )
-//   })().catch(errors => res.status(400).json(errors));
-// });
-
+// UPDATE
 router.patch("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
@@ -81,6 +80,7 @@ router.patch("/:bookmarkId", (req, res) => {
   });
 });
 
+// DESTROY
 router.delete("/:bookmarkId", (req, res) => {
   const { bookmarkId } = req.params;
   if (!bookmarkId) {
