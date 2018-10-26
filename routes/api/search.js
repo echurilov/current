@@ -106,7 +106,9 @@ router.get("/:searchQuery", (req, res) => {
         if (imgurData.type && imgurData.type.slice(0,5) === 'image' && imgurData.privacy != 'hidden') {
           validImgurData.push(imgurData);
         }
-      })
+      });
+
+      console.log(value);
 
       res.json({
         giphy: value[0].data.slice(0,10),
