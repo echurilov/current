@@ -15,6 +15,7 @@ class Search extends React.Component {
         this.state = { searchTerm: '', render: true, trends: [] };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
+        this.openBookmarks = this.openBookmarks.bind(this);
     }
 
     componentDidMount() {   
@@ -25,6 +26,7 @@ class Search extends React.Component {
     submitSearch(searchTermInput) {
         this.setState({ render: false })
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
+        debugger
         this.props.fetchResults(searchTerm)
             .then( () => this.props.fetchRelatedTopics(searchTerm) )
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
@@ -32,7 +34,6 @@ class Search extends React.Component {
     }
 
     onSave() {
-        console.log('omg;;;sfkafhdsnz,');
         if (!this.props.userId) {
             this.props.openModal('login');
         } else {
@@ -41,6 +42,14 @@ class Search extends React.Component {
             let user_id = this.props.userId;
             let bookmark = { query, user_id };
             this.props.createBookmark(bookmark);
+        }
+    }
+
+    openBookmarks() {
+        if (!this.props.userId) {
+            this.props.openModal('login');
+        } else {
+            this.props.openModal('bookmark')
         }
     }
     
@@ -57,7 +66,8 @@ class Search extends React.Component {
             trendButtons2 = null;
             trendButtons3 = null;
         } else if (searchTerm.length < 1 || relatedTopics.length === 0) {
-            let dailyTrends = trends.slice(0, 5)
+            let dailyTrends = trends.slice(0, 4)
+            dailyTrends.push("Halloween");
             let dailyTrends2 = trends.slice(5, 10)
             let dailyTrends3 = trends.slice(10, 15)
     
@@ -138,7 +148,7 @@ class Search extends React.Component {
                    
                         <button onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                        
-                        <button onClick={() => this.props.openModal('bookmark')} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
+                        <button onClick={this.openBookmarks} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
 
                         <button type="submit" className="search-btn">
                             <i className="fa fa-search"></i>
