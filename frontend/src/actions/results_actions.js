@@ -18,7 +18,6 @@ export const clearResults = () => {
 export const fetchResults = (searchTerm) => dispatch => {
   return axios.get(`/api/search/${searchTerm}`)
     .then( results => {
-      debugger
       dispatch(receiveResults(results.data));
     }, () => console.log('In error of fetchResults'))
     .catch(err => console.log('did not make it to search'))

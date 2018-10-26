@@ -6,7 +6,7 @@ import LoginForm from './session/login_form';
 import SignupForm from './session/signup_form';
 import Bookmark from './bookmarks_modal';
 
-function Modal({ modal, closeModal }) {
+function Modal({ modal, closeModal, bookmarkFunc }) {
   if (!modal) {
     return null;
   }
@@ -19,7 +19,7 @@ function Modal({ modal, closeModal }) {
       component = <SignupForm/>;
       break;
     case 'bookmark':
-      component = <Bookmark />;
+      component = <Bookmark bookmarkFunc={bookmarkFunc}/>;
       return (
         <div className="modal-background-bookmark" onClick={closeModal}>
           <div className="modal-child-bookmark" onClick={e => e.stopPropagation()}>

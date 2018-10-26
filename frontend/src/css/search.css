@@ -1,9 +1,12 @@
 .search {
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
   align-items: center;
   margin-top: 10px;
+  position: relative;
   background: #F9ECD7;
 }
 
@@ -11,12 +14,22 @@
   display: flex;
 }
 
+.add-btn {
+  padding: 0px 15px;
+  background-color: #E7E7E7;
+  height: 40px;
+  border: 2px solid #7dbbc2;
+  border-radius: 20px 0 0 20px !important;
+  border-right: none;
+  margin: 10px 0 10px 60px;
+}
+
 .search-bar {
   font-family: "Heebo";
-  margin: 10px 0px 10px 10px;
+  margin: 10px 0px 10px 0px;
   width: 700px !important;
   height: 40px;
-  border-radius: 20px 0 0 20px !important;
+  /* border-radius: 20px 0 0 20px !important; */
   border: 2px solid #7dbbc2;
   font-size: 20px;
   padding: 0 10px 0 20px;
@@ -46,27 +59,40 @@
 }
 
 .fa-bookmark {
-  color: white;
+  color: #2F2F2F;
   font-size: 20px;
-  -webkit-text-stroke: 3px #7dbbc2;
+  /* -webkit-text-stroke: 1px white; */
 }
 
-.add-btn {
-  padding: 0px 15px;
-  background-color: #E7E7E7;
-  height: 40px;
-  border: 2px solid #7dbbc2;
-  border-right: none;
-  margin: 10px 0 10px 0;
+.fa-home {
+  color: #2F2F2F;
+  font-size: 23px;
+  /* -webkit-text-stroke: 1px white; */
 }
+
 
 .modal-btn {
-  padding: 0px 15px;
-  background-color: #E7E7E7;
+  padding: 0px 5px;
+  background-color: transparent;
   height: 40px;
   border: 2px solid #7dbbc2;
-  border-right: none;
-  margin: 10px 0 10px 0;
+  border-radius: 50%;
+  /* margin-right: 50px; */
+  position: absolute;
+  left: 120px;
+  width: 30px;
+}
+
+.home-btn {
+  padding: 0px 5px;
+  background-color: transparent;
+  height: 40px;
+  border: 2px solid #7dbbc2;
+  border-radius: 50%;
+  /* margin-right: 50px; */
+  position: absolute;
+  left: 60px;
+  width: 30px;
 }
 
 .search-btn {
@@ -88,11 +114,11 @@
   color: #7dbbc2;
 }
 
-.modal-btn:hover, .add-btn:hover {
+.add-btn:hover {
   cursor: pointer;
   background: #A2A2A2;
 }
-.modal-btn:hover i, .add-btn:hover i {
+.add-btn:hover i {
   color: black;
 }
 
