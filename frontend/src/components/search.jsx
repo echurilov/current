@@ -46,13 +46,8 @@ class Search extends React.Component {
             trendButtons = null;
             trendButtons2 = null;
             trendButtons3 = null;
-<<<<<<< HEAD
-        } else if (searchTerm.length < 1 || relatedTopics.length === 0) {
-            // debugger
-=======
         } else if (searchTerm.length < 1 || relatedTopics.length == 0) {
             
->>>>>>> da7503c939a6c95a4d4666113ba570c03d0c0363
             let dailyTrends = trends.slice(0, 5)
             let dailyTrends2 = trends.slice(5, 10)
             let dailyTrends3 = trends.slice(10, 15)
