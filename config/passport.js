@@ -9,7 +9,7 @@ options.secretOrKey = keys.secretOrKey;
 module.exports = passport => {
   passport.use(new JwtStrategy(options, (payload, done) => {
     // This payload includes the items we specified earlier
-    console.log(payload);
+    // console.log(payload);
   }));
 };
 

@@ -5,21 +5,10 @@ const keys = require("../../config/keys");
 const NewsAPI = require("newsapi");
 const news = new NewsAPI(keys.newsId);
 const youtubeSearch = require("youtube-api-v3-search");
+const moment = require("moment");
 
-//https://stackoverflow.com/questions/16686640/function-to-get-yesterdays-date-in-javascript-in-format-dd-mm-yyyy
-let today = new Date();
-let yesterday = new Date(today);
-yesterday.setDate(today.getDate() - 2);
-const dd = yesterday.getDate();
-const mm = yesterday.getMonth() + 1; //January is 0!
-const yyyy = yesterday.getFullYear();
-if (dd < 10) {
-  dd = "0" + dd;
-}
-if (mm < 10) {
-  mm = "0" + mm;
-}
-yesterday = yyyy + "-" + mm + "-" + dd;
+const twoDaysAgo = moment().subtract(2, "day").format("YYYY-MM-DD");
+const twoWeeksAgo = moment().subtract(14, "day").format("YYYY-MM-DD");
 
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
@@ -36,7 +25,7 @@ router.get("/:searchQuery", (req, res) => {
         return res.data;
       })
       .catch(err => {
-        console.log(err)
+        return err;
       })
   };
 
@@ -62,7 +51,7 @@ router.get("/:searchQuery", (req, res) => {
         q: processedQuery,
         language: "en",
         sortBy: "relevancy",
-        from: yesterday
+        from: twoDaysAgo
       })
       .then(res => {
         return { data: res.articles };
@@ -79,9 +68,10 @@ router.get("/:searchQuery", (req, res) => {
       type: 'video',
       maxResults: 10,
       order: 'viewCount',
-      publishedAfter: yesterday + "T00:00:00Z",
+      publishedAfter: twoWeeksAgo + "T00:00:00Z",
       safeSearch: "strict",
-      videoEmbeddable: "true"
+      videoEmbeddable: "true",
+      relevanceLanguage: "en"
     };
 
     return youtubeSearch(keys.youtubeId, options)
@@ -107,8 +97,6 @@ router.get("/:searchQuery", (req, res) => {
           validImgurData.push(imgurData);
         }
       });
-
-      console.log(value);
 
       res.json({
         giphy: value[0].data.slice(0,10),
