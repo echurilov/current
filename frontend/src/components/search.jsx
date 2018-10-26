@@ -40,7 +40,6 @@ class Search extends React.Component {
             let query = document.getElementById('search-input').value;
             let user_id = this.props.userId;
             let bookmark = { query, user_id };
-            debugger
             this.props.createBookmark(bookmark);
         }
     }

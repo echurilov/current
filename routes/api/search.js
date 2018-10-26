@@ -24,7 +24,7 @@ yesterday = yyyy + "-" + mm + "-" + dd;
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
 
-  console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
+  // console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
 
   const imgurCallback = () => {
     return axios({

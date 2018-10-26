@@ -11,7 +11,6 @@ export default (state = [], action) => {
     case GET_BOOKMARK_ERRORS:
       return action.errors;
     case RECEIVE_BOOKMARK:
-      debugger
       return [];
     case RECEIVE_BOOKMARKS:
       return [];

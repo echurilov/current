@@ -29,15 +29,11 @@ router.get('/', passport.authenticate('jwt', { session: false }),
 
 // CREATE
 router.post("/", (req, res) => {
-  // console.log('CREATING BOOKMARK!!!!GUUGHI', req.body);
   // (async () => {
     
-    // console.log('IN ASYNC ACTION', req.body);
     const { errors, isValid } = validateBookmark(req.body);
-    // console.log('BOOKMARK', req.body);
 
     if (!isValid) {
-      // console.log('ERRORSinvalid',errors);
       return res.status(400).json(errors);
     }
 
@@ -54,13 +50,11 @@ router.post("/", (req, res) => {
           success: true,
           bookmark: newBookmark
         }))
-          .catch(err => console.log('ERR2', err));
+          .catch(err => console.log(err));
       }
     })
   // })
     .catch(errors => {
-      console.log('ERRORS',errors);
-      console.log('heyyyy',errors);
       res.status(400).json(errors);
     })
 });
