@@ -10,7 +10,7 @@ export default (state = [], action) => {
   switch (action.type) {
     case GET_BOOKMARK_ERRORS:
       // debugger
-      return action.payload;
+      return action.errors;
     case RECEIVE_BOOKMARK:
       // debugger
       return [];
