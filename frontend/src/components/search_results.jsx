@@ -19,7 +19,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  fetchResults: searchTerm => dispatch(fetchResults(searchTerm))
+  fetchResults: (searchTerm, filters) => dispatch(fetchResults(searchTerm, filters))
 });
 
 class SearchResults extends React.Component {

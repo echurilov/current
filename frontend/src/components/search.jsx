@@ -81,10 +81,11 @@ class Search extends React.Component {
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
+        let filters = { imgur: true, giphy: true, news: true, youtube: true };
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
        
-        this.props.fetchResults(searchTerm)
-            .then( () => this.props.fetchRelatedTopics(searchTerm) )
+        this.props.fetchResults(searchTerm, filters)
+            .then( () => this.props.fetchRelatedTopics(searchTerm))
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
         document.getElementById('search-input').value = searchTerm;
     }
@@ -94,7 +95,6 @@ class Search extends React.Component {
         if (!this.props.userId) {
             this.props.openModal('login');
         } else {
-            console.log('trying to save');
             let query = document.getElementById('search-input').value;
             let user_id = this.props.userId;
             let bookmark = { query, user_id };
@@ -253,7 +253,7 @@ const mapDispatchToProps = dispatch => ({
     fetchTrends: () => dispatch(fetchTrends()),
     openModal: modal => dispatch(openModal(modal)),
     fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-    fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+    fetchResults: (searchTerm, filters) => dispatch(fetchResults(searchTerm, filters)),
     createBookmark: bookmark => dispatch(createBookmark(bookmark)),
     clearResults: () => dispatch(clearResults())
 })
