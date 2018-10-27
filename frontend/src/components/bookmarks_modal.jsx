@@ -66,7 +66,7 @@ const mapDispatchToProps = dispatch => ({
   closeModal: () => dispatch(closeModal()),
   fetchTrends: () => dispatch(fetchTrends()),
   fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-  fetchResults: searchTerm => dispatch(fetchResults(searchTerm)),
+  fetchResults: (searchTerm, filters) => dispatch(fetchResults(searchTerm, filters)),
   fetchBookmarks: () => dispatch(fetchBookmarks())
 })
 
