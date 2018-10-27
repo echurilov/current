@@ -16,7 +16,7 @@ class Header extends React.Component {
   }
 
   clearSearch() {
-    document.getElementById('search-bar').value = '';
+    document.getElementById('search-input').value = '';
     this.props.clearResults();
   }
 
@@ -26,7 +26,7 @@ class Header extends React.Component {
   }
 
   ghostType() {
-    document.getElementById('search-bar').value = '';
+    document.getElementById('search-input').value = '';
     let options = {
       strings: [
         'welcome to current!',
