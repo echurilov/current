@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import LoginForm from './session/login_form';
 import SignupForm from './session/signup_form';
 import Bookmark from './bookmarks_modal';
+import Instructions from './instructions';
 
 function Modal({ modal, closeModal, bookmarkFunc }) {
   if (!modal) {
@@ -17,6 +18,9 @@ function Modal({ modal, closeModal, bookmarkFunc }) {
       break;
     case 'signup':
       component = <SignupForm/>;
+      break;
+    case 'instructions':
+      component = <Instructions />
       break;
     case 'bookmark':
       component = <Bookmark bookmarkFunc={bookmarkFunc}/>;

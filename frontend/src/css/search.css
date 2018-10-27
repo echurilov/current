@@ -14,6 +14,19 @@
   display: flex;
 }
 
+.intro-typer {
+  position: absolute;
+  top: Calc(60% - 100px);
+  left: Calc(50% - 500px);
+  width: 1000px;
+  height: 200px;
+  text-align: center;
+  font-family: "Heebo";
+  font-size: 40px;
+  color: #7dbbc2;
+  font-style: italic;
+}
+
 .add-btn {
   padding: 0px 15px;
   background-color: #E7E7E7;
@@ -93,6 +106,14 @@
   position: absolute;
   left: 60px;
   width: 30px;
+}
+
+.modal-btn:hover, .home-btn:hover {
+  background-color: #2F2F2F;
+}
+
+.modal-btn:hover i, .home-btn:hover i {
+  color: white;
 }
 
 .search-btn {

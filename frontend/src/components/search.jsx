@@ -15,48 +15,79 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: true, trends: [] };
+        this.state = { searchTerm: '', render: true, trends: [], demoed: false };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
+        this.drawOnPage = this.drawOnPage.bind(this);
     }
 
     componentDidMount() {   
         this.props.fetchTrends()
             .then( () => this.setState({ trends: this.props.trends }) )
+            .then( () => this.drawOnPage() )
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.userEmail === 'demouser@gmail.com') {
+        if (newProps.userEmail === 'demo@user.com' && !this.state.demoed) {
             let options = {
                 strings: [
                     'welcome to current!',
                     'click on the trending topics below to check them out,',
+                    'save your favorite topics on the right,',
                     'or type in this search bar to explore more!',
                     ''
                 ],
-                typeSpeed: 60
+                typeSpeed: 40
             }
             // npm module typed.js
             let typed = new Typed(".search-bar", options);
+            this.setState({ demoed: true })
         }
     }
 
+    drawOnPage() {
+        // var ctx = document.querySelector("canvas").getContext("2d"),
+        //     dashLen = 220, dashOffset = dashLen, speed = 5,
+        //     txt = "what's trending?", x = 30, i = 0;
+
+        // ctx.font = "30px Heebo";
+        // ctx.lineWidth = 4; ctx.lineJoin = "round"; ctx.globalAlpha = 2 / 3;
+        // ctx.strokeStyle = ctx.fillStyle = "#7dbbc2";
+
+        // (function loop() {
+        //     ctx.clearRect(x, 0, 60, 150);
+        //     ctx.setLineDash([dashLen - dashOffset, dashOffset - speed]); // create a long dash mask
+        //     dashOffset -= speed;                                         // reduce dash length
+        //     ctx.strokeText(txt[i], x, 90);                               // stroke letter
+
+        //     if (dashOffset > 0) requestAnimationFrame(loop);             // animate
+        //     else {
+        //         ctx.fillText(txt[i], x, 90);                               // fill final letter
+        //         dashOffset = dashLen;                                      // prep next char
+        //         x += ctx.measureText(txt[i++]).width + ctx.lineWidth * Math.random();
+        //         ctx.setTransform(1, 0, 0, 1, 0, 3 * Math.random());        // random y-delta
+        //         ctx.rotate(Math.random() * 0.005);                         // random rotation
+        //         if (i < txt.length) requestAnimationFrame(loop);
+        //     }
+        // })();
+    }
+
     clearSearch() {
-        document.getElementById('search-bar').value = '';
+        document.getElementById('search-input').value = '';
         this.props.clearResults();
     }
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
         let filters = { imgur: true, giphy: true, news: true, youtube: true };
-        let searchTerm = searchTermInput || document.getElementById('search-bar').value;
+        let searchTerm = searchTermInput || document.getElementById('search-input').value;
        
         this.props.fetchResults(searchTerm, filters)
             .then( () => this.props.fetchRelatedTopics(searchTerm))
             .then(() => this.setState({ render: true, searchTerm: searchTerm }))
-        document.getElementById('search-bar').value = searchTerm;
+        document.getElementById('search-input').value = searchTerm;
     }
 
     onSave(e) {
@@ -128,12 +159,7 @@ class Search extends React.Component {
 
             trendButtons = [];
             for (let i = 0; i < dailyTrends.length; i++) {
-                let btn;
-                if (i === pulseIdx) {
-                    btn = <button className="trend-btn-1 animated pulse" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
-                } else {
-                    btn = <button className="trend-btn-1" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
-                }
+                let btn = <button className="trend-btn-1" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
                 trendButtons.push(btn);
             }
 
@@ -183,7 +209,7 @@ class Search extends React.Component {
                     <button type="button" onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
                         <input 
                             className="search-bar"
-                            id="search-bar"
+                            id="search-input"
                             autoFocus="autoFocus"
                             type="text"
                             spellcheck="false"></input>
