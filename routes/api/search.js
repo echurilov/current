@@ -12,75 +12,92 @@ const twoWeeksAgo = moment().subtract(14, "day").format("YYYY-MM-DD");
 
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
-
-  // console.log('WE MADE IT INTO THE BACKEND SEARCH!!!')
+  let filters = req.query;
 
   const imgurCallback = () => {
-    return axios({
-      method: "get",
-      url: `https://api.imgur.com/3/gallery/search?q=${processedQuery}`,
-      headers: { Authorization: `Client-ID ${keys.imgurId}` }
-    })
-      .then(res => {
-        return res.data;
+    if (filters.imgur === 'true') {
+      return axios({
+        method: "get",
+        url: `https://api.imgur.com/3/gallery/search?q=${processedQuery}`,
+        headers: { Authorization: `Client-ID ${keys.imgurId}` }
       })
-      .catch(err => {
-        return err;
-      })
+        .then(res => {
+          return res.data;
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }
+    
   };
 
   const giphyCallback = () => {
-    return axios({
-      method: "get",
-      url: `https://api.giphy.com/v1/gifs/search?api_key=${
-        keys.giphyId
-      }&q=${processedQuery}`
-    })
-      .then(result => {
-        return result.data;
+    if (filters.giphy === 'true') {
+      return axios({
+        method: "get",
+        url: `https://api.giphy.com/v1/gifs/search?api_key=${
+          keys.giphyId
+          }&q=${processedQuery}`
       })
-      .catch(err => {
-        return err;
-      });
+        .then(result => {
+          return result.data;
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    } 
   };
 
   const newsCallback = () => {
-
-    return news.v2
-      .everything({
-        q: processedQuery,
-        language: "en",
-        sortBy: "relevancy",
-        from: twoDaysAgo
-      })
-      .then(res => {
-        return { data: res.articles };
-      })
-      .catch(err => {
-        return err;
-      });
+    if (filters.news === 'true') {
+      return news.v2
+        .everything({
+          q: processedQuery,
+          language: "en",
+          sortBy: "relevancy",
+          from: twoDaysAgo
+        })
+        .then(res => {
+          return { data: res.articles };
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }   
   };
 
   const youtubeCallback = () => {
-    const options = {
-      part: 'snippet, id',
-      q: processedQuery,
-      type: 'video',
-      maxResults: 10,
-      order: 'viewCount',
-      publishedAfter: twoWeeksAgo + "T00:00:00Z",
-      safeSearch: "strict",
-      videoEmbeddable: "true",
-      relevanceLanguage: "en"
-    };
 
-    return youtubeSearch(keys.youtubeId, options)
-      .then(res => {
-        return { data: res.items };
-      })
-      .catch(err => {
-        return err;
-      });
+    if (filters.youtube === 'true') {
+      const options = {
+        part: 'snippet, id',
+        q: processedQuery,
+        type: 'video',
+        maxResults: 10,
+        order: 'viewCount',
+        publishedAfter: twoWeeksAgo + "T00:00:00Z",
+        safeSearch: "strict",
+        videoEmbeddable: "true",
+        relevanceLanguage: "en"
+      };
+
+      return youtubeSearch(keys.youtubeId, options)
+        .then(res => {
+          return { data: res.items };
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }
+    
   };
 
   Promise.all([
@@ -91,17 +108,34 @@ router.get("/:searchQuery", (req, res) => {
   ])
     .then(function(value) {
 
-      const validImgurData = []
-      value[3].data.forEach( imgurData => {
-        if (imgurData.type && imgurData.type.slice(0,5) === 'image' && imgurData.privacy != 'hidden') {
-          validImgurData.push(imgurData);
-        }
-      });
+      let giphyData = [];
+      if (value[0]){
+        giphyData = value[0].data.slice(0,10);
+      }
 
+      let newsData = [];
+      if (value[1]){
+        newsData = value[1].data.slice(0,10);
+      }
+
+      let youtubeData = [];
+      if (value[2]) {
+        youtubeData = value[2].data;
+      }
+
+      const validImgurData = [];
+      if (value[3]) {
+        value[3].data.forEach(imgurData => {
+          if (imgurData.type && imgurData.type.slice(0, 5) === 'image' && imgurData.privacy != 'hidden') {
+            validImgurData.push(imgurData);
+          }
+        });
+      }
+      
       res.json({
-        giphy: value[0].data.slice(0,10),
-        news: value[1].data.slice(0,10),
-        youtube: value[2].data,
+        giphy: giphyData,
+        news: newsData,
+        youtube: youtubeData,
         imgur: validImgurData.slice(0,10)
       });
     })
