@@ -12,7 +12,7 @@ class Header extends React.Component {
     super(props);
     this.clearSearch = this.clearSearch.bind(this);
     this.handleDemo = this.handleDemo.bind(this);
-    this.ghostType = this.ghostType.bind(this);
+    // this.ghostType = this.ghostType.bind(this);
   }
 
   clearSearch() {
@@ -21,25 +21,25 @@ class Header extends React.Component {
   }
 
   handleDemo() {
-    const user = { email: 'demouser@gmail.com', password: '123456'};
+    const user = { email: 'demo@user.com', password: 'password'};
     this.props.loginUser(user);
   }
 
-  ghostType() {
-    document.getElementById('search-input').value = '';
-    let options = {
-      strings: [
-        'welcome to current!',
-        'click on the trending topics below to check them out,',
-        'save your favorite topics on the right,',
-        'or type in this search bar to explore more!',
-        ''
-      ],
-      typeSpeed: 60
-    }
-    // npm module typed.js
-    let typed = new Typed(".search-bar", options);
-  }
+  // ghostType() {
+  //   document.getElementById('search-input').value = '';
+  //   let options = {
+  //     strings: [
+  //       'welcome to current!',
+  //       'click on the trending topics below to check them out,',
+  //       'save your favorite topics on the right,',
+  //       'or type in this search bar to explore more!',
+  //       ''
+  //     ],
+  //     typeSpeed: 60
+  //   }
+  //   // npm module typed.js
+  //   let typed = new Typed(".search-bar", options);
+  // }
 
   render() {
     let user;
@@ -65,7 +65,7 @@ class Header extends React.Component {
       <div className="header-container">
         <div>
           <a target="_blank" rel="noopener noreferrer" href="https://github.com/echurilov/current" className="header-links">About Us</a>
-          <button onClick={this.ghostType} className="header-links">How do I use Current?</button>
+          <button onClick={() => this.props.openModal('instructions')} className="header-links">How do I use Current?</button>
         </div>
         <button onClick={this.clearSearch}>
          <img src={window.location.origin + '/images/current-logo.png'} alt="current"></img>

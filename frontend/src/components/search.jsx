@@ -30,7 +30,7 @@ class Search extends React.Component {
     }
 
     componentWillReceiveProps(newProps) {
-        if (newProps.userEmail === 'demouser@gmail.com' && !this.state.demoed) {
+        if (newProps.userEmail === 'demo@user.com' && !this.state.demoed) {
             let options = {
                 strings: [
                     'welcome to current!',
@@ -39,7 +39,7 @@ class Search extends React.Component {
                     'or type in this search bar to explore more!',
                     ''
                 ],
-                typeSpeed: 60
+                typeSpeed: 40
             }
             // npm module typed.js
             let typed = new Typed(".search-bar", options);
