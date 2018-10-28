@@ -59,7 +59,9 @@ router.get("/:searchQuery", (req, res) => {
           q: processedQuery,
           language: "en",
           sortBy: "relevancy",
-          from: twoDaysAgo
+          from: twoDaysAgo,
+          pageSize: 10,
+          page: 1
         })
         .then(res => {
           return { data: res.articles };
@@ -104,6 +106,7 @@ router.get("/:searchQuery", (req, res) => {
     giphyCallback(),
     newsCallback(),
     youtubeCallback(),
+    imgurCallback()
   ])
     .then(function(value) {
 
@@ -114,7 +117,7 @@ router.get("/:searchQuery", (req, res) => {
 
       let newsData = [];
       if (value[1]){
-        newsData = value[1].data.slice(0,10);
+        newsData = value[1].data;
       }
 
       let youtubeData = [];
@@ -135,7 +138,7 @@ router.get("/:searchQuery", (req, res) => {
         giphy: giphyData,
         news: newsData,
         youtube: youtubeData,
-        imgur: []
+        imgur: validImgurData.slice(0,10)
       });
     })
     .catch(err => {
