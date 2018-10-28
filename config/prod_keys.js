@@ -4,4 +4,5 @@ module.exports = {
   giphyId: process.env.giphyId,
   newsId: process.env.newsId,
   youtubeId: process.env.youtubeId,
+  imgurId: process.env.imgurId
 };

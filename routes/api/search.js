@@ -106,6 +106,7 @@ router.get("/:searchQuery", (req, res) => {
     giphyCallback(),
     newsCallback(),
     youtubeCallback(),
+    imgurCallback()
   ])
     .then(function(value) {
 
@@ -137,7 +138,7 @@ router.get("/:searchQuery", (req, res) => {
         giphy: giphyData,
         news: newsData,
         youtube: youtubeData,
-        imgur: []
+        imgur: validImgurData.slice(0,10)
       });
     })
     .catch(err => {
