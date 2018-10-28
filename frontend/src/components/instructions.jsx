@@ -3,26 +3,24 @@ import React from 'react';
 class Instructions extends React.Component {
 
   render() {
-    return (
-      <div className="instructions">
+    return <div className="instructions">
+        <p>Welcome to Current!</p>
+        <br />
         <p>
-          welcome to Current! 
+          Current is a trending content aggregator. The words in the
+          scrolling bar are today's trending topics - click on one to see
+          the latest content about the topic from multiple news sites, Youtube, and
+          Giphy! You can also search for a topic of your choice using the search
+          bar.
         </p>
-        <br></br>
+        <br />
         <p>
-          we are a trending content aggregator. the words in the scrolling bar are today's
-          trending topics - click on them to see more! you can search for just about anything in the search bar
-          and see the latest content about it from multiple news sites, youtube, imgur, and even
-          giphy. 
+          If you find a search you like, save it by clicking the + button,
+          and search it again easily from your bookmarks! You can hit the
+          home button to go back to seeing today's main trends. Thanks for
+          visiting! :)
         </p>
-        <br></br>
-        <p>
-          if you search something you like, save it by clicking the + button, and search 
-          it again easily from your bookmarks! and you can hit the home button to go back to 
-          seeing today's main trends. thanks for visiting!
-        </p>
-      </div>
-    )
+      </div>;
   }
 
 }
