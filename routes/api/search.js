@@ -104,7 +104,6 @@ router.get("/:searchQuery", (req, res) => {
     giphyCallback(),
     newsCallback(),
     youtubeCallback(),
-    imgurCallback()
   ])
     .then(function(value) {
 
@@ -126,7 +125,7 @@ router.get("/:searchQuery", (req, res) => {
       const validImgurData = [];
       if (value[3]) {
         value[3].data.forEach(imgurData => {
-          if (imgurData.type && imgurData.type.slice(0, 5) === 'image' && imgurData.privacy != 'hidden') {
+          if (imgurData.type && imgurData.type.slice(0, 5) === 'image' && imgurData.privacy !== 'hidden') {
             validImgurData.push(imgurData);
           }
         });
@@ -136,7 +135,7 @@ router.get("/:searchQuery", (req, res) => {
         giphy: giphyData,
         news: newsData,
         youtube: youtubeData,
-        imgur: validImgurData.slice(0,10)
+        imgur: []
       });
     })
     .catch(err => {
