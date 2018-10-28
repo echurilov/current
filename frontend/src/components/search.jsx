@@ -30,12 +30,14 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: true, trends: [], demoed: false };
+        this.state = { searchTerm: '', render: true, trends: [], demoed: false,
+        giphy: true, news: true, imgur: true, youtube: true };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
         this.clearSearch = this.clearSearch.bind(this);
         this.drawOnPage = this.drawOnPage.bind(this);
+        this.toggleFilter = this.toggleFilter.bind(this);
     }
 
     componentDidMount() {   
@@ -73,7 +75,8 @@ class Search extends React.Component {
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
-        let filters = { imgur: true, giphy: true, news: true, youtube: true };
+        let filters = { imgur: this.state.imgur, giphy: this.state.giphy, 
+            news: this.state.news, youtube: this.state.youtube };
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
        
         this.props.fetchResults(searchTerm, filters)
@@ -100,6 +103,16 @@ class Search extends React.Component {
         } else {
             this.props.openModal('bookmark')
         }
+    }
+
+    toggleFilter(value){
+        return () => {
+            if (this.state[value]) {
+                this.setState({ [value]: false })
+            } else {
+                this.setState({ [value]: true })
+            }
+        }   
     }
     
     render() {
@@ -218,28 +231,28 @@ class Search extends React.Component {
                       <li className="dropdown-item">
                         <label className="dropdown-item-label">
                           giphy
-                          <input type="checkbox" value="giphy" />
-                          <span class="checkmark"></span>
+                          <input onClick={this.toggleFilter("giphy")} type="checkbox" value="giphy" checked={this.state.giphy ? "true" : ""} />
+                          <span class="checkmark" />
                         </label>
                       </li>
                       <li className="dropdown-item">
                         <label className="dropdown-item-label">
                           imgur
-                          <input type="checkbox" value="imgur" />
+                          <input onClick={this.toggleFilter("imgur")} type="checkbox" value="imgur" checked={this.state.imgur ? "true" : ""} />
                           <span class="checkmark" />
                         </label>
                       </li>
                       <li className="dropdown-item">
                         <label className="dropdown-item-label">
                           news
-                          <input type="checkbox" value="news" />
+                          <input onClick={this.toggleFilter("news")} type="checkbox" value="news" checked={this.state.news ? "true" : ""} />
                           <span class="checkmark" />
                         </label>
                       </li>
                       <li className="dropdown-item">
                         <label className="dropdown-item-label">
                           youtube
-                          <input type="checkbox" value="youtube" />
+                          <input onClick={this.toggleFilter("youtube")} type="checkbox" value="youtube" checked={this.state.youtube ? "true" : ""} />
                           <span class="checkmark" />
                         </label>
                       </li>
