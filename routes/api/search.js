@@ -33,16 +33,21 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const tumblrCallback = () => {
-    return axios({
-      method: "get",
-      url: `http://api.tumblr.com/v2/tagged?tag=${processedQuery}&api_key=${keys.tumblrId}`
-    })
-      .then(res => {
-        return res.data;
+    if (filters.tumblr === 'true') {
+      return axios({
+        method: "get",
+        url: `http://api.tumblr.com/v2/tagged?tag=${processedQuery}&api_key=${keys.tumblrId}`
       })
-      .catch(err => {
-        return err;
-      });
+        .then(res => {
+          return res.data;
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }
+    
   }
 
   const giphyCallback = () => {
@@ -161,8 +166,8 @@ router.get("/:searchQuery", (req, res) => {
         giphy: giphyData,
         news: newsData,
         youtube: youtubeData,
-        imgur: validImgurData.slice(0,10),
-        tumblr: tumblrData,
+        imgur: validImgurData.slice(0, 10),
+        tumblr: tumblrData.slice(0, 10),
       });
     })
     .catch(err => {
