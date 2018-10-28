@@ -10,7 +10,22 @@ import { createBookmark } from '../actions/bookmark_actions';
 import SearchResults from './search_results';
 import Typed from 'typed.js';
 
+const mapStateToProps = state => ({
+  trends: state.entities.trends,
+  relatedTopics: state.entities.relatedTopics,
+  userId: state.session.id,
+  userEmail: state.session.email
+});
 
+const mapDispatchToProps = dispatch => ({
+  fetchTrends: () => dispatch(fetchTrends()),
+  openModal: modal => dispatch(openModal(modal)),
+  fetchRelatedTopics: searchTerm => dispatch(fetchRelatedTopics(searchTerm)),
+  fetchResults: (searchTerm, filters) =>
+    dispatch(fetchResults(searchTerm, filters)),
+  createBookmark: bookmark => dispatch(createBookmark(bookmark)),
+  clearResults: () => dispatch(clearResults())
+});
 class Search extends React.Component {
 
     constructor(props) {
@@ -179,8 +194,6 @@ class Search extends React.Component {
             }
         }
         
-
-
         let results = this.state.render ? (
             <SearchResults />
         ) : (
@@ -195,67 +208,79 @@ class Search extends React.Component {
                 </div>
         )
 
-        return (
-            <div>
-                <Modal bookmarkFunc={this.submitSearch}></Modal>
+        return <div>
+            <Modal bookmarkFunc={this.submitSearch} />
 
-                <div className="search">
+            <div className="search">
+              <button type="button" onClick={this.clearSearch} className="home-btn">
+                <i className="fa fa-home" />{" "}
+              </button>
+              <button type="button" onClick={this.openBookmarks} className="modal-btn">
+                <i className="fa fa-bookmark" />{" "}
+              </button>
 
-                    <button type="button" onClick={this.clearSearch} className="home-btn"><i className="fa fa-home"></i> </button>
-                    <button type="button" onClick={this.openBookmarks} className="modal-btn"><i className="fa fa-bookmark"></i> </button>
+              <form className="search-input">
+                <button type="button" onClick={this.onSave} className="add-btn">
+                  <i className="fa fa-plus" />{" "}
+                </button>
+                <input className="search-bar" id="search-input" autoFocus="autoFocus" type="text" spellcheck="false" />
 
+                <button type="submit" onClick={() => this.submitSearch(null)} className="search-btn">
+                  <i className="fa fa-search" />
+                </button>
 
-                    <form className="search-input">
-                    <button type="button" onClick={this.onSave} className="add-btn"><i className="fa fa-plus"></i> </button>
-                        <input 
-                            className="search-bar"
-                            id="search-input"
-                            autoFocus="autoFocus"
-                            type="text"
-                            spellcheck="false"></input>
-                   
-                       
+                <dl className="search-options-dropdown">
+                  <dt>
+                    <button className="dropdown-button">
+                      <i className="fas fa-chevron-down" />
+                    </button>
+                  </dt>
 
-                        <button type="submit" onClick={() => this.submitSearch(null)} className="search-btn">
-                            <i className="fa fa-search"></i>
-                        </button>
-                   
-                    </form>
-                </div>
-                
-                <div className="trends">
-                    <div className="item-1">
-                        {trendButtons}
-                    </div>
-                    <div className="item-2">
-                        {trendButtons2}
-                    </div>
-                    <div className="item-3">
-                        {trendButtons3}
-                    </div>
-                </div>
-
-                { results }
+                  <dd className="dropdown-content">
+                    <ul className="dropdown-options">
+                      <li className="dropdown-item">
+                        <label className="dropdown-item-label">
+                          giphy
+                          <input type="checkbox" value="giphy" />
+                          <span class="checkmark"></span>
+                        </label>
+                      </li>
+                      <li className="dropdown-item">
+                        <label className="dropdown-item-label">
+                          imgur
+                          <input type="checkbox" value="imgur" />
+                          <span class="checkmark" />
+                        </label>
+                      </li>
+                      <li className="dropdown-item">
+                        <label className="dropdown-item-label">
+                          news
+                          <input type="checkbox" value="news" />
+                          <span class="checkmark" />
+                        </label>
+                      </li>
+                      <li className="dropdown-item">
+                        <label className="dropdown-item-label">
+                          youtube
+                          <input type="checkbox" value="youtube" />
+                          <span class="checkmark" />
+                        </label>
+                      </li>
+                    </ul>
+                  </dd>
+                </dl>
+              </form>
             </div>
-        )
+
+            <div className="trends">
+              <div className="item-1">{trendButtons}</div>
+              <div className="item-2">{trendButtons2}</div>
+              <div className="item-3">{trendButtons3}</div>
+            </div>
+
+            {results}
+          </div>;
     }
 }
-
-
-const mapStateToProps = state => ({
-    trends: state.entities.trends,
-    relatedTopics: state.entities.relatedTopics,
-    userId: state.session.id,
-    userEmail: state.session.email
-})
-
-const mapDispatchToProps = dispatch => ({
-    fetchTrends: () => dispatch(fetchTrends()),
-    openModal: modal => dispatch(openModal(modal)),
-    fetchRelatedTopics: (searchTerm) => dispatch(fetchRelatedTopics(searchTerm)),
-    fetchResults: (searchTerm, filters) => dispatch(fetchResults(searchTerm, filters)),
-    createBookmark: bookmark => dispatch(createBookmark(bookmark)),
-    clearResults: () => dispatch(clearResults())
-})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
