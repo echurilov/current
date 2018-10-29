@@ -83,7 +83,6 @@
   /* -webkit-text-stroke: 1px white; */
 }
 
-
 .modal-btn {
   padding: 0px 5px;
   background-color: transparent;
@@ -119,8 +118,8 @@
 .search-btn {
   margin: 10px 10px 10px 0;
   height: 40px;
-  border-radius: 0 20px 20px 0;
   border: 2px solid #7dbbc2;
+  border-radius: 0 20px 20px 0;
   border-left: 2px solid #7dbbc2;
   background-color: #7dbbc2;
   width: 90px;
@@ -150,6 +149,144 @@
 .search-btn i {
   font-size: 25px;
 }
+
+/* dropdown */
+
+.search-options-dropdown {
+  position: relative;
+  display: inline-block;
+  padding: 10px 10px 15px 10px;
+  margin-right: 8px;
+}
+
+.dropdown-button {
+  margin: 10px 10px 10px 0;
+  height: 40px;
+  width: 50px;
+  border: 2px solid #7dbbc2;
+  border-radius: 0 20px 20px 0;
+  border-left: 2px solid #7dbbc2;
+  background-color: #E7E7E7;
+  transition: 0.1s;
+  text-align: center;
+}
+
+.fa-chevron-down {
+  color: white;
+  font-size: 27px;
+  -webkit-text-stroke: 3px #7dbbc2;
+}
+
+.dropdown-content {
+  display: block;
+  position: absolute;
+  padding: 10px;
+  top: 65px;
+  left: -30px;
+  min-width: 122px;
+  color: #7dbbc2;
+  text-align: left;
+  background: #545454;
+  border: 2px solid #7dbbc2;
+  border-radius: 5px;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.search-options-dropdown:hover .dropdown-content {
+  visibility: visible;
+  transform: scale(1) translateY(0);
+}
+
+.dropdown-options {
+  padding: 0
+}
+
+.dropdown-item {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.dropdown-item:hover {
+  color: black;
+}
+
+.dropdown-item input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.dropdown-item-label {
+  font-family: "Ubuntu Condensed";
+  color: #7dbbc2;
+  font-size: 22px;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  border: 2px solid #7dbbc2;
+  background-color: #545454;
+  border-radius: 5px;
+}
+
+.dropdown-item:hover .dropdown-item-label {
+  color: black;
+  cursor: pointer;
+}
+
+.dropdown-item:hover input ~ .checkmark {
+  border: 2px solid black;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.dropdown-item input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.dropdown-item .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #7dbbc2;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.dropdown-item:hover input:checked ~ .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #000000;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+/* trends */
 
 .trends {
   height: 50px;

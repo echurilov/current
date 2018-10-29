@@ -48,7 +48,7 @@ router.get("/:searchQuery", (req, res) => {
       return Promise.resolve();
     }
     
-  }
+  };
 
   const giphyCallback = () => {
     if (filters.giphy === 'true') {
@@ -153,7 +153,6 @@ router.get("/:searchQuery", (req, res) => {
       }
 
       let tumblrData = [];
-
       if (value[4]) {
         value[4].response.forEach(tumblrItem => {
           if (tumblrItem.type === 'photo' && (tumblrItem.photos[0].original_size.height/tumblrItem.photos[0].original_size.width) > 0.7) {
