@@ -14,14 +14,6 @@ const BookmarkSchema = new Schema({
     type: String,
     required: true
   }
-  // API_id: {
-  //   type: Number,
-  //   required: true
-  // },
-  // date: {
-  //   type: Date,
-  //   default: Date.now
-  // }
 });
 
 module.exports = Bookmark = mongoose.model("bookmarks", BookmarkSchema);

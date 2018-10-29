@@ -46,7 +46,7 @@ class TumblrIndexItem extends React.Component {
             {tags.map(tag => {
               const tagString = tag.slice(1);
               return (
-                <a href={`https://www.tumblr.com/tagged/${tagString}`}
+                <a key={Math.random()} href={`https://www.tumblr.com/tagged/${tagString}`}
                    className="tumblr-tag-link"
                    target="_blank"
                    rel="noopener noreferrer"

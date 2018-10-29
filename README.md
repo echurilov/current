@@ -107,8 +107,33 @@ Users can save search terms as bookmarks by clicking the plus sign when they sea
 
 ### Filtering
 
-Users can filter which sources they want to see information from, by checking or unchecking sources like news, imgur, etc from the dropdown. 
+Users can filter which sources they want to see information from by checking or unchecking them from the dropdown before making a search. 
 
+![alt text](filter_dropdown.png)
+
+This is accomplished by initially setting all boxes to true and triggering an event to change the value in the state whenever the box is checked.
+
+```js
+//setup appearance and set checked based on the state
+<li className="dropdown-item">
+  <label className="dropdown-item-label">
+    giphy
+    <input onChange={this.toggleFilter("giphy")} type="checkbox" value="giphy" checked={this.state.giphy ? true : ""} />
+    <span className="checkmark" />
+  </label>
+</li>
+
+//toggle the current value in state when clicked
+toggleFilter(value){
+      return () => {
+          if (this.state[value]) {
+              this.setState({ [value]: false })
+          } else {
+              this.setState({ [value]: true })
+          }
+      }   
+  }
+```
 
 
 ----

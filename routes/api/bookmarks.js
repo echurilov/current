@@ -28,7 +28,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), function (req,
 
 // CREATE
 router.post("/", passport.authenticate("jwt", { session: false }), function (req, res) {
-  // (async () => {
     
     const { errors, isValid } = validateBookmark(req.body);
 
@@ -38,7 +37,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), function (req
 
     Bookmark.findOne({ user_id: req.body.user_id, query: req.body.query }).then(dupBookmark => {
       if (dupBookmark) {
-        // throw { query: "Bookmark already exists" };
         errors.query = "You already saved this bookmark";
         return res.status(400).json(errors);
       } else {
@@ -53,7 +51,6 @@ router.post("/", passport.authenticate("jwt", { session: false }), function (req
       }
     });
   });
-  // .catch(errors => res.status(400).json(errors));
 
 // SHOW
 router.get("/:bookmarkId", passport.authenticate("jwt", { session: false }), function (req, res) {

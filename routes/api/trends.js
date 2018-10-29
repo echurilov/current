@@ -33,7 +33,4 @@ router.get("/related/:searchQuery", (req, res) => {
     });
 });
 
-
-// googleTrends.relatedQueries({keyword: string, startTime: Date, endTime: Date, geo: string}, cbFunc)
-
 module.exports = router;
