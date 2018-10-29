@@ -53,6 +53,14 @@
       margin-top: 10px;
     }
 
+    .imgur-image-container {
+      height: 314px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
     .imgur-description {
       font-size: 13px;
       font-weight: 300;
