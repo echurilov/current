@@ -1,4 +1,4 @@
-![alt text]()
+![alt text](https://github.com/echurilov/current/blob/master/logo.png)
 # Current
 ---
 
@@ -103,7 +103,7 @@ const results = shuffle(giphyItems.concat(newsItems).concat(youtubeItems).concat
 
 Users can save search terms as bookmarks by clicking the plus sign when they search something they want to save, and these get persisted into the database saved under the current users id. By clicking on the bookmarks button, the user can see their saved bookmarks and by clicking on any of them, they can see the most recent posts/information about those topics again. 
 
-
+![alt text](https://github.com/echurilov/current/blob/master/bookmarks.png)
 
 ### Filtering
 
