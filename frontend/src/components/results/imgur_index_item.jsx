@@ -23,7 +23,7 @@ class ImgurIndexItem extends React.Component {
         <img className="imgur-image" src={imgurItem.link} alt="imgur" />
         <div className="imgur-title-container">
           <h1 className="imgur-title">{imgurTitle}</h1>
-          <img src="https://i.imgur.com/cX0VsCp.png" alt=""
+          <img src="https://i.imgur.com/cX0VsCp.png" alt="imgur-logo"
             className="imgur-logo" />
         </div>
       </a>;
