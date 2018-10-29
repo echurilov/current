@@ -1,122 +1,121 @@
+![alt text]()
 # Current
-[current live](https://whats-current.herokuapp.com/)
+---
 
-*A website that lets you see trending posts from multiple websites, all in one place*
+[Visit Current Now](https://whats-current.herokuapp.com)
 
-## Background and Overview
+Current is a trending content aggregator, where you can explore the top trending daily topics, and search any of your favorite topics to see trending news stories, youtube videos, imgur and tumblr posts, and even gifs about them.
 
-Search for a topic and Current shows you related posts from multiple big websites. If you're not sure what you're looking for, Current also provides you some options based on what's trending right now.
+---
 
-If you want to save your search terms, you can make an account and easily search for things you've search for before.
+## Features
 
-Current is built with a MERN Stack (MongoDB, Express, React, node.js) and uses GoogleTrendsAPI, NewsAPI, and imgurAPI.
+- Users can view the top 15 trending topics of the day, and click on them to see current information about them
+- Users can search for any topic to see trending posts and images about it
+- Users can create an account to bookmark their favorite topics, and search them quickly from their bookmarks tab
+- Users can refine searches to only see results from news, videos, or images
 
-## Functionality and MVP
+---
 
-* User auth with login/signup forms
-* Logged in users can save search terms
-* Search bar that dispatches to multiple APIs
-* Trend data from GoogleTrends, with ability to search multiple APIs
-* News API that displays news articles related to search term
-* imgur API that displays images related to search term
+### Daily Trends
 
-### Bonus Features
+When a user first goes to the Current site, the top 15 daily trending topics are scrolling across the page. When the user searches a topic, the trending related topics scroll across the screen instead.
 
-* Ability to filter trending results based on location
-* More APIs to show data from (Youtube, giphy, etc)
-* Related search terms
-* Word cloud for trending terms
+This feature used the Google Trends API to request the top daily trends, or would pass the same API a search term to find the related topics. These were stored in the redux state, so when a user searched for a term, the results and the related trends would be fetched. If there were related trends in the redux state, they would be displayed instead of the general trends.
 
-## Technologies & Technical Challenges
+![alt text](http://g.recordit.co/RRZDoAJCo3.gif)
+![alt text](http://g.recordit.co/tv2Fo7R9SL.gif)
 
-Current is a heroku webapplication with a backend built with MongoDB to save user auth and favorite search terms. Most of the data for the site will come from APIs: GoogleTrends, News, and imgur.
+---
 
-**Backend: MongoDB/Express**
-**Frontend: React/Node.js**
+### Search 
 
-### Backend
+The search functionality was achieved by creating one backend route that hit 5 different APIs, waited for a promise from all of them, and then sent back the information under the keys of 'news', 'imgur', etc, so they could be sent into different reducers on the frontend. 
 
-Current will be a single page application. User's do not have to login to use the site, but there is an option to login on the mainpage if a user wants to save search terms.
+``` javascript
+  const youtubeCallback = () => {
 
-* Current will only have two models: Users and SearchTerms
-* Relations between the two should be simple to query
-* API data will not be stored in the database
+    if (filters.youtube === 'true') {
+      const options = {
+        part: 'snippet, id',
+        q: processedQuery,
+        type: 'video',
+        maxResults: 10,
+        order: 'viewCount',
+        publishedAfter: twoWeeksAgo + "T00:00:00Z",
+        safeSearch: "strict",
+        videoEmbeddable: "true",
+        relevanceLanguage: "en"
+      };
 
+      return youtubeSearch(keys.youtubeId, options)
+        .then(res => {
+          return { data: res.items };
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }
+    
+  };
+  // inserting information into key to be returned by axios promise
+  let youtubeData = [];
+  if (value[2]) {
+    youtubeData = value[2].data;
+  }
+```
 
-Technical Challenges:
+There are different slices of state for the responses from each API, which are mapped to in the Search Results component. In that component, each element in each slice of state is mapped to the corresponding index item:
 
-Since most of the data for the site will be coming from different APIs, we will need to be able to dispatch the same action to multiple APIs at once, while returning data in a similar structure from each API so that the frontend will know how to render each component.
+``` javascript
 
-Each API should return data with a type (ie: news) and content (the results of the search). We will need to isolate the relevant data to render it on the page (ie imageUrls for imgur).
+// get information from state
+const mapStateToProps = state => ({
+  giphy: state.entities.giphy,
+  news: state.entities.news,
+  imgur: state.entities.imgur,
+  youtube: state.entities.youtube
+});
 
-### Frontend
+// map information to index item components
+let youtubeItems;
+if (youtube.length > 0) {
+  youtubeItems = [];
+  this.props.youtube.forEach(
+    (video) => (youtubeItems.push((<YoutubeIndexItem key={video.id.videoId} video={video} />)))
+  )
+} else {
+  youtubeItems = [];
+};
+    
+// shuffle results to display them
+const results = shuffle(giphyItems.concat(newsItems).concat(youtubeItems).concat(imgurItems));
 
-Splash page:
+```
 
-![](currenthomepage.png)
+![alt text](https://github.com/echurilov/current/blob/master/random-search-results.png)
 
-Search results:
+--- 
 
-![](currentsearchresults.png)
+### Bookmarks
 
-
-Data from each API will need to be rendered on the page. 
-
-Technical Challenges: 
-The state will need to be updated based on API calls that return different kinds of data. The data from news sites will be formatted differently from the data from imgur. The frontend should hold data that looks similar to the site it's representing, while also looking appealing all together.
-
-## Accomplished over the Weekend
-
-* All members read the MERN tutorials
-* Wrote up Readme and planned work for the next week
-* Got API calls to work for our selected APIs and got back data
-* Set up project skeleton
-
-## Group Members & Work Breakdown
-
-**Sam McClure, Elena Churilov, Wade Coufal, Riya Kulkarni**
-
-### October 20-21
-
-* Build project skeleton - **Elena**
- * Investigate imgur and GoogleTrends APIs - **Wade**
- * Investigate Youtube and News API, write proposal - **Sam**
- * Plan frontend layount - **Riya**
-
- ### Day 1 
- * Finish building User Auth backend- **Elena**
- * Create methods to get info from APIs return relevant data, start building frontend components - **Wade and Sam**
- * Build Frontend User Auth and connect to backend - **Riya**
- * Discuss how we want to display returned API info on the frontend -**All**
-
-### Day 2
-* Start building database for search terms and connect search terms through util to pass to fronend components -**Elena**
-* Get APIs styled on frontend -**Sam and Wade**
-*  Get GoogleTrends requests and connect to frontend & connect search terms to components -**Riya**
-
-### Day 3
-* Add functionality for saving search terms and using them to make requests to the APIs -**Elena**
-* Finish debugging APIs and make sure they show up correctly, pick second APIs and start working (Youtube and Reddit) -**Sam and Wade**
-* Add related search terms to user's search -**Riya**
-
-### Day 4
-* Discuss how the project is coming along and what else needs to be done -**All**
-* Setup seed data/demo user -**Elena**
-* Work on filtering trends by location -**Riya**
-* Get second APIs working and displaying -**Sam and Wade**
-
-### Day 5
-* Add possible word cloud functionality
-* Make sure all APIs are working correctly, add new ones if time
-
-### Day 6-7
-* Finish styling/debugging/refining -**All**
-* Complete Production README
+Users can save search terms as bookmarks by clicking the plus sign when they search something they want to save, and these get persisted into the database saved under the current users id. By clicking on the bookmarks button, the user can see their saved bookmarks and by clicking on any of them, they can see the most recent posts/information about those topics again. 
 
 
 
+### Filtering
+
+Users can filter which sources they want to see information from, by checking or unchecking sources like news, imgur, etc from the dropdown. 
 
 
+
+----
+
+## Technologies
+
+This MERN project was built with Mongoose and MongoDB to store data, used Express for backend routing, and NodeJS server. React and Redux were used on the frontend to make it a single-page application with seamless navigation and dynamic updating.
 
 
 
