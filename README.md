@@ -13,7 +13,7 @@ Current is a trending content aggregator, where you can explore the top trending
 - Users can view the top 15 trending topics of the day, and click on them to see current information about them
 - Users can search for any topic to see trending posts and images about it
 - Users can create an account to bookmark their favorite topics, and search them quickly from their bookmarks tab
-- Users can refine searches to only see results from news, videos, or images
+- Users can refine searches to only see results from specific sources
 
 ---
 
@@ -116,6 +116,15 @@ Users can filter which sources they want to see information from, by checking or
 ## Technologies
 
 This MERN project was built with Mongoose and MongoDB to store data, used Express for backend routing, and NodeJS server. React and Redux were used on the frontend to make it a single-page application with seamless navigation and dynamic updating.
+
+Current was built using 6 different APIs:
+
+* [GoogleTrendsAPI](https://www.npmjs.com/package/google-trends-api) - Used to fetch daily trends and related search terms
+* [NewsAPI](https://newsapi.org/) - Used to fetch top news results from multiple sources
+* [YoutubeDataAPI](https://developers.google.com/youtube/v3/) - Used to fetch popular youtube videos
+* [imgurAPI](https://api.imgur.com/) - Used to fetch popular imgur image posts
+* [giphyAPI](https://developers.giphy.com/) - Used to fetch popular gifs
+* [tumblrAPI](https://www.tumblr.com/docs/en/api/v2) - Used to fetch popular tumblr posts
 
 
 
