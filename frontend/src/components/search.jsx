@@ -75,8 +75,12 @@ class Search extends React.Component {
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
+<<<<<<< HEAD
         let filters = { imgur: this.state.imgur, giphy: this.state.giphy, 
             news: this.state.news, youtube: this.state.youtube };
+=======
+        let filters = { imgur: true, giphy: true, news: true, youtube: true, tumblr: true };
+>>>>>>> b939e5a4aab85c3b08309331a57d82c02ce6c78f
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
        
         this.props.fetchResults(searchTerm, filters)

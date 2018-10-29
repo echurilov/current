@@ -30,8 +30,25 @@ router.get("/:searchQuery", (req, res) => {
     } else {
       return Promise.resolve();
     }
-    
   };
+
+  const tumblrCallback = () => {
+    if (filters.tumblr === 'true') {
+      return axios({
+        method: "get",
+        url: `http://api.tumblr.com/v2/tagged?tag=${processedQuery}&api_key=${keys.tumblrId}`
+      })
+        .then(res => {
+          return res.data;
+        })
+        .catch(err => {
+          return err;
+        });
+    } else {
+      return Promise.resolve();
+    }
+    
+  }
 
   const giphyCallback = () => {
     if (filters.giphy === 'true') {
@@ -106,7 +123,8 @@ router.get("/:searchQuery", (req, res) => {
     giphyCallback(),
     newsCallback(),
     youtubeCallback(),
-    imgurCallback()
+    imgurCallback(),
+    tumblrCallback(),
   ])
     .then(function(value) {
 
@@ -133,12 +151,23 @@ router.get("/:searchQuery", (req, res) => {
           }
         });
       }
+
+      let tumblrData = [];
+
+      if (value[4]) {
+        value[4].response.forEach(tumblrItem => {
+          if (tumblrItem.type === 'photo' && (tumblrItem.photos[0].original_size.height/tumblrItem.photos[0].original_size.width) > 0.7) {
+            tumblrData.push(tumblrItem);
+          }
+        });
+      }
       
       res.json({
         giphy: giphyData,
         news: newsData,
         youtube: youtubeData,
-        imgur: validImgurData.slice(0,10)
+        imgur: validImgurData.slice(0, 10),
+        tumblr: tumblrData.slice(0, 10),
       });
     })
     .catch(err => {

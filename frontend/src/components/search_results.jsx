@@ -7,6 +7,7 @@ import ImgurIndexItem from './results/imgur_index_item';
 import GiphyIndexItem from './results/giphy_index_item';
 import NewsIndexItem from './results/news/news_index_item';
 import YoutubeIndexItem from './results/youtube/youtube_index_item';
+import TumblrIndexItem from './results/tumblr_index_item';
 
 import "../css/search_results.scss";
 const shuffle = require('shuffle-array');
@@ -15,7 +16,8 @@ const mapStateToProps = state => ({
   giphy: state.entities.giphy,
   news: state.entities.news,
   imgur: state.entities.imgur,
-  youtube: state.entities.youtube
+  youtube: state.entities.youtube,
+  tumblr: state.entities.tumblr,
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -26,13 +28,13 @@ class SearchResults extends React.Component {
 
   render() {
 
-    let { giphy, news, imgur, youtube } = this.props; 
+    let { giphy, news, imgur, youtube, tumblr } = this.props; 
 
     let giphyItems;
     if (giphy.length > 0) {
       giphyItems = [];
       giphy.forEach((giphyItem, idx) =>
-        giphyItems.push(<GiphyIndexItem key={idx} giphyItem={giphyItem} />)
+        giphyItems.push(<GiphyIndexItem key={giphyItem.id} giphyItem={giphyItem} />)
       );
     } else {
       giphyItems = [];
@@ -55,7 +57,7 @@ class SearchResults extends React.Component {
       imgurItems = [];
       imgur.forEach(imgurItem =>
         imgurItems.push(
-          <ImgurIndexItem key={Math.random()} imgurItem={imgurItem} />
+          <ImgurIndexItem key={imgurItem.id} imgurItem={imgurItem} />
         )
       );
     } else {
@@ -72,7 +74,15 @@ class SearchResults extends React.Component {
       youtubeItems = [];
     }
 
-    let results = shuffle(giphyItems.concat(newsItems).concat(youtubeItems).concat(imgurItems));
+    let tumblrItems;
+    if (tumblr.length > 0) {
+      tumblrItems = [];
+      tumblr.forEach( tumblrItem => 
+        tumblrItems.push(<TumblrIndexItem tumblrItem={tumblrItem} key={tumblrItem.id} />)
+      )
+    }
+
+    let results = shuffle(giphyItems.concat(newsItems).concat(youtubeItems).concat(imgurItems).concat(tumblrItems));
 
     return (
       <div className="search-results">
