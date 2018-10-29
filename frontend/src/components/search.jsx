@@ -202,9 +202,11 @@ class Search extends React.Component {
             <Modal bookmarkFunc={this.submitSearch} />
 
             <div className="search">
+
               <button type="button" onClick={this.clearSearch} className="home-btn">
                 <i className="fa fa-home" />{" "}
               </button>
+
               <button type="button" onClick={this.openBookmarks} className="modal-btn">
                 <i className="fa fa-bookmark" />{" "}
               </button>
@@ -213,59 +215,68 @@ class Search extends React.Component {
                 <button type="button" onClick={this.onSave} className="add-btn">
                   <i className="fa fa-plus" />{" "}
                 </button>
+
+
+                <dl className="search-options-dropdown">
+                    <dt>
+                        <button className="dropdown-button">
+                            <i className="fas fa-chevron-down" />
+                        </button>
+                    </dt>
+
+                    <dd className="dropdown-content">
+                        <ul className="dropdown-options">
+                            <li className="dropdown-item">
+                                <label className="dropdown-item-label">
+                                    giphy
+                        <input onClick={this.toggleFilter("giphy")} type="checkbox" value="giphy" checked={this.state.giphy ? "true" : ""} />
+                                    <span class="checkmark" />
+                                </label>
+                            </li>
+                            <li className="dropdown-item">
+                                <label className="dropdown-item-label">
+                                    imgur
+                        <input onClick={this.toggleFilter("imgur")} type="checkbox" value="imgur" checked={this.state.imgur ? "true" : ""} />
+                                    <span class="checkmark" />
+                                </label>
+                            </li>
+                            <li className="dropdown-item">
+                                <label className="dropdown-item-label">
+                                    news
+                        <input onClick={this.toggleFilter("news")} type="checkbox" value="news" checked={this.state.news ? "true" : ""} />
+                                    <span class="checkmark" />
+                                </label>
+                            </li>
+                            <li className="dropdown-item">
+                                <label className="dropdown-item-label">
+                                    youtube
+                        <input onClick={this.toggleFilter("youtube")} type="checkbox" value="youtube" checked={this.state.youtube ? "true" : ""} />
+                                    <span class="checkmark" />
+                                </label>
+                            </li>
+                            <li className="dropdown-item">
+                                <label className="dropdown-item-label">
+                                    tumblr
+                        <input onClick={this.toggleFilter("tumblr")} type="checkbox" value="tumblr" checked={this.state.tumblr ? "true" : ""} />
+                                    <span class="checkmark" />
+                                </label>
+                            </li>
+                        </ul>
+                    </dd>
+                </dl>
+
                 <input className="search-bar" id="search-input" autoFocus="autoFocus" type="text" spellcheck="false" />
 
                 <button type="submit" onClick={() => this.submitSearch(null)} className="search-btn">
                   <i className="fa fa-search" />
                 </button>
 
-                <dl className="search-options-dropdown">
-                  <dt>
-                    <button className="dropdown-button">
-                      <i className="fas fa-chevron-down" />
-                    </button>
-                  </dt>
 
-                  <dd className="dropdown-content">
-                    <ul className="dropdown-options">
-                      <li className="dropdown-item">
-                        <label className="dropdown-item-label">
-                          giphy
-                          <input onClick={this.toggleFilter("giphy")} type="checkbox" value="giphy" checked={this.state.giphy ? "true" : ""} />
-                          <span class="checkmark" />
-                        </label>
-                      </li>
-                      <li className="dropdown-item">
-                        <label className="dropdown-item-label">
-                          imgur
-                          <input onClick={this.toggleFilter("imgur")} type="checkbox" value="imgur" checked={this.state.imgur ? "true" : ""} />
-                          <span class="checkmark" />
-                        </label>
-                      </li>
-                      <li className="dropdown-item">
-                        <label className="dropdown-item-label">
-                          news
-                          <input onClick={this.toggleFilter("news")} type="checkbox" value="news" checked={this.state.news ? "true" : ""} />
-                          <span class="checkmark" />
-                        </label>
-                      </li>
-                      <li className="dropdown-item">
-                        <label className="dropdown-item-label">
-                          youtube
-                          <input onClick={this.toggleFilter("youtube")} type="checkbox" value="youtube" checked={this.state.youtube ? "true" : ""} />
-                          <span class="checkmark" />
-                        </label>
-                      </li>
-                    <li className="dropdown-item">
-                        <label className="dropdown-item-label">
-                            tumblr
-                            <input onClick={this.toggleFilter("tumblr")} type="checkbox" value="tumblr" checked={this.state.tumblr ? "true" : ""} />
-                            <span class="checkmark" />
-                        </label>
-                    </li>
-                    </ul>
-                  </dd>
-                </dl>
+
+
+
+
+                
               </form>
             </div>
 
