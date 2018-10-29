@@ -49,7 +49,6 @@ class SignupForm extends React.Component {
 
 		let renderedErrors;
 		if (this.props.errors.length > 0) { 
-			console.log(this.props.errors);
 			renderedErrors = this.renderErrors()
 		} else {
 			renderedErrors = null

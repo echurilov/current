@@ -16,7 +16,7 @@ mongoose
   .catch(err => console.log(err));
   
 const app = express();
-app.use(cors());{}
+app.use(cors());
 const port = process.env.PORT || 5000;
 const users = require("./routes/api/users");
 const bookmarks = require("./routes/api/bookmarks");
@@ -29,7 +29,7 @@ app.use("/api/users", users);
 app.use("/api/bookmarks", bookmarks);
 app.use(passport.initialize());
 app.use("/api/search", search);
-app.use('/api/trends', trends)
+app.use('/api/trends', trends);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("frontend/build"));

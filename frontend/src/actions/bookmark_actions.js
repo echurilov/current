@@ -47,7 +47,6 @@ export const createBookmark = (bookmark) => dispatch => {
       dispatch(receiveBookmark(bookmark));
     })
     .catch(errors => {
-      console.log(errors);
       dispatch(receiveBookmarkErrors(errors));
     });
 }
