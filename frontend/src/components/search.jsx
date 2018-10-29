@@ -31,7 +31,7 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = { searchTerm: '', render: true, trends: [], demoed: false,
-        giphy: true, news: true, imgur: true, youtube: true };
+        giphy: true, news: true, imgur: true, youtube: true, tumblr: true };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
@@ -75,12 +75,8 @@ class Search extends React.Component {
 
     submitSearch(searchTermInput) {
         this.setState({ render: false })
-<<<<<<< HEAD
         let filters = { imgur: this.state.imgur, giphy: this.state.giphy, 
-            news: this.state.news, youtube: this.state.youtube };
-=======
-        let filters = { imgur: true, giphy: true, news: true, youtube: true, tumblr: true };
->>>>>>> b939e5a4aab85c3b08309331a57d82c02ce6c78f
+            news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr };
         let searchTerm = searchTermInput || document.getElementById('search-input').value;
        
         this.props.fetchResults(searchTerm, filters)
@@ -260,6 +256,13 @@ class Search extends React.Component {
                           <span class="checkmark" />
                         </label>
                       </li>
+                    <li className="dropdown-item">
+                        <label className="dropdown-item-label">
+                            tumblr
+                            <input onClick={this.toggleFilter("tumblr")} type="checkbox" value="tumblr" checked={this.state.tumblr ? "true" : ""} />
+                            <span class="checkmark" />
+                        </label>
+                    </li>
                     </ul>
                   </dd>
                 </dl>
