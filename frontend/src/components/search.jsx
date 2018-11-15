@@ -214,6 +214,7 @@ class Search extends React.Component {
               </button>
 
               <form className="search-input">
+
                 <button type="button" onClick={this.onSave} className="add-btn">
                   <i className="fa fa-plus" />{" "}
                 </button>
@@ -221,7 +222,7 @@ class Search extends React.Component {
 
                 <dl className="search-options-dropdown">
                     <dt>
-                        <button className="dropdown-button">
+                        <button type="button" className="dropdown-button">
                             <i className="fas fa-chevron-down" />
                         </button>
                     </dt>
