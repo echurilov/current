@@ -79,7 +79,8 @@ class Search extends React.Component {
         this.props.fetchResults(null, filters, this.props.trends.slice(0,5));
     }
 
-    submitSearch(searchTermInput) {
+    submitSearch(e, searchTermInput) {
+        e.preventDefault();
         this.setState({ render: false })
         let filters = { imgur: this.state.imgur, giphy: this.state.giphy, 
             news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr };
@@ -141,19 +142,19 @@ class Search extends React.Component {
 
             trendButtons = [];
             for(let i = 0; i < dailyTrends.length; i++) {
-                let btn = <button className="trend-btn animated pulse fast delay-2s" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                let btn = <button className="trend-btn animated pulse fast delay-2s" key={`trends-${i}`} onClick={(e) => this.submitSearch(e, dailyTrends[i])}> {dailyTrends[i]} </button>
                 trendButtons.push(btn);
             }
     
             trendButtons2 = [];
             for(let i = 0; i < dailyTrends2.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i * 2}`} onClick={() => this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
+                let btn = <button className="trend-btn" key={`trends-${i * 2}`} onClick={(e) => this.submitSearch(e, dailyTrends2[i])}> {dailyTrends2[i]} </button>
                 trendButtons2.push(btn);
             }
     
             trendButtons3 = [];
             for(let i = 0; i < dailyTrends3.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i * 3}`} onClick={() => this.submitSearch(dailyTrends3[i])}>
+                let btn = <button className="trend-btn" key={`trends-${i * 3}`} onClick={(e) => this.submitSearch(e, dailyTrends3[i])}>
                     
                     {dailyTrends3[i]}
                   </button>;
@@ -166,19 +167,19 @@ class Search extends React.Component {
 
             trendButtons = [];
             for (let i = 0; i < dailyTrends.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i}`} onClick={() => this.submitSearch(dailyTrends[i])}> {dailyTrends[i]} </button>
+                let btn = <button className="trend-btn" key={`trends-${i}`} onClick={(e) => this.submitSearch(e, dailyTrends[i])}> {dailyTrends[i]} </button>
                 trendButtons.push(btn);
             }
 
             trendButtons2 = [];
             for (let i = 0; i < dailyTrends2.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i * 2}`} onClick={() => this.submitSearch(dailyTrends2[i])}> {dailyTrends2[i]} </button>
+                let btn = <button className="trend-btn" key={`trends-${i * 2}`} onClick={(e) => this.submitSearch(e, dailyTrends2[i])}> {dailyTrends2[i]} </button>
                 trendButtons2.push(btn);
             }
 
             trendButtons3 = [];
             for (let i = 0; i < dailyTrends3.length; i++) {
-                let btn = <button className="trend-btn" key={`trends-${i * 3}`} onClick={() => this.submitSearch(dailyTrends3[i])}>
+                let btn = <button className="trend-btn" key={`trends-${i * 3}`} onClick={(e) => this.submitSearch(e, dailyTrends3[i])}>
 
                     {dailyTrends3[i]}
                 </button>;
@@ -213,7 +214,7 @@ class Search extends React.Component {
                 <i className="fa fa-bookmark" />{" "}
               </button>
 
-              <form className="search-input">
+                <form onSubmit="return false" className="search-input">
 
                 <button type="button" onClick={this.onSave} className="add-btn">
                   <i className="fa fa-plus" />{" "}
@@ -270,7 +271,7 @@ class Search extends React.Component {
 
                 <input className="search-bar" id="search-input" autoFocus="autoFocus" type="text" spellCheck="false" />
 
-                <button type="submit" onClick={() => this.submitSearch(null)} className="search-btn">
+                <button type="submit" onClick={(e) => this.submitSearch(e, null)} className="search-btn">
                   <i className="fa fa-search" />
                 </button>
 
