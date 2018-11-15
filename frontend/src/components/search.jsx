@@ -21,8 +21,8 @@ const mapDispatchToProps = dispatch => ({
   fetchTrends: () => dispatch(fetchTrends()),
   openModal: modal => dispatch(openModal(modal)),
   fetchRelatedTopics: searchTerm => dispatch(fetchRelatedTopics(searchTerm)),
-  fetchResults: (searchTerm, filters) =>
-    dispatch(fetchResults(searchTerm, filters)),
+  fetchResults: (searchTerm, filters, landingPageTopics) =>
+    dispatch(fetchResults(searchTerm, filters, landingPageTopics)),
   createBookmark: bookmark => dispatch(createBookmark(bookmark)),
   clearResults: () => dispatch(clearResults())
 });
@@ -40,8 +40,15 @@ class Search extends React.Component {
     }
 
     componentDidMount() {   
+        const filters = {
+            imgur: this.state.imgur, giphy: this.state.giphy,
+            news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr
+        };
+
         this.props.fetchTrends()
             .then( () => this.setState({ trends: this.props.trends }) )
+            .then( () => this.props.fetchResults(null, filters, this.state.trends.slice(0,5)))
+            .catch( err => console.log(err));
     }
 
     componentWillReceiveProps(newProps) {

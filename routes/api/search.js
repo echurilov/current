@@ -12,7 +12,7 @@ const twoWeeksAgo = moment().subtract(14, "day").format("YYYY-MM-DD");
 
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
-
+  
   let filters = {
     imgur: req.query.imgur,
     tumblr: req.query.tumblr,
@@ -20,8 +20,11 @@ router.get("/:searchQuery", (req, res) => {
     news: req.query.news,
     youtube: req.query.youtube,
   }
-  let landingResultQueries = req.query.landingPageTopics;
 
+  let landingResultQueries = req.query.landingPageTopics ? 
+    req.query.landingPageTopics.map( query => {
+      return query.split(" ").join("+");
+    }) : undefined;
 
   const imgurCallback = () => {
     const queryToUse = landingResultQueries ? landingResultQueries[0] : processedQuery
@@ -44,7 +47,7 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const tumblrCallback = () => {
-    const queryToUse = landingResultQueries ? landingResultQueries[0] : processedQuery;
+    const queryToUse = landingResultQueries ? landingResultQueries[1] : processedQuery;
 
     if (filters.tumblr === 'true') {
       return axios({
@@ -64,7 +67,7 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const giphyCallback = () => {
-    const queryToUse = landingResultQueries ? landingResultQueries[1] : processedQuery;
+    const queryToUse = landingResultQueries ? landingResultQueries[2] : processedQuery;
 
     if (filters.giphy === 'true') {
       return axios({
@@ -85,7 +88,7 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const newsCallback = () => {
-    const queryToUse = landingResultQueries ? landingResultQueries[1] : processedQuery;
+    const queryToUse = landingResultQueries ? landingResultQueries[3] : processedQuery;
 
     if (filters.news === 'true') {
       return news.v2
@@ -109,7 +112,7 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const youtubeCallback = () => {
-    const queryToUse = landingResultQueries ? landingResultQueries[2] : processedQuery;
+    const queryToUse = landingResultQueries ? landingResultQueries[4] : processedQuery;
 
     if (filters.youtube === 'true') {
       const options = {
