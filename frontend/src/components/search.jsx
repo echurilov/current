@@ -75,6 +75,7 @@ class Search extends React.Component {
             imgur: this.state.imgur, giphy: this.state.giphy,
             news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr
         };
+        this.props.clearResults();
         this.props.fetchResults(null, filters, this.props.trends.slice(0,5));
     }
 
