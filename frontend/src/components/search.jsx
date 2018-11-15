@@ -30,8 +30,9 @@ class Search extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = { searchTerm: '', render: true, trends: [], demoed: false,
-        giphy: true, news: true, imgur: true, youtube: true, tumblr: true };
+        this.state = { searchTerm: "", render: true, trends: [], demoed: false, giphy: true, 
+            news: true, imgur: true, youtube: true, tumblr: true,
+        };
         this.submitSearch = this.submitSearch.bind(this);
         this.onSave = this.onSave.bind(this);
         this.openBookmarks = this.openBookmarks.bind(this);
@@ -40,11 +41,10 @@ class Search extends React.Component {
     }
 
     componentDidMount() {   
-        const filters = {
+        let filters = {
             imgur: this.state.imgur, giphy: this.state.giphy,
             news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr
         };
-
         this.props.fetchTrends()
             .then( () => this.setState({ trends: this.props.trends }) )
             .then( () => this.props.fetchResults(null, filters, this.state.trends.slice(0,5)))
@@ -71,7 +71,11 @@ class Search extends React.Component {
 
     clearSearch() {
         document.getElementById('search-input').value = '';
-        this.props.clearResults();
+        let filters = {
+            imgur: this.state.imgur, giphy: this.state.giphy,
+            news: this.state.news, youtube: this.state.youtube, tumblr: this.state.tumblr
+        };
+        this.props.fetchResults(null, filters, this.props.trends.slice(0,5));
     }
 
     submitSearch(searchTermInput) {
@@ -109,9 +113,9 @@ class Search extends React.Component {
     toggleFilter(value){
         return () => {
             if (this.state[value]) {
-                this.setState({ [value]: false })
+                this.setState({[value]: false })
             } else {
-                this.setState({ [value]: true })
+                this.setState({[value]: true })
             }
         }   
     }

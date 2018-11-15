@@ -3,7 +3,7 @@ import '../css/header.css'
 import { connect } from 'react-redux';
 import { logoutUser, loginUser } from '../util/session_api_util';
 import { openModal } from '../actions/modal_actions';
-import { clearResults } from '../actions/results_actions';
+import { clearResults, fetchResults } from '../actions/results_actions';
 
 class Header extends React.Component {
 
@@ -15,7 +15,8 @@ class Header extends React.Component {
 
   clearSearch() {
     document.getElementById('search-input').value = '';
-    this.props.clearResults();
+    const filters = {imgur: true, tumblr: true, giphy: true, news: true, youtube: true};
+    this.props.fetchResults(null, filters, this.props.trends.slice(0,5));
   }
 
   handleDemo() {
@@ -62,9 +63,10 @@ class Header extends React.Component {
 
 }
 
-const mapStateToProps = ({session}) => {
+const mapStateToProps = ({session, entities}) => {
   return {
-    currentUser: session.email
+    currentUser: session.email,
+    trends: entities.trends,
   };
 };
 
@@ -73,7 +75,9 @@ const mapDispatchToProps = dispatch => {
     logoutUser: () => dispatch(logoutUser()),
     loginUser: (userData) => dispatch(loginUser(userData)),
     openModal: modal => dispatch(openModal(modal)),
-    clearResults: () => dispatch(clearResults())
+    clearResults: () => dispatch(clearResults()),
+    fetchResults: (searchTerm, filters, landingPageTopics) => 
+      dispatch(fetchResults(searchTerm, filters, landingPageTopics))
   };
 };
 
