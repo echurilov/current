@@ -5,7 +5,6 @@ import 'normalize.css';
 import configureStore from './store/store';
 import jwt_decode from 'jwt-decode';
 import * as APIUtil from './util/session_api_util';
-import { fetchTrends } from './actions/trends_actions';
 
 document.addEventListener('DOMContentLoaded', () => {
     const root = document.getElementById('root');
@@ -24,7 +23,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     ReactDOM.render(<Root store={store} />, root);
-    window.getState = store.getState;
-    window.dispatch = store.dispatch;
-    window.fetchTrends = fetchTrends;
 })
