@@ -15,9 +15,16 @@ export const clearResults = () => {
   }
 }
 
-export const fetchResults = (searchTerm, filters) => dispatch => {
+export const fetchResults = (searchTerm, filters, landingPageTopics) => dispatch => {
   return axios.get(`/api/search/${searchTerm}`, {
-    params: filters
+    params: {
+      tumblr: filters.tumblr,
+      imgur: filters.imgur,
+      youtube: filters.youtube,
+      news: filters.news,
+      giphy: filters.giphy,
+      landingPageTopics: landingPageTopics,
+    },
   })
     .then( results => {
       dispatch(receiveResults(results.data));

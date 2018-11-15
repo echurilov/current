@@ -12,13 +12,27 @@ const twoWeeksAgo = moment().subtract(14, "day").format("YYYY-MM-DD");
 
 router.get("/:searchQuery", (req, res) => {
   const processedQuery = req.params.searchQuery.split(" ").join("+");
-  let filters = req.query;
+  
+  let filters = {
+    imgur: req.query.imgur,
+    tumblr: req.query.tumblr,
+    giphy: req.query.giphy,
+    news: req.query.news,
+    youtube: req.query.youtube,
+  }
+
+  let landingResultQueries = req.query.landingPageTopics ? 
+    req.query.landingPageTopics.map( query => {
+      return query.split(" ").join("+");
+    }) : undefined;
 
   const imgurCallback = () => {
+    const queryToUse = landingResultQueries ? landingResultQueries[0] : processedQuery
+
     if (filters.imgur === 'true') {
       return axios({
         method: "get",
-        url: `https://api.imgur.com/3/gallery/search?q=${processedQuery}`,
+        url: `https://api.imgur.com/3/gallery/search?q=${queryToUse}`,
         headers: { Authorization: `Client-ID ${keys.imgurId}` }
       })
         .then(res => {
@@ -33,10 +47,12 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const tumblrCallback = () => {
+    const queryToUse = landingResultQueries ? landingResultQueries[1] : processedQuery;
+
     if (filters.tumblr === 'true') {
       return axios({
         method: "get",
-        url: `http://api.tumblr.com/v2/tagged?tag=${processedQuery}&api_key=${keys.tumblrId}`
+        url: `http://api.tumblr.com/v2/tagged?tag=${queryToUse}&api_key=${keys.tumblrId}`
       })
         .then(res => {
           return res.data;
@@ -51,12 +67,14 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const giphyCallback = () => {
+    const queryToUse = landingResultQueries ? landingResultQueries[2] : processedQuery;
+
     if (filters.giphy === 'true') {
       return axios({
         method: "get",
         url: `https://api.giphy.com/v1/gifs/search?api_key=${
           keys.giphyId
-          }&q=${processedQuery}`
+          }&q=${queryToUse}`
       })
         .then(result => {
           return result.data;
@@ -70,10 +88,12 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const newsCallback = () => {
+    const queryToUse = landingResultQueries ? landingResultQueries[3] : processedQuery;
+
     if (filters.news === 'true') {
       return news.v2
         .everything({
-          q: processedQuery,
+          q: queryToUse,
           language: "en",
           sortBy: "relevancy",
           from: twoDaysAgo,
@@ -92,11 +112,12 @@ router.get("/:searchQuery", (req, res) => {
   };
 
   const youtubeCallback = () => {
+    const queryToUse = landingResultQueries ? landingResultQueries[4] : processedQuery;
 
     if (filters.youtube === 'true') {
       const options = {
         part: 'snippet, id',
-        q: processedQuery,
+        q: queryToUse,
         type: 'video',
         maxResults: 10,
         order: 'viewCount',
