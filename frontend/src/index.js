@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentTime = Date.now() / 1000;
         if (decoded.exp < currentTime) {
             store.dispatch(APIUtil.logoutUser());
-            window.location.href = '/login';
+            window.location.href = '/';
         }
     }
 
