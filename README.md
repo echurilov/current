@@ -8,6 +8,31 @@ Current is a trending content aggregator, where you can explore the top trending
 
 ---
 
+## Team 
+
+  * Elena Churilov - [Github](https://github.com/echurilov) | [LinkedIn](https://www.linkedin.com/in/elenachurilov/) | [Portfolio](http://elena-churilov.com/)
+  * Sam McClure - [Github](https://github.com/sam-mcclure) | [LinkedIn](https://www.linkedin.com/in/sam-mcclure-developer/) | [Portfolio](https://www.sam-mcclure.com/)
+  * Riya Kulkarni - [Github](https://github.com/amanpriya-k) | [LinkedIn](https://www.linkedin.com/in/amanpriyakulkarni/) | [Portfolio](https://helloriya.com/)
+  * Wade Coufal - [Github](https://github.com/wadecoufal) | [LinkedIn](https://www.linkedin.com/in/wade-coufal/) | [Portfolio](https://www.wadecoufal.com/)
+
+
+___
+
+## Technologies
+
+This MERN project was built with Mongoose and MongoDB to store data, used Express for backend routing, and NodeJS server. React and Redux were used on the frontend to make it a single-page application with seamless navigation and dynamic updating.
+
+Current was built using 6 different APIs:
+
+* [GoogleTrendsAPI](https://www.npmjs.com/package/google-trends-api) - Used to fetch daily trends and related search terms
+* [NewsAPI](https://newsapi.org/) - Used to fetch top news results from multiple sources
+* [YoutubeDataAPI](https://developers.google.com/youtube/v3/) - Used to fetch popular youtube videos
+* [imgurAPI](https://api.imgur.com/) - Used to fetch popular imgur image posts
+* [giphyAPI](https://developers.giphy.com/) - Used to fetch popular gifs
+* [tumblrAPI](https://www.tumblr.com/docs/en/api/v2) - Used to fetch popular tumblr posts
+
+---
+
 ## Features
 
 - Users can view the top 15 trending topics of the day, and click on them to see current information about them
@@ -135,21 +160,5 @@ toggleFilter(value){
   }
 ```
 
-
 ----
-
-## Technologies
-
-This MERN project was built with Mongoose and MongoDB to store data, used Express for backend routing, and NodeJS server. React and Redux were used on the frontend to make it a single-page application with seamless navigation and dynamic updating.
-
-Current was built using 6 different APIs:
-
-* [GoogleTrendsAPI](https://www.npmjs.com/package/google-trends-api) - Used to fetch daily trends and related search terms
-* [NewsAPI](https://newsapi.org/) - Used to fetch top news results from multiple sources
-* [YoutubeDataAPI](https://developers.google.com/youtube/v3/) - Used to fetch popular youtube videos
-* [imgurAPI](https://api.imgur.com/) - Used to fetch popular imgur image posts
-* [giphyAPI](https://developers.giphy.com/) - Used to fetch popular gifs
-* [tumblrAPI](https://www.tumblr.com/docs/en/api/v2) - Used to fetch popular tumblr posts
-
-
 
