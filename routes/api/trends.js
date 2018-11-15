@@ -24,9 +24,9 @@ router.get("/", (req, res) => {
     method: "get",
     url: `https://trends.google.com/trends/trendingsearches/daily/rss?geo=US`,
   })
-    .then(res => {
+    .then(res2 => {
       let items = [];
-      parseString(res.data, function (err, result) {
+      parseString(res2.data, function (err, result) {
         items = result.rss.channel[0].item;
       });  
 
@@ -35,7 +35,6 @@ router.get("/", (req, res) => {
         trends.push(item.title[0]);
       });
 
-      console.log(trends);
       return res.json({trends: trends});
     })
     .catch(err => {
