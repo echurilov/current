@@ -16,6 +16,7 @@ class Header extends React.Component {
   clearSearch() {
     document.getElementById('search-input').value = '';
     const filters = {imgur: true, tumblr: true, giphy: true, news: true, youtube: true};
+    this.props.clearResults();
     this.props.fetchResults(null, filters, this.props.trends.slice(0,5));
   }
 
