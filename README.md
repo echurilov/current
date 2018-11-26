@@ -6,16 +6,6 @@
 
 Current is a trending content aggregator, where you can explore the top trending daily topics, and search any of your favorite topics to see trending news stories, youtube videos, imgur and tumblr posts, and even gifs about them.
 
----
-
-## Team 
-
-  * Elena Churilov - [Github](https://github.com/echurilov) | [LinkedIn](https://www.linkedin.com/in/elenachurilov/) | [Portfolio](http://elena-churilov.com/)
-  * Sam McClure - [Github](https://github.com/sam-mcclure) | [LinkedIn](https://www.linkedin.com/in/sam-mcclure-developer/) | [Portfolio](https://www.sam-mcclure.com/)
-  * Riya Kulkarni - [Github](https://github.com/amanpriya-k) | [LinkedIn](https://www.linkedin.com/in/amanpriyakulkarni/) | [Portfolio](https://helloriya.com/)
-  * Wade Coufal - [Github](https://github.com/wadecoufal) | [LinkedIn](https://www.linkedin.com/in/wade-coufal/) | [Portfolio](https://www.wadecoufal.com/)
-
-
 ___
 
 ## Technologies
@@ -161,4 +151,12 @@ toggleFilter(value){
 ```
 
 ----
+
+## Team 
+
+  * Elena Churilov - [Github](https://github.com/echurilov) | [LinkedIn](https://www.linkedin.com/in/elenachurilov/) | [Portfolio](http://elena-churilov.com/)
+  * Sam McClure - [Github](https://github.com/sam-mcclure) | [LinkedIn](https://www.linkedin.com/in/sam-mcclure-developer/) | [Portfolio](https://www.sam-mcclure.com/)
+  * Riya Kulkarni - [Github](https://github.com/amanpriya-k) | [LinkedIn](https://www.linkedin.com/in/amanpriyakulkarni/) | [Portfolio](https://helloriya.com/)
+  * Wade Coufal - [Github](https://github.com/wadecoufal) | [LinkedIn](https://www.linkedin.com/in/wade-coufal/) | [Portfolio](https://www.wadecoufal.com/)
+
 
